@@ -75,7 +75,7 @@ Nest is [MIT licensed](LICENSE).
 ## MODULES CREATE
 
 ```bash
-# Comando apra criar modulo com API
+# Comando para criar modulo com API
 $ npx nest generate resource
 
 # Modulo Simples
