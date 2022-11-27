@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS do LEAFLET-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <!-- Script do LEAFLET tem que ficar aqui pois essa desgraça exporta um L e só quem criou sabe o que é-->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <title>Document</title>
+    <style>
+        #map {
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TESTE MAP</h1>
+    <div id="map"></div>
+    <script>
+        //inicializa o mapa o 19 é o zoom do inicial do map
+        var map = L.map('map').setView([-6.25309, -36.53401], 19);
+
+        //Configura a visão do mapa e o zoom
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20, //fica bugado com mais que 19
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        //fazer uma marcação e adicona um texto
+        L.marker([-6.25309, -36.53401]).addTo(map)
+            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+            .openPopup();
+ 
+        //criar um polygono
+        var polygon = L.polygon([
+            [
+                -6.253142585162962,
+                -36.53404412963343
+
+            ],
+            [
+                -6.2531609012307,
+                -36.53403152257928
+
+            ],
+            [
+                -6.253168131256544,
+                -36.53404364474693
+
+            ],
+            [
+                -6.253151743196412,
+                -36.53405406981031
+
+            ],
+            [
+                -6.253145236172287,
+                -36.534043402303155
+
+            ],
+            [
+                -6.2531442721691235,
+                -36.534041220313384
+
+            ]
+        ]).addTo(map).bindPopup("I am a polygon.");
+    </script>
+</body>
+
+</html>
