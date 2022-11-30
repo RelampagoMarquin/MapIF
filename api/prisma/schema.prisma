@@ -11,18 +11,18 @@ datasource db {
 }
 
 model Usuarios {
-  id          Int            @id @default(autoincrement())
-  nome        String
-  email       String
-  senha       String
-  userioGrupo usuarioGrupo[]
+  id           Int            @id @default(autoincrement())
+  nome         String
+  email        String         @unique
+  senha        String
+  usuarioGrupo usuarioGrupo[]
 }
 
 model Grupos {
-  id          Int            @id @default(autoincrement())
-  nome        String
-  userioGrupo usuarioGrupo[]
-  Eventos     Eventos[]
+  id           Int            @id @default(autoincrement())
+  nome         String
+  usuarioGrupo usuarioGrupo[]
+  eventos      Eventos[]
 }
 
 model usuarioGrupo {
@@ -41,15 +41,15 @@ model Eventos {
   fim       DateTime
   grupoId   Int
   grupo     Grupos      @relation(fields: [grupoId], references: [id])
-  Poligonos Poligonos[]
+  poligonos Poligonos[]
 }
 
 model Poligonos {
   id        Int         @id @default(autoincrement())
   eventoId  Int
   evento    Eventos     @relation(fields: [eventoId], references: [id])
-  Local     Local[]
-  Atividade Atividade[]
+  local     Local[]
+  atividade Atividade[]
 }
 
 model Local {

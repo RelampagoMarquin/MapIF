@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import * as bcrypt from 'bcrypt';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { usuariosEntity } from './entities/usuario.entity';
 
@@ -12,7 +13,10 @@ export class UsuariosController {
 
   @Post()
   @ApiCreatedResponse({ type: usuariosEntity})
-  create(@Body() createUsuarioDto: CreateUsuarioDto) {
+  async create(@Body() createUsuarioDto: CreateUsuarioDto) {
+    const saltOrRounds = 10;
+    const password = await bcrypt.hash(createUsuarioDto.senha, saltOrRounds)
+    createUsuarioDto.senha = password
     return this.usuariosService.create(createUsuarioDto);
   }
 

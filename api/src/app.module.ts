@@ -9,9 +9,10 @@ import { UsuariogruposModule } from './usuariogrupos/usuariogrupos.module';
 import { PoligonosModule } from './poligonos/poligonos.module';
 import { AtividadesModule } from './atividades/atividades.module';
 import { LocaisModule } from './locais/locais.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [PrismaModule, UsuariosModule, GruposModule, EventosModule, UsuariogruposModule, PoligonosModule, AtividadesModule, LocaisModule],
+  imports: [PrismaModule, AuthModule, UsuariosModule, GruposModule, EventosModule, UsuariogruposModule, PoligonosModule, AtividadesModule, LocaisModule],
   controllers: [AppController],
   providers: [AppService],
 })
