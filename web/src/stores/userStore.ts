@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { User, UserCreate, UserLogin } from '../utils/types'
 
 export const useUserStore = defineStore('users', {
    state: () => {
@@ -8,6 +9,17 @@ export const useUserStore = defineStore('users', {
    },
     getters: {},
     actions: {
+        async login(body: UserLogin){
+            const response = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            })
+            const data = await response.json()
+            return data
+        },
         async getUsers() {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios`)
             const users = await response.json()
@@ -18,7 +30,7 @@ export const useUserStore = defineStore('users', {
             const user = await response.json()
             return user
         },
-        async createUser(user: object) {
+        async createUser(user: UserCreate) {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios`, {
                 method: 'POST',
                 headers: {
@@ -27,7 +39,7 @@ export const useUserStore = defineStore('users', {
                 body: JSON.stringify(user)
             })
         },
-        async updateUser(user: object) {
+        async updateUser(user: User) {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios/${user.id}`, {
                 method: 'PUT',
                 headers: {
