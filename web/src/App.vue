@@ -10,5 +10,14 @@
   </div>
 </template>
 
-<style scoped>
+<style>
+.text-primary {
+  color: #389C37 !important;
+}
+
+.primary{
+  background-color: #389C37 !important;
+  color: #fff !important;
+}
+
 </style>

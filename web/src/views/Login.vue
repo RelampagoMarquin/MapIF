@@ -17,7 +17,7 @@ function login() {
 
 <template>
   <div class="container vh-100">
-    <div class="row">
+    <v-row cols="12">
       <!-- LOGO -->
       <div class="col-12 text-center">
         <h1 class="text-primary mb-5 mt-5">LOGO AQUI</h1>
@@ -31,11 +31,11 @@ function login() {
           <label for="senha" class="text-secondary">Senha</label>
           <input type="password" name="senha" id="senha" v-model="senha" class="form-control rounded-5">
           <div class="d-grid gap-2 mt-4">
-            <button type="button" class="btn btn-primary" @click.prevent="login()">Login</button>
+            <button type="button" class="btn primary" @click.prevent="login()">Login</button>
           </div>
         </form>
-        <p class="text-secondary text-center mt-4">Não possui um cadastro? <a href="#" class="text-decoration-none text-primary">Crie uma nova conta</a></p>
+        <p class="text-secondary text-center mt-4">Não possui um cadastro? <router-link to="/signup" class="text-primary">Crie uma nova conta</router-link></p>
       </div>
-    </div>
+    </v-row>
   </div>
 </template>
