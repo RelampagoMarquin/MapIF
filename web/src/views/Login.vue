@@ -1,71 +1,41 @@
-<script lang="ts"></script>
+<script setup lang="ts">
+import { useUserStore } from '../stores/userStore';
+import { ref } from 'vue';
+const userStore = useUserStore();
+
+const senha = ref('')
+const email = ref('')
+
+function login() {
+  const data = {
+    senha: senha.value,
+    email: email.value
+  }
+  userStore.login(data);
+}
+</script>
 
 <template>
-    <div>
-      <div class="d-flex justify-space-around align-center flex-column flex-md-row fill-height">
-        <v-btn
-          size="x-small"
-          color="secondary"
-        >
-          Extra small Button
-        </v-btn>
-  
-        <v-btn
-          size="small"
-          color="primary"
-        >
-          Small Button
-        </v-btn>
-  
-        <v-btn
-          color="warning"
-        >
-          Normal Button
-        </v-btn>
-  
-        <v-btn
-          color="error"
-          size="large"
-        >
-          Large Button
-        </v-btn>
-  
-        <v-btn
-          size="x-large"
-          color="success"
-        >
-          Extra large Button
-        </v-btn>
+  <div class="container vh-100">
+    <div class="row">
+      <!-- LOGO -->
+      <div class="col-12 text-center">
+        <h1 class="text-primary mb-5 mt-5">LOGO AQUI</h1>
       </div>
-      <div class="d-flex justify-space-around align-center flex-column flex-md-row">
-        <v-btn
-          color="secondary"
-          icon="mdi-television"
-          size="x-small"
-        ></v-btn>
-  
-        <v-btn
-          color="primary"
-          icon="mdi-pencil"
-          size="small"
-        ></v-btn>
-  
-        <v-btn
-          color="warning"
-          icon="mdi-account-circle"
-        ></v-btn>
-  
-        <v-btn
-          color="error"
-          icon="mdi-alarm"
-          size="large"
-        ></v-btn>
-  
-        <v-btn
-          color="success"
-          icon="mdi-domain"
-          size="x-large"
-        ></v-btn>
+      <!-- FORM -->
+      <div class="col-12 d-flex flex-column">
+        <h2 class="text-center text-primary mb-5">Login</h2>
+        <form action="#" method="post" class="px-5">
+          <label for="email" class="text-secondary">Email</label>
+          <input type="email" name="email" id="email" v-model="email" class="form-control rounded-5">
+          <label for="senha" class="text-secondary">Senha</label>
+          <input type="password" name="senha" id="senha" v-model="senha" class="form-control rounded-5">
+          <div class="d-grid gap-2 mt-4">
+            <button type="button" class="btn btn-primary" @click.prevent="login()">Login</button>
+          </div>
+        </form>
+        <p class="text-secondary text-center mt-4">Não possui um cadastro? <a href="#" class="text-decoration-none text-primary">Crie uma nova conta</a></p>
       </div>
     </div>
-  </template>
+  </div>
+</template>

@@ -1,17 +1,17 @@
 export interface User {
     id: number
-    name: string
+    nome: string
     email: string
-    password: string
+    senha: string
 }
 
 export interface UserCreate {
-    name: string
+    nome: string
     email: string
-    password: string
+    senha: string
 }
 
 export interface UserLogin {
     email: string
-    password: string
+    senha: string
 }

@@ -10,7 +10,7 @@ export const useUserStore = defineStore('users', {
     getters: {},
     actions: {
         async login(body: UserLogin){
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ export const useUserStore = defineStore('users', {
         },
         async updateUser(user: User) {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios/${user.id}`, {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
                 },
