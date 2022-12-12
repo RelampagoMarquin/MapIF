@@ -1,41 +1,72 @@
 <script setup lang="ts">
-import { useUserStore } from '../stores/userStore';
-import { ref } from 'vue';
+import { useUserStore } from "../stores/userStore";
+import { ref } from "vue";
 const userStore = useUserStore();
 
-const senha = ref('')
-const email = ref('')
+const senha = ref("");
+const email = ref("");
 
 function login() {
   const data = {
     senha: senha.value,
-    email: email.value
-  }
+    email: email.value,
+  };
   userStore.login(data);
 }
 </script>
 
 <template>
-  <div class="container vh-100">
-    <v-row cols="12">
-      <!-- LOGO -->
-      <div class="col-12 text-center">
-        <h1 class="text-primary mb-5 mt-5">LOGO AQUI</h1>
-      </div>
-      <!-- FORM -->
-      <div class="col-12 d-flex flex-column">
-        <h2 class="text-center text-primary mb-5">Login</h2>
-        <form action="#" method="post" class="px-5">
-          <label for="email" class="text-secondary">Email</label>
-          <input type="email" name="email" id="email" v-model="email" class="form-control rounded-5">
-          <label for="senha" class="text-secondary">Senha</label>
-          <input type="password" name="senha" id="senha" v-model="senha" class="form-control rounded-5">
-          <div class="d-grid gap-2 mt-4">
-            <button type="button" class="btn primary" @click.prevent="login()">Login</button>
-          </div>
-        </form>
-        <p class="text-secondary text-center mt-4">Não possui um cadastro? <router-link to="/signup" class="text-primary">Crie uma nova conta</router-link></p>
-      </div>
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="12" md="6" lg="4">
+        <div>
+          <h1 class="mb-5 mt-5 text-center">LOGO AQUI</h1>
+        </div>
+        <!-- FORM -->
+        <div>
+          <h2 class="text-primary mb-5 text-center">Login</h2>
+          <form action="#" method="post" class="text-start">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              v-model="email"
+              class="form-control"
+            />
+            <label for="senha" class="mt-3">Senha</label>
+            <input
+              type="password"
+              name="senha"
+              id="senha"
+              v-model="senha"
+              class="form-control rounded-5"
+            />
+            <div class="d-grid gap-2 mt-4">
+              <v-btn class="primary" rounded="lg" @click.prevent="login()">
+                Login
+              </v-btn>
+            </div>
+          </form>
+          <p class="text-center mt-4">
+            Não possui um cadastro?
+            <router-link to="/signup" class="text-primary"
+              >Crie uma nova conta</router-link
+            >
+          </p>
+        </div>
+      </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
+
+<style>
+.text-primary {
+  color: #389c37 !important;
+}
+
+.primary {
+  background-color: #389c37 !important;
+  color: #fff !important;
+}
+</style>
