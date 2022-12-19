@@ -23,57 +23,83 @@ function signup() {
 </script>
 
 <template>
-  <div class="container vh-100">
-    <div class="row">
-      <!-- LOGO -->
-      <div class="col-12 text-center">
-        <h1 class="text-primary mb-5 mt-5">LOGO AQUI</h1>
-      </div>
-      <!-- FORM -->
-      <div class="col-12 d-flex flex-column">
-        <h2 class="text-center text-primary mb-5">Cadastre-se</h2>
-        <form action="#" method="post" class="px-5">
-          <label for="nome" class="text-secondary mb-1">Nome Completo</label>
-          <input
-            type="text"
-            name="nome"
-            id="nome"
+  <v-container class="align-center">
+    <v-row class="justify-center">
+      <v-col cols="10" md="4">
+        <div>
+          <h1 class="mb-5 mt-5 text-center">LOGO AQUI</h1>
+        </div>
+        <h2 class="text-primary-custom mb-5 text-center">Cadastre-se</h2>
+        <v-form>
+          <label for="email">Nome</label>
+          <v-text-field
             v-model="nome"
-            class="form-control rounded-5 mb-2"
-          />
-          <label for="email" class="text-secondary mb-1">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
+            placeholder="Ex: John Doe"
+            density="compact"
+            variant="outlined"
+            class="mb-2 rounded"
+          ></v-text-field>
+          <label for="email">Email</label>
+          <v-text-field
             v-model="email"
-            class="form-control rounded-5 mb-2"
-          />
-          <label for="senha" class="text-secondary mb-1">Senha</label>
-          <input
-            type="password"
-            name="senha"
-            id="senha"
+            placeholder="johndoe@gmail.com"
+            density="compact"
+            variant="outlined"
+            class="mb-2 rounded"
+          ></v-text-field>
+          <label for="senha" class="mt-3">Senha</label>
+          <v-text-field
             v-model="senha"
-            class="form-control rounded-5 mb-2"
-          />
-          <label for="senha-check" class="text-secondary mb-1"
-            >Confirmar Senha</label
-          >
-          <input
+            placeholder="********"
             type="password"
-            name="senha"
-            id="senha-check"
+            density="compact"
+            variant="outlined"
+            class="mb-2 v-text-field"
+          ></v-text-field>
+          <label for="senha" class="mt-3">Confirmar Senha</label>
+          <v-text-field
             v-model="confirmarSenha"
-            class="form-control rounded-5 mb-2"
-          />
-          <div class="d-grid gap-2 mt-4">
-            <button type="button" class="btn primary" @click.prevent="signup()">
-              Cadastrar-se
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+            placeholder="********"
+            type="password"
+            density="compact"
+            variant="outlined"
+            class="mb-2 v-text-field"
+          ></v-text-field>
+          <v-btn class="primary" block outlined rounded="lg" @click="signup()"
+            >Cadastrar-se</v-btn
+          >
+        </v-form>
+        <p class="text-center mt-4">
+          Já possui um cadastro?
+          <router-link to="/" class="text-primary-custom"
+            >Fazer Login</router-link
+          >
+        </p>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+
+<style scoped>
+.text-primary-custom {
+  text-decoration: none;
+  font-weight: 600;
+  color: #389c37 !important;
+}
+
+.rounded {
+  border-radius: 10px !important;
+}
+
+.primary {
+  background-color: #389c37 !important;
+  color: #fff !important;
+}
+
+.v-text-field--outlined >>> fieldset {
+  border-color: rgba(192, 0, 250, 0.986);
+}
+.v-text-field {
+  border-radius: 10px !important;
+}
+</style>
