@@ -12,31 +12,31 @@ export class GruposController {
 
   @Post()
   @ApiCreatedResponse({ type: GruposEntity})
-  create(@Body() createGrupoDto: CreateGrupoDto) {
+  async create(@Body() createGrupoDto: CreateGrupoDto) {
     return this.gruposService.create(createGrupoDto);
   }
 
   @Get()
   @ApiOkResponse({type: GruposEntity, isArray: true})
-  findAll() {
+  async findAll() {
     return this.gruposService.findAll();
   }
 
   @Get(':id')
   @ApiOkResponse({type: GruposEntity})
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.gruposService.findOne(+id);
   }
 
   @Patch(':id')
   @ApiOkResponse({type: GruposEntity})
-  update(@Param('id') id: string, @Body() updateGrupoDto: UpdateGrupoDto) {
+  async update(@Param('id') id: string, @Body() updateGrupoDto: UpdateGrupoDto) {
     return this.gruposService.update(+id, updateGrupoDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({type: GruposEntity})
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.gruposService.remove(+id);
   }
 }

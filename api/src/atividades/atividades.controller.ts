@@ -12,31 +12,31 @@ export class AtividadesController {
 
   @Post()
   @ApiCreatedResponse({type: atividadesEntity})
-  create(@Body() createAtividadeDto: CreateAtividadeDto) {
+  async create(@Body() createAtividadeDto: CreateAtividadeDto) {
     return this.atividadesService.create(createAtividadeDto);
   }
 
   @Get()
   @ApiOkResponse({type: atividadesEntity, isArray: true})
-  findAll() {
+  async findAll() {
     return this.atividadesService.findAll();
   }
 
   @Get(':id')
   @ApiOkResponse({type: atividadesEntity})
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.atividadesService.findOne(+id);
   }
 
   @Patch(':id')
   @ApiOkResponse({type: atividadesEntity})
-  update(@Param('id') id: string, @Body() updateAtividadeDto: UpdateAtividadeDto) {
+  async update(@Param('id') id: string, @Body() updateAtividadeDto: UpdateAtividadeDto) {
     return this.atividadesService.update(+id, updateAtividadeDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({type: atividadesEntity})
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.atividadesService.remove(+id);
   }
 }

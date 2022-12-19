@@ -8,20 +8,20 @@ import { UpdateUsuariogrupoDto } from './dto/update-usuariogrupo.dto';
 export class UsuariogruposService {
   constructor (private prisma: PrismaService){}
 
-  create(createUsuariogrupoDto: CreateUsuariogrupoDto) {
+  async create(createUsuariogrupoDto: CreateUsuariogrupoDto) {
     return this.prisma.usuarioGrupo.create({data: createUsuariogrupoDto});
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.usuarioGrupo.findMany();
   }
 
-  findOne(usuarioId, grupoId) {
+  async findOne(usuarioId, grupoId) {
     return this.prisma.usuarioGrupo.findUnique({where: 
       { usuarioId_grupoId: {usuarioId, grupoId}}});
   }
 
-  update(usuarioId, grupoId, updateUsuariogrupoDto: UpdateUsuariogrupoDto) {
+  async update(usuarioId, grupoId, updateUsuariogrupoDto: UpdateUsuariogrupoDto) {
     return this.prisma.usuarioGrupo.update({
       where: { usuarioId_grupoId: {usuarioId, grupoId}},
       data: updateUsuariogrupoDto

@@ -7,26 +7,26 @@ import { UpdateGrupoDto } from './dto/update-grupo.dto';
 export class GruposService {
   constructor(private prisma: PrismaService) {}
 
-  create(createGrupoDto: CreateGrupoDto) {
+  async create(createGrupoDto: CreateGrupoDto) {
     return this.prisma.grupos.create({data: createGrupoDto});
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.grupos.findMany();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return this.prisma.grupos.findUnique({where: {id}});
   }
 
-  update(id: number, updateGrupoDto: UpdateGrupoDto) {
+  async update(id: number, updateGrupoDto: UpdateGrupoDto) {
     return this.prisma.grupos.update({
       where: {id},
       data: updateGrupoDto,
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.prisma.grupos.delete({where: {id}});
   }
 }

@@ -7,26 +7,26 @@ import { UpdatePoligonoDto } from './dto/update-poligono.dto';
 export class PoligonosService {
   constructor (private prisma: PrismaService){}
 
-  create(createPoligonoDto: CreatePoligonoDto) {
+  async create(createPoligonoDto: CreatePoligonoDto) {
     return this.prisma.poligonos.create({data: createPoligonoDto});
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.poligonos.findMany();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return this.prisma.poligonos.findUnique({where: {id}});
   }
 
-  update(id: number, updatePoligonoDto: UpdatePoligonoDto) {
+  async update(id: number, updatePoligonoDto: UpdatePoligonoDto) {
     return this.prisma.poligonos.update({
       where: {id},
       data: updatePoligonoDto
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.prisma.poligonos.delete({where: {id}});
   }
 }
