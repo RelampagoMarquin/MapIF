@@ -16,57 +16,66 @@ function login() {
 </script>
 
 <template>
-  <v-container>
-    <v-row justify="center">
-      <v-col cols="12" md="6" lg="4">
+  <v-container class="align-center">
+    <v-row class="justify-center">
+      <v-col cols="10" md="4">
         <div>
           <h1 class="mb-5 mt-5 text-center">LOGO AQUI</h1>
         </div>
-        <!-- FORM -->
-        <div>
-          <h2 class="text-primary mb-5 text-center">Login</h2>
-          <form action="#" method="post" class="text-start">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              v-model="email"
-              class="form-control"
-            />
-            <label for="senha" class="mt-3">Senha</label>
-            <input
-              type="password"
-              name="senha"
-              id="senha"
-              v-model="senha"
-              class="form-control rounded-5"
-            />
-            <div class="d-grid gap-2 mt-4">
-              <v-btn class="primary" rounded="lg" @click.prevent="login()">
-                Login
-              </v-btn>
-            </div>
-          </form>
-          <p class="text-center mt-4">
-            Não possui um cadastro?
-            <router-link to="/signup" class="text-primary"
-              >Crie uma nova conta</router-link
-            >
-          </p>
-        </div>
+        <h2 class="text-primary-custom mb-5 text-center">Login</h2>
+        <v-form>
+          <label for="email">Email</label>
+          <v-text-field
+            v-model="email"
+            placeholder="johndoe@gmail.com"
+            density="compact"
+            variant="outlined"
+            class="mb-2 rounded"
+          ></v-text-field>
+          <label for="senha" class="mt-3">Senha</label>
+          <v-text-field
+            v-model="senha"
+            placeholder="********"
+            type="password"
+            density="compact"
+            variant="outlined"
+            class="mb-2 v-text-field"
+          ></v-text-field>
+          <v-btn class="primary" block outlined rounded="lg" @click="login()"
+            >Entrar</v-btn
+          >
+        </v-form>
+        <p class="text-center mt-4">
+          Não possui um cadastro?
+          <router-link to="/signup" class="text-primary-custom"
+            >Crie uma nova conta</router-link
+          >
+        </p>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<style>
-.text-primary {
+<style scoped>
+.text-primary-custom {
+  text-decoration: none;
+  font-weight: 600;
   color: #389c37 !important;
+}
+
+.rounded {
+  border-radius: 10px !important;
 }
 
 .primary {
   background-color: #389c37 !important;
   color: #fff !important;
+}
+
+.v-text-field--outlined >>> fieldset {
+  border-color: rgba(192, 0, 250, 0.986);
+}
+.v-text-field {
+  border-radius: 10px !important;
 }
 </style>
