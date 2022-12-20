@@ -9,8 +9,12 @@ import Main from "./layout/Main.vue";
 </template>
 
 <style>
-.text-primary {
+.text-primary-custom {
   color: #389c37 !important;
+}
+
+.text-secondary-custom {
+  color: #888888 !important;
 }
 
 .primary {
@@ -28,6 +32,11 @@ import Main from "./layout/Main.vue";
 .title-primary {
   color: #389c37 !important;
   font-weight: 700 !important;
+}
+
+.title-secondary {
+  color: #389c37 !important;
+  font-weight: 650 !important;
 }
 
 .bold {

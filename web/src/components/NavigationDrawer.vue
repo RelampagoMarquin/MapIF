@@ -16,9 +16,9 @@ const listNavigationDrawer: Drawer[] = [
   },
   {
     icon: "mdi-calendar",
-    title: "Events",
+    title: "Atividades",
     value: "wallets",
-    router: "/create-event",
+    router: "/schedule-activity",
   },
 ];
 </script>
