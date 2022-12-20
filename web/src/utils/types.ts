@@ -15,3 +15,10 @@ export interface UserLogin {
     email: string
     senha: string
 }
+
+export interface Drawer {
+    icon: string;
+    title: string;
+    value: string;
+    router: string;
+  }
