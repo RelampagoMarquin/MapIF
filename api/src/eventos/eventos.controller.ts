@@ -12,31 +12,31 @@ export class EventosController {
 
   @Post()
   @ApiCreatedResponse({ type: eventosEntity })
-  create(@Body() createEventoDto: CreateEventoDto) {
+  async create(@Body() createEventoDto: CreateEventoDto) {
     return this.eventosService.create(createEventoDto);
   }
 
   @Get()
   @ApiOkResponse({ type: eventosEntity })
-  findAll() {
+  async findAll() {
     return this.eventosService.findAll();
   }
 
   @Get(':id')
   @ApiOkResponse({ type: eventosEntity })
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.eventosService.findOne(+id);
   }
 
   @Patch(':id')
   @ApiOkResponse({ type: eventosEntity })
-  update(@Param('id') id: string, @Body() updateEventoDto: UpdateEventoDto) {
+  async update(@Param('id') id: string, @Body() updateEventoDto: UpdateEventoDto) {
     return this.eventosService.update(+id, updateEventoDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: eventosEntity })
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.eventosService.remove(+id);
   }
 }

@@ -12,31 +12,31 @@ export class LocaisController {
 
   @Post()
   @ApiCreatedResponse({type: LocaisEntity})
-  create(@Body() createLocaiDto: CreateLocaiDto) {
+  async create(@Body() createLocaiDto: CreateLocaiDto) {
     return this.locaisService.create(createLocaiDto);
   }
 
   @Get()
   @ApiOkResponse({type: LocaisEntity, isArray: true})
-  findAll() {
+  async findAll() {
     return this.locaisService.findAll();
   }
 
   @Get(':id')
   @ApiOkResponse({type: LocaisEntity})
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.locaisService.findOne(+id);
   }
 
   @Patch(':id')
   @ApiOkResponse({type: LocaisEntity})
-  update(@Param('id') id: string, @Body() updateLocaiDto: UpdateLocaiDto) {
+  async update(@Param('id') id: string, @Body() updateLocaiDto: UpdateLocaiDto) {
     return this.locaisService.update(+id, updateLocaiDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({type: LocaisEntity})
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.locaisService.remove(+id);
   }
 }

@@ -12,32 +12,32 @@ export class UsuariogruposController {
 
   @Post()
   @ApiCreatedResponse({type: usuariogrupoEntity})
-  create(@Body() createUsuariogrupoDto: CreateUsuariogrupoDto) {
+  async create(@Body() createUsuariogrupoDto: CreateUsuariogrupoDto) {
     return this.usuariogruposService.create(createUsuariogrupoDto);
   }
 
   @Get()
   @ApiOkResponse({type: usuariogrupoEntity, isArray: true})
-  findAll() {
+  async findAll() {
     return this.usuariogruposService.findAll();
   }
 
   @Get('/:usuarioId/:grupoId')
   @ApiOkResponse({type: usuariogrupoEntity})
-  findOne(@Param('usuarioId' ) usuarioId: string, @Param('grupoId') grupoId: string ) {
+  async findOne(@Param('usuarioId' ) usuarioId: string, @Param('grupoId') grupoId: string ) {
     console.log(Param)
     return this.usuariogruposService.findOne(+usuarioId, +grupoId);
   }
 
   @Patch('/:usuarioId/:grupoId')
   @ApiOkResponse({type: usuariogrupoEntity})
-  update(@Param('usuarioId' ) usuarioId: string, @Param('grupoId') grupoId: string, @Body() updateUsuariogrupoDto: UpdateUsuariogrupoDto) {
+  async update(@Param('usuarioId' ) usuarioId: string, @Param('grupoId') grupoId: string, @Body() updateUsuariogrupoDto: UpdateUsuariogrupoDto) {
     return this.usuariogruposService.update(+usuarioId, +grupoId, updateUsuariogrupoDto);
   }
 
   @Delete('/:usuarioId/:grupoId')
   @ApiOkResponse({type: usuariogrupoEntity})
-  remove(@Param('usuarioId' ) usuarioId: string, @Param('grupoId') grupoId: string ) {
+  async remove(@Param('usuarioId' ) usuarioId: string, @Param('grupoId') grupoId: string ) {
     return this.usuariogruposService.remove(+usuarioId, +grupoId);
   }
 }

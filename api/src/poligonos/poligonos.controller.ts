@@ -12,31 +12,31 @@ export class PoligonosController {
 
   @Post()
   @ApiCreatedResponse({type: poligonosEntity})
-  create(@Body() createPoligonoDto: CreatePoligonoDto) {
+  async create(@Body() createPoligonoDto: CreatePoligonoDto) {
     return this.poligonosService.create(createPoligonoDto);
   }
 
   @Get()
   @ApiOkResponse({type: poligonosEntity, isArray: true})
-  findAll() {
+  async findAll() {
     return this.poligonosService.findAll();
   }
 
   @Get(':id')
   @ApiOkResponse({type: poligonosEntity})
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.poligonosService.findOne(+id);
   }
 
   @Patch(':id')
   @ApiOkResponse({type: poligonosEntity})
-  update(@Param('id') id: string, @Body() updatePoligonoDto: UpdatePoligonoDto) {
+  async update(@Param('id') id: string, @Body() updatePoligonoDto: UpdatePoligonoDto) {
     return this.poligonosService.update(+id, updatePoligonoDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({type: poligonosEntity})
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.poligonosService.remove(+id);
   }
 }

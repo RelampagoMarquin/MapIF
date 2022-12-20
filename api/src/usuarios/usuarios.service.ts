@@ -14,26 +14,26 @@ interface FormatLogin extends Partial<usuariosEntity> {
 export class UsuariosService {
   constructor(private prisma: PrismaService) {}
 
-  create(createUsuarioDto: CreateUsuarioDto) {
+  async create(createUsuarioDto: CreateUsuarioDto) {
     return this.prisma.usuarios.create({data: createUsuarioDto})
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.usuarios.findMany();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return this.prisma.usuarios.findUnique({ where: { id } });
   }
 
-  update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
+  async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
     return this.prisma.usuarios.update({
       where: { id },
       data: updateUsuarioDto,
       });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.prisma.usuarios.delete({ where: { id } });
   }
 

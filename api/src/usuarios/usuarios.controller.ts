@@ -22,25 +22,25 @@ export class UsuariosController {
 
   @Get()
   @ApiOkResponse({ type: usuariosEntity, isArray: true})
-  findAll() {
+  async findAll() {
     return this.usuariosService.findAll();
   }
 
   @Get(':id')
   @ApiOkResponse({ type: usuariosEntity})
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.usuariosService.findOne(+id);
   }
 
   @Patch(':id')
   @ApiOkResponse({ type: usuariosEntity})
-  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+  async update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuariosService.update(+id, updateUsuarioDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: usuariosEntity})
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.usuariosService.remove(+id);
   }
 }

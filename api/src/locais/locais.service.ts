@@ -7,26 +7,26 @@ import { UpdateLocaiDto } from './dto/update-locai.dto';
 export class LocaisService {
   constructor(private prisma: PrismaService) { }
 
-  create(createLocaiDto: CreateLocaiDto) {
+  async create(createLocaiDto: CreateLocaiDto) {
     return this.prisma.local.create({ data: createLocaiDto });
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.local.findMany();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return this.prisma.local.findUnique({ where: { id } });
   }
 
-  update(id: number, updateLocaiDto: UpdateLocaiDto) {
+  async update(id: number, updateLocaiDto: UpdateLocaiDto) {
     return this.prisma.local.update({
       where: { id },
       data: updateLocaiDto
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.prisma.local.delete({ where: { id } });
   }
 }

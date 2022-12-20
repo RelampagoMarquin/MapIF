@@ -7,26 +7,26 @@ import { UpdateAtividadeDto } from './dto/update-atividade.dto';
 export class AtividadesService {
   constructor(private prisma: PrismaService) { }
 
-  create(createAtividadeDto: CreateAtividadeDto) {
+  async create(createAtividadeDto: CreateAtividadeDto) {
     return this.prisma.atividade.create({ data: createAtividadeDto });
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.atividade.findMany();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return this.prisma.atividade.findUnique({ where: { id } });
   }
 
-  update(id: number, updateAtividadeDto: UpdateAtividadeDto) {
+  async update(id: number, updateAtividadeDto: UpdateAtividadeDto) {
     return this.prisma.atividade.update({
       where: { id },
       data: updateAtividadeDto
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.prisma.atividade.delete({ where: { id } });
   }
 }
