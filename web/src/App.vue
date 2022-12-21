@@ -4,7 +4,7 @@ import Main from "./layout/Main.vue";
 
 <template>
   <Main>
-    <div class="container"><router-view /></div>
+    <div><router-view /></div>
   </Main>
 </template>
 
