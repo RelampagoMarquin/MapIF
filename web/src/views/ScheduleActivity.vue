@@ -27,21 +27,30 @@ const activitys = ref([
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" md="6" lg="4">
+      <v-col cols="12" md="6" lg="10">
         <div class="mb-5">
           <h2 class="mb-8 mt-5 text-center title-primary">
             Calendário de Atividades
           </h2>
         </div>
         <div class="rounded-lg elevation-2 p-4">
-          <div v-for="item in activitys" :key="item.title" class="mb-3">
-            <Activity
-              :title="item.title"
-              :description="item.description"
-              :date="item.date"
-              :location="item.location"
-            ></Activity>
-          </div>
+          <v-row>
+            <v-col
+              v-for="item in activitys"
+              :key="item.title"
+              class="mb-3"
+              cols="12"
+              md="12"
+              lg="6"
+            >
+              <Activity
+                :title="item.title"
+                :description="item.description"
+                :date="item.date"
+                :location="item.location"
+              ></Activity>
+            </v-col>
+          </v-row>
         </div>
       </v-col>
     </v-row>

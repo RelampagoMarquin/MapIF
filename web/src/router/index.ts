@@ -4,13 +4,14 @@ import Start from "../views/Start.vue";
 import CreateEvent from "../views/CreateEvent.vue";
 import CreateActivity from "../views/CreateActivity.vue";
 import ScheduleActivity from "../views/ScheduleActivity.vue";
+import Home from "../views/Home.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
   {
     path: "/",
-    name: "login",
-    component: Login,
+    name: "home",
+    component: Home,
   },
   {
     path: "/signup",
