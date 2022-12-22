@@ -6,6 +6,16 @@ import locate from "leaflet";
 import latlng from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+function localizacao(posicao) {
+    var lat = posicao.coords.latitude
+    var lon = posicao.coords.longitude
+
+    // marcador da localização atual
+    var marker2 = L.marker([lat, lon])
+      .addTo(map.value)
+      .bindPopup("aqui está você!!!");
+}
+
 const mapElement = ref(null);
 const map = ref(null);
 
@@ -22,6 +32,9 @@ onMounted(() => {
     .addTo(map.value)
     .bindPopup("Aqui é bom pra namorar.<br> Traga seu amor.")
     .openPopup();
+
+  //aqui a sua localização e achada e enviada para o método sucess
+  navigator.geolocation.getCurrentPosition(localizacao)
 
   //criar um polygono
   var polygon = L.polygon([
