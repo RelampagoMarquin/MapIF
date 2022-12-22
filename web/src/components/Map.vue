@@ -33,7 +33,7 @@ onMounted(() => {
     .bindPopup("Aqui é bom pra namorar.<br> Traga seu amor.")
     .openPopup();
 
-  //aqui a sua localização e achada e enviada para o método sucess
+  //aqui a sua localização e achada e enviada para o método localizacao
   navigator.geolocation.getCurrentPosition(localizacao)
 
   //criar um polygono
