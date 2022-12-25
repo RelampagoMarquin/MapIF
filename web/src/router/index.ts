@@ -5,6 +5,7 @@ import CreateEvent from "../views/CreateEvent.vue";
 import CreateActivity from "../views/CreateActivity.vue";
 import ScheduleActivity from "../views/ScheduleActivity.vue";
 import Home from "../views/Home.vue";
+import CreateLocal from "../views/CreateLocal.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
@@ -37,6 +38,11 @@ const routes = [
     path: "/schedule-activity",
     name: "schedule-activity",
     component: ScheduleActivity,
+  },
+  {
+    path: "/create-local",
+    name: "create-local",
+    component: CreateLocal,
   },
 ];
 
