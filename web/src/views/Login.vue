@@ -24,7 +24,7 @@ function login() {
         </div>
         <h2 class="text-primary-custom mb-5 text-center">Login</h2>
         <v-form>
-          <label for="email">Email</label>
+          <label for="email" class="text-label">Email</label>
           <v-text-field
             v-model="email"
             placeholder="johndoe@gmail.com"
@@ -32,7 +32,7 @@ function login() {
             variant="outlined"
             class="mb-2 rounded"
           ></v-text-field>
-          <label for="senha" class="mt-3">Senha</label>
+          <label for="senha" class="text-label">Senha</label>
           <v-text-field
             v-model="senha"
             placeholder="********"

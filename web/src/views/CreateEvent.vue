@@ -12,7 +12,7 @@
         <!-- FORM -->
         <div class="rounded-lg elevation-2 p-4">
           <form action="#" method="post" class="text-start">
-            <label for="nome" class="bold">Nome</label>
+            <label for="nome" class="text-label">Nome</label>
             <input
               type="text"
               name="nome"
@@ -20,7 +20,7 @@
               v-model="nome"
               class="form-control input-camp rounded-pill elevation-4"
             />
-            <label for="data-inicio" class="mt-3 bold">Data do início da Exibição</label>
+            <label for="data-inicio" class="mt-3 text-label">Data do início da Exibição</label>
             <input
               type="date"
               name="data-inicio"
@@ -28,7 +28,7 @@
               v-model="dataInicio"
               class="form-control input-camp rounded-pill elevation-4"
             />
-            <label for="data-fim" class="mt-3 bold">Data do fim da Exibição</label>
+            <label for="data-fim" class="mt-3 text-label">Data do fim da Exibição</label>
             <input
               type="date"
               name="data-fim"
@@ -37,15 +37,15 @@
               class="form-control input-camp rounded-pill elevation-4"
             />
             <div>
-              <v-btn class="btn mt-8 p-4" x-large block rounded="lg" @click.prevent="login()">
-                <span class="mr-4">Cadastrar Local</span>
-                <v-icon x-large color="white">
-                  mdi-plus-circle
-                </v-icon>
+              <v-btn class="btn mt-8 p-4" x-large block rounded="lg">
+                  <span class="mr-4">Cadastrar Local</span>
+                  <v-icon x-large color="white">
+                    mdi-plus-circle
+                  </v-icon>
               </v-btn>
             </div>
             <div>
-              <v-btn class="btn mt-8 p-4 disabled" disabled x-large block rounded="lg" @click.prevent="login()">
+              <v-btn class="btn mt-8 p-4 disabled" disabled x-large block rounded="lg">
                 <span class="mr-4">Cadastrar atividade</span>
                 <v-icon x-large color="white">
                   mdi-plus-circle
@@ -54,6 +54,11 @@
             </div>
           </form>
         </div>
+        <div>
+              <v-btn class="btn mt-8 p-4" x-large block rounded="lg">
+                <span class="mr-4">Cadastrar Evento</span>
+              </v-btn>
+            </div>
       </v-col>
     </v-row>
   </v-container>
@@ -69,16 +74,6 @@
 .title-primary {
   color: #389c37 !important;
   font-weight: 700 !important;
-}
-
-.bold {
-  font-weight: 700 !important;
-  color: #888888 !important;
-}
-
-.input-camp {
-  background-color: #DDDDDD !important;
-  color: #888888 !important;
 }
 
 .btn {
