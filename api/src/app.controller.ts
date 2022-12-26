@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { LoginUsuarioDto } from './usuarios/dto/login-user.dto';
+import { Public } from './auth/auth.decoretor';
 
 @Controller()
 export class AppController {
@@ -25,6 +26,7 @@ export class AppController {
     return this.authService.validateUser(req.user);
   }
 
+  @Public()
   @Post('login')
     public async logon(@Body() LoginUsuarioDto: LoginUsuarioDto):
         Promise<any> {
