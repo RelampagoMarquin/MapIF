@@ -4,6 +4,7 @@ import { CreatePoligonoDto } from './dto/create-poligono.dto';
 import { UpdatePoligonoDto } from './dto/update-poligono.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { poligonosEntity } from './entities/poligono.entity';
+import { Public } from 'src/auth/auth.decoretor';
 
 @Controller('poligonos')
 @ApiTags('poligonos')
@@ -16,12 +17,14 @@ export class PoligonosController {
     return this.poligonosService.create(createPoligonoDto);
   }
 
+  @Public()
   @Get()
   @ApiOkResponse({type: poligonosEntity, isArray: true})
   async findAll() {
     return this.poligonosService.findAll();
   }
 
+  @Public()
   @Get(':id')
   @ApiOkResponse({type: poligonosEntity})
   async findOne(@Param('id') id: string) {
