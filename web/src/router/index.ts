@@ -8,6 +8,7 @@ import Home from "../views/Home.vue";
 import UserProfile from "../views/UserProfile.vue";
 import CreateLocal from "../views/CreateLocal.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
+import EventList from "../views/EventList.vue";
 
 const routes = [
   {
@@ -55,6 +56,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+  },
+  {
+    path: "/event-list",
+    name: "event-list",
+    component: EventList,
   },
 ];
 
