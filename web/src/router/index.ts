@@ -51,6 +51,11 @@ const routes = [
     name: "create-local",
     component: CreateLocal,
   },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
 ];
 
 const router = createRouter({
