@@ -41,11 +41,12 @@ const routes = [
     component: ScheduleActivity,
   },
   {
-    path: '/userprofile/:id',
-    name: 'userprofile',
+    path: "/userprofile/:id",
+    name: "userprofile",
     component: UserProfile,
-    props: true
-},
+    props: true,
+  },
+  {
     path: "/create-local",
     name: "create-local",
     component: CreateLocal,
