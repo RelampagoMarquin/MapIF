@@ -4,6 +4,7 @@ import { CreateLocaiDto } from './dto/create-locai.dto';
 import { UpdateLocaiDto } from './dto/update-locai.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { LocaisEntity } from './entities/locai.entity';
+import { Public } from 'src/auth/auth.decoretor';
 
 @Controller('locais')
 @ApiTags('locais')
@@ -16,12 +17,14 @@ export class LocaisController {
     return this.locaisService.create(createLocaiDto);
   }
 
+  @Public()
   @Get()
   @ApiOkResponse({type: LocaisEntity, isArray: true})
   async findAll() {
     return this.locaisService.findAll();
   }
 
+  @Public()
   @Get(':id')
   @ApiOkResponse({type: LocaisEntity})
   async findOne(@Param('id') id: string) {

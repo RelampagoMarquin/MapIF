@@ -31,7 +31,7 @@ function signup() {
         </div>
         <h2 class="text-primary-custom mb-5 text-center">Cadastre-se</h2>
         <v-form>
-          <label for="email">Nome</label>
+          <label for="email" class="text-label">Nome</label>
           <v-text-field
             v-model="nome"
             placeholder="Ex: John Doe"
@@ -39,7 +39,7 @@ function signup() {
             variant="outlined"
             class="mb-2 rounded"
           ></v-text-field>
-          <label for="email">Email</label>
+          <label for="email" class="text-label">Email</label>
           <v-text-field
             v-model="email"
             placeholder="johndoe@gmail.com"
@@ -47,7 +47,7 @@ function signup() {
             variant="outlined"
             class="mb-2 rounded"
           ></v-text-field>
-          <label for="senha" class="mt-3">Senha</label>
+          <label for="senha" class="text-label">Senha</label>
           <v-text-field
             v-model="senha"
             placeholder="********"
@@ -56,7 +56,7 @@ function signup() {
             variant="outlined"
             class="mb-2 v-text-field"
           ></v-text-field>
-          <label for="senha" class="mt-3">Confirmar Senha</label>
+          <label for="senha" class="text-label">Confirmar Senha</label>
           <v-text-field
             v-model="confirmarSenha"
             placeholder="********"

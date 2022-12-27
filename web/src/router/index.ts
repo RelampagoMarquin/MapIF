@@ -5,6 +5,7 @@ import CreateEvent from "../views/CreateEvent.vue";
 import CreateActivity from "../views/CreateActivity.vue";
 import ScheduleActivity from "../views/ScheduleActivity.vue";
 import Home from "../views/Home.vue";
+import UserProfile from "../views/UserProfile.vue";
 import CreateLocal from "../views/CreateLocal.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
@@ -40,6 +41,11 @@ const routes = [
     component: ScheduleActivity,
   },
   {
+    path: '/userprofile/:id',
+    name: 'userprofile',
+    component: UserProfile,
+    props: true
+},
     path: "/create-local",
     name: "create-local",
     component: CreateLocal,
