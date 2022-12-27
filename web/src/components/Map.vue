@@ -1,10 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import { onMounted } from "@vue/runtime-core";
-import L from "leaflet";
-import locate from "leaflet";
-import latlng from "leaflet";
-import "leaflet/dist/leaflet.css";
 
 function localizacao(posicao) {
     var lat = posicao.coords.latitude
@@ -22,7 +18,8 @@ const map = ref(null);
 onMounted(() => {
   map.value = L.map(mapElement.value).setView([-6.25309, -36.53401], 19);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 23, //fica bugado com mais que 19
+    maxZoom: 23,
+    maxNativeZoom: 19, // caso não tenha o zoom, ele pega o atual e amplia
     attribution:
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map.value);
