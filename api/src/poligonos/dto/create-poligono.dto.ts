@@ -4,4 +4,7 @@ export class CreatePoligonoDto {
 
     @ApiProperty()
     eventoId: number;
+
+    @ApiProperty()
+    locais: JSON;
 }

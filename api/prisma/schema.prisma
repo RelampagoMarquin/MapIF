@@ -47,17 +47,9 @@ model Eventos {
 model Poligonos {
   id        Int         @id @default(autoincrement())
   eventoId  Int
+  locais  Json?
   evento    Eventos     @relation(fields: [eventoId], references: [id])
-  local     Local[]
   atividade Atividade[]
-}
-
-model Local {
-  id         Int       @id @default(autoincrement())
-  latitude   String
-  longitude  String
-  poligonoId Int
-  poligono   Poligonos @relation(fields: [poligonoId], references: [id])
 }
 
 model Atividade {
