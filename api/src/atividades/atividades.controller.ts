@@ -11,9 +11,10 @@ import { atividadesEntity } from './entities/atividade.entity';
 export class AtividadesController {
   constructor(private readonly atividadesService: AtividadesService) {}
 
-  @Post()
+  @Post('/poligono/:idpoligono')
   @ApiCreatedResponse({type: atividadesEntity})
-  async create(@Body() createAtividadeDto: CreateAtividadeDto) {
+  async create(@Param('idpoligono') id: number, @Body() createAtividadeDto: CreateAtividadeDto) {
+    createAtividadeDto.poligonoId = id
     return this.atividadesService.create(createAtividadeDto);
   }
 
