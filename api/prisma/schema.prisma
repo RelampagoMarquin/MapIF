@@ -28,7 +28,7 @@ model Grupos {
 model usuarioGrupo {
   usuarioId Int
   grupoId   Int
-  isAdmin   Boolean
+  isAdmin   Boolean  @default(false)
   usuario   Usuarios @relation(fields: [usuarioId], references: [id])
   grupo     Grupos   @relation(fields: [grupoId], references: [id])
 
@@ -41,7 +41,7 @@ model Eventos {
   comeca    DateTime
   fim       DateTime
   grupoId   Int
-  isPublic  Boolean
+  isPublic  Boolean     @default(false)
   grupo     Grupos      @relation(fields: [grupoId], references: [id])
   poligonos Poligonos[]
 }
