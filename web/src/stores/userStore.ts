@@ -1,5 +1,6 @@
-import { defineStore } from 'pinia'
-import { User, UserCreate, UserLogin } from '../utils/types'
+import { defineStore } from 'pinia';
+import { User, UserCreate, UserLogin } from '../utils/types';
+import axios from "axios";
 
 export const useUserStore = defineStore('users', {
    state: () => {
@@ -21,37 +22,28 @@ export const useUserStore = defineStore('users', {
             return data
         },
         async getUsers() {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios`)
-            const users = await response.json()
-            this.users = users
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/usuarios`);
+            this.users = response.data;
         },
         async getOneUser(id: number){
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios/${id}`)
-            const user = await response.json()
-            return user
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/usuarios/${id}`);
+            const user = response.data;
+            return user;
         },
         async createUser(user: UserCreate) {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/usuarios`, {
+                user
+            });
         },
         async updateUser(user: User) {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios/${user.id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
+            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/usuario/${user.id}`, {
+                user
+            });
+
+            return this.getOneUser(user.id);
         },
         async deleteUser(id: number) {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios/${id}`, {
-                method: 'DELETE',
-            })
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/usuario/${id}`);
         }
     }
 })
