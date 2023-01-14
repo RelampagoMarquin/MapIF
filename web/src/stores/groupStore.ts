@@ -20,14 +20,11 @@ export const useGroupStore = defineStore('group', {
             return group;
         },
         async createGroup(group: GroupCreate) {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/grupos`, {
-                group
-            })
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/grupos`, group)
         },
         async updateGroup(group: Group) {
-            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/grupos/${group.id}`, {
-                group
-            })
+            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/grupos/${group.id}`,
+                group)
 
             return this.getOneGroup(group.id);
         },

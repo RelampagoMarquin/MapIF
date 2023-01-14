@@ -20,14 +20,12 @@ export const useActivityStore = defineStore('activity', {
             return activity;
         },
         async createActivity(activity: ActivityCreate) {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/atividades`, {
-                activity
-            })
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/atividades`,
+                activity)
         },
         async updateActivity(activity: Activity) {
-            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/atividades/${activity.id}`, {
-                activity
-            })
+            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/atividades/${activity.id}`,
+                activity)
 
             return this.getOneActivity(activity.id);
         },

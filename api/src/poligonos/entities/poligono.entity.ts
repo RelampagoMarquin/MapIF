@@ -9,5 +9,5 @@ export class poligonosEntity implements Poligonos {
     eventoId: number;
 
     @ApiProperty()
-    locais: JSON;
+    locais: string;
 }

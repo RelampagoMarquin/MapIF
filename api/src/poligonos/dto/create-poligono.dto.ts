@@ -6,5 +6,5 @@ export class CreatePoligonoDto {
     eventoId: number;
 
     @ApiProperty()
-    locais: JSON;
+    locais: string;
 }

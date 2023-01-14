@@ -18,4 +18,6 @@ export class eventosEntity implements Eventos {
     @ApiProperty()
     grupoId: number;
 
+    @ApiProperty()
+    isPublic: boolean;
 }

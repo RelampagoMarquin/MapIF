@@ -20,14 +20,12 @@ export const useEventStore = defineStore('event', {
             return event;
         },
         async createEvent(event: EventCreate) {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/eventos`, {
-                event
-            })
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/eventos`,
+                event)
         },
         async updateEvent(event: Event) {
-            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/eventos/${event.id}`, {
-                event
-            })
+            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/eventos/${event.id}`,
+                event)
 
             return this.getOneEvent(event.id);
         },

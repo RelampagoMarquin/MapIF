@@ -20,14 +20,11 @@ export const usePolygonStore = defineStore('polygon', {
             return polygon;
         },
         async createPolygon(polygon: PolygonCreate) {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/poligonos`, {
-                polygon
-            })
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/poligonos`, polygon)
         },
         async updatePolygon(polygon: Polygon) {
-            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/poligonos/${polygon.id}`, {
-                polygon
-            })
+            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/poligonos/${polygon.id}`,
+                polygon)
 
             return this.getOnePolygon(polygon.id);
         },
