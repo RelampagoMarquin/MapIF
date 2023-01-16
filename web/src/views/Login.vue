@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useUserStore } from "../stores/userStore";
+import { useAuthStore } from "../stores/authStore";
 import { ref } from "vue";
-const userStore = useUserStore();
+const authStore = useAuthStore();
 
 const senha = ref("");
 const email = ref("");
@@ -11,7 +11,7 @@ function login() {
     senha: senha.value,
     email: email.value,
   };
-  userStore.login(data);
+  authStore.login(data);
 }
 </script>
 
