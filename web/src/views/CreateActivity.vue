@@ -36,13 +36,6 @@
               v-model="dataFim"
               class="form-control input-camp rounded-pill elevation-4"
             />
-            <label for="local" class="mt-3 text-label">Escolher Local</label>
-            <select name="local" id="" class="block form-control input-camp rounded-pill elevation-4">
-              <option disabled selected value>Selecione uma opção</option>
-              <option value="">Opção 01</option>
-              <option value="">Opção 02</option>
-              <option value="">Opção 03</option>
-            </select>
             <label for="descricao" class="mt-3 text-label">Descrição</label>
             <textarea name="descricao" maxlength="225" id="" cols="30" rows="4" class="form-control input-camp rounded-border elevation-4"></textarea>
           </form>

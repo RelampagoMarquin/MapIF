@@ -11,8 +11,7 @@ const activitys = ref([
   {
     title: "Expotec",
     description: "Exposição de Tecnologias e Ciências",
-    date: "10/10/2021",
-    location: "Salas 1",
+    date: "13:00 10/10/2021"
   },
   {
     title: "Semana da Abelha",
@@ -51,7 +50,6 @@ const activitys = ref([
                 :title="item.title"
                 :description="item.description"
                 :date="item.date"
-                :location="item.location"
                 :verAtividades="true"
                 :editar="true"
               ></Activity>
