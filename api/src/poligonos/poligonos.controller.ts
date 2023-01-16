@@ -11,9 +11,10 @@ import { Public } from 'src/auth/auth.decoretor';
 export class PoligonosController {
   constructor(private readonly poligonosService: PoligonosService) {}
 
-  @Post()
+  @Post('/evento/:ideventos')
   @ApiCreatedResponse({type: poligonosEntity})
-  async create(@Body() createPoligonoDto: CreatePoligonoDto) {
+  async create(@Param('ideventos') id: number, @Body() createPoligonoDto: CreatePoligonoDto) {
+    createPoligonoDto.eventoId = id
     return this.poligonosService.create(createPoligonoDto);
   }
 
