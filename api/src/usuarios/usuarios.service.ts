@@ -63,7 +63,6 @@ export class UsuariosService {
 
  //use by auth module to get user in database
  async findByPayload({ email }: any): Promise<any> {
-  console.log(email)
    return await this.prisma.usuarios.findFirst({
      where: { email }
    });
