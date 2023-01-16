@@ -15,5 +15,5 @@ export class CreateAtividadeDto {
     descricao: string;
 
     @ApiProperty()
-    poligonoId: number;
+    poligonoId?: number;
 }

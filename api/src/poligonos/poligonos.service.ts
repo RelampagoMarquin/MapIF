@@ -8,7 +8,11 @@ export class PoligonosService {
   constructor (private prisma: PrismaService){}
 
   async create(createPoligonoDto: CreatePoligonoDto) {
-    return this.prisma.poligonos.create({data: createPoligonoDto});
+    const {locais, eventoId} = createPoligonoDto
+    return this.prisma.poligonos.create({data: {
+      eventoId: eventoId,
+      locais: locais
+    }});
   }
 
   async findAll() {

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-export const useLocaisStore = defineStore("locais", {
+export const useUserStore = defineStore("users", {
   state: () => {
     return {
       locais: [],
