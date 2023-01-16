@@ -28,6 +28,7 @@ model Grupos {
 model usuarioGrupo {
   usuarioId Int
   grupoId   Int
+  isAdmin   Boolean  @default(false)
   usuario   Usuarios @relation(fields: [usuarioId], references: [id])
   grupo     Grupos   @relation(fields: [grupoId], references: [id])
 
@@ -40,6 +41,7 @@ model Eventos {
   comeca    DateTime
   fim       DateTime
   grupoId   Int
+  isPublic  Boolean     @default(false)
   grupo     Grupos      @relation(fields: [grupoId], references: [id])
   poligonos Poligonos[]
 }
@@ -47,17 +49,9 @@ model Eventos {
 model Poligonos {
   id        Int         @id @default(autoincrement())
   eventoId  Int
+  locais    Json?
   evento    Eventos     @relation(fields: [eventoId], references: [id])
-  local     Local[]
   atividade Atividade[]
-}
-
-model Local {
-  id         Int       @id @default(autoincrement())
-  latitude   String
-  longitude  String
-  poligonoId Int
-  poligono   Poligonos @relation(fields: [poligonoId], references: [id])
 }
 
 model Atividade {

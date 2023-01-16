@@ -8,8 +8,7 @@ import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 
 const mapElement = ref(null);
 var map = ref(null);
-const osmAttrib =
-  'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+const osmAttrib = "";
 const osmUrl = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
 const osm = ref(L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }));
 

@@ -27,3 +27,55 @@ export interface Local {
   id: number;
   nome: string;
 }
+
+export interface Event {
+  id: number;
+  nome: string;
+  comeca: Date;
+  fim: Date;
+  grupoId: number;
+}
+
+export interface EventCreate {
+  nome: string;
+  comeca: Date;
+  fim: Date;
+  grupoId: number;
+}
+
+export interface Polygon {
+  id: number;
+  eventoId: number;
+  locais: JSON;
+}
+
+export interface PolygonCreate {
+  eventoId: number;
+  locais: JSON;
+}
+
+export interface Activity {
+  id: number;
+  nome: string;
+  horarioInicial: Date;
+  horarioFinal: Date;
+  descricao: string;
+  poligonoId: number;
+}
+
+export interface ActivityCreate {
+  nome: string;
+  horarioInicial: Date;
+  horarioFinal: Date;
+  descricao: string;
+  poligonoId: number;
+}
+
+export interface Group {
+  id: number;
+  name: string;
+}
+
+export interface GroupCreate {
+  name: string;
+}

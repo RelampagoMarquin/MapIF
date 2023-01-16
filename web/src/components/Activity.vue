@@ -4,6 +4,14 @@ defineProps<{
   description: string;
   date: string;
   location: string;
+  verAtividades: {
+    type: boolean;
+    default: false;
+  };
+  editar: {
+    type: boolean;
+    default: false;
+  };
 }>();
 </script>
 
@@ -14,5 +22,39 @@ defineProps<{
     <p class="text-secondary-custom">{{ description }}</p>
     <p class="text-secondary-custom">{{ date }}</p>
     <a href="" class="text-primary-custom">{{ location }}</a>
+
+    <v-row class="mt-4" v-if="verAtividades && editar">
+      <v-col cols="12" md="6" lg="6">
+        <v-btn
+          class="rounded-lg elevation-2 btn"
+          block
+          nuxt
+          to="/schedule-activity"
+        >
+          <v-icon class="mr-2">mdi-pencil</v-icon>
+          Editar
+        </v-btn>
+      </v-col>
+      <v-col cols="12" md="6" lg="6">
+        <v-btn
+          class="rounded-lg elevation-2 btn"
+          block
+          nuxt
+          to="/schedule-activity"
+        >
+          <v-icon class="mr-2">mdi-calendar</v-icon>
+          Ver Atividades
+        </v-btn>
+      </v-col>
+    </v-row>
   </div>
 </template>
+
+<style scoped>
+.btn {
+  background-color: #389c37 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  text-transform: capitalize;
+}
+</style>

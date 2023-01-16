@@ -3,5 +3,8 @@ import { ApiProperty } from "@nestjs/swagger";
 export class CreatePoligonoDto {
 
     @ApiProperty()
-    eventoId: number;
+    eventoId?: number;
+
+    @ApiProperty()
+    locais: string;
 }

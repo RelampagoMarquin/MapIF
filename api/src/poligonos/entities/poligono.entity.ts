@@ -7,4 +7,7 @@ export class poligonosEntity implements Poligonos {
 
     @ApiProperty()
     eventoId: number;
+
+    @ApiProperty()
+    locais: any;
 }

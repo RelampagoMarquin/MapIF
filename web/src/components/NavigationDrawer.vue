@@ -12,7 +12,7 @@ const listNavigationDrawer: Drawer[] = [
     icon: "mdi-map-marker",
     title: "Events",
     value: "wallets",
-    router: "/create-event",
+    router: "/event-list",
   },
   {
     icon: "mdi-calendar",

@@ -8,6 +8,7 @@ import Home from "../views/Home.vue";
 import UserProfile from "../views/UserProfile.vue";
 import CreateLocal from "../views/CreateLocal.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
+import EventList from "../views/EventList.vue";
 
 const routes = [
   {
@@ -41,14 +42,25 @@ const routes = [
     component: ScheduleActivity,
   },
   {
-    path: '/userprofile/:id',
-    name: 'userprofile',
+    path: "/userprofile/:id",
+    name: "userprofile",
     component: UserProfile,
-    props: true
-},
+    props: true,
+  },
+  {
     path: "/create-local",
     name: "create-local",
     component: CreateLocal,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  {
+    path: "/event-list",
+    name: "event-list",
+    component: EventList,
   },
 ];
 
