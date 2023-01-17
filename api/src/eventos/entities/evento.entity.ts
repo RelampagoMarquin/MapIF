@@ -16,9 +16,6 @@ export class eventosEntity implements Eventos {
     fim: Date;
 
     @ApiProperty()
-    isPublic: boolean
-
-    @ApiProperty()
     grupoId: number;
 
     @ApiProperty()
