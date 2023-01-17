@@ -17,7 +17,7 @@ export class UsuariosController {
   @Public()
   @ApiCreatedResponse({ type: usuariosEntity})
   async create(@Body() createUsuarioDto: CreateUsuarioDto) {
-    const saltOrRounds = 10;
+    const saltOrRounds = await bcrypt.genSalt()
     const password = await bcrypt.hash(createUsuarioDto.senha, saltOrRounds)
     createUsuarioDto.senha = password
     return this.usuariosService.create(createUsuarioDto);

@@ -8,4 +8,7 @@ export class CreateUsuariogrupoDto {
     @ApiProperty()
     grupoId: number;
 
+    @ApiProperty()
+    isAdmin: boolean;
+
 }
