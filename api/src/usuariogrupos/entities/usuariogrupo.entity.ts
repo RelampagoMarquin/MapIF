@@ -8,4 +8,7 @@ export class usuariogrupoEntity implements usuarioGrupo {
 
     @ApiProperty()
     grupoId: number;
+
+    @ApiProperty()
+    isAdmin: boolean;
 }

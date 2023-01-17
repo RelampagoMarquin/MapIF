@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePoligonoDto } from './dto/create-poligono.dto';
 import { UpdatePoligonoDto } from './dto/update-poligono.dto';
@@ -8,15 +9,23 @@ export class PoligonosService {
   constructor (private prisma: PrismaService){}
 
   async create(createPoligonoDto: CreatePoligonoDto) {
-    const {locais, eventoId} = createPoligonoDto
+    let {locais, eventoId} = createPoligonoDto
+    locais = JSON.parse(locais)
+    console.log(locais)
     return this.prisma.poligonos.create({data: {
       eventoId: eventoId,
-      locais: locais
+      locais: locais 
     }});
   }
 
   async findAll() {
-    return this.prisma.poligonos.findMany();
+    return this.prisma.poligonos.findMany(
+      {include: {
+        atividade:{
+
+        }}
+      }
+    );
   }
 
   async findOne(id: number) {
@@ -24,10 +33,10 @@ export class PoligonosService {
   }
 
   async update(id: number, updatePoligonoDto: UpdatePoligonoDto) {
-    return this.prisma.poligonos.update({
+    /* return this.prisma.poligonos.update({
       where: {id},
       data: updatePoligonoDto
-    });
+    }); */
   }
 
   async remove(id: number) {

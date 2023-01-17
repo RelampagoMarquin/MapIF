@@ -3,16 +3,18 @@ import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import * as bcrypt from 'bcrypt';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { usuariosEntity } from './entities/usuario.entity';
 import { Public } from 'src/auth/auth.decoretor';
 
 @Controller('usuarios')
+@ApiBearerAuth('JWT-auth')
 @ApiTags('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
   @Post()
+  @Public()
   @ApiCreatedResponse({ type: usuariosEntity})
   async create(@Body() createUsuarioDto: CreateUsuarioDto) {
     const saltOrRounds = 10;

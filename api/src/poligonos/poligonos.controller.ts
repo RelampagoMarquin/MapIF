@@ -2,24 +2,25 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { PoligonosService } from './poligonos.service';
 import { CreatePoligonoDto } from './dto/create-poligono.dto';
 import { UpdatePoligonoDto } from './dto/update-poligono.dto';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { poligonosEntity } from './entities/poligono.entity';
 import { Public } from 'src/auth/auth.decoretor';
 
 @Controller('poligonos')
 @ApiTags('poligonos')
+@ApiBearerAuth('JWT-auth')
 export class PoligonosController {
   constructor(private readonly poligonosService: PoligonosService) {}
 
   @Post('/evento/:ideventos')
   @ApiCreatedResponse({type: poligonosEntity})
   async create(@Param('ideventos') id: number, @Body() createPoligonoDto: CreatePoligonoDto) {
-    createPoligonoDto.eventoId = id
+    createPoligonoDto.eventoId = Number(id)
     return this.poligonosService.create(createPoligonoDto);
   }
 
   @Public()
-  @Get()
+  @Get('/evento/:ideventos')
   @ApiOkResponse({type: poligonosEntity, isArray: true})
   async findAll() {
     return this.poligonosService.findAll();
