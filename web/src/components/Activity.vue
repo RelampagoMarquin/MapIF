@@ -32,7 +32,7 @@ defineProps<{
           to="/schedule-activity"
         >
           <v-icon class="mr-2">mdi-pencil</v-icon>
-          Editar
+          Add Atividade
         </v-btn>
       </v-col>
       <v-col cols="12" md="6" lg="6">

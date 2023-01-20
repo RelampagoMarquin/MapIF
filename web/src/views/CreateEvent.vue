@@ -38,14 +38,6 @@
               v-model="dataFim"
               class="form-control input-camp rounded-pill elevation-4"
             />
-            <div>
-              <v-btn class="btn mt-8 p-4" x-large block rounded="lg" nuxt to="/create-local">
-                  <span class="mr-4">Cadastrar Atividade</span>
-                  <v-icon x-large color="white">
-                    mdi-plus-circle
-                  </v-icon>
-              </v-btn>
-            </div>
           </form>
         </div>
         <div>

@@ -52,6 +52,7 @@ onMounted(() => {
       layer = e.layer;
 
     drawnItems.addLayer(layer);
+    console.log(typeof layer)
     console.log(layer);
   });
 });
