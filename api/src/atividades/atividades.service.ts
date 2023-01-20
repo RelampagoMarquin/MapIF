@@ -11,8 +11,12 @@ export class AtividadesService {
     return this.prisma.atividade.create({ data: createAtividadeDto });
   }
 
-  async findAll() {
-    return this.prisma.atividade.findMany();
+  async findByPoligono(idpoligono: number) {
+    return this.prisma.atividade.findMany({
+      where: {
+        poligonoId: idpoligono
+      }
+    });
   }
 
   async findOne(id: number) {

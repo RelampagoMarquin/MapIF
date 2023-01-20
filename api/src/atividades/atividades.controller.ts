@@ -18,11 +18,11 @@ export class AtividadesController {
     return this.atividadesService.create(createAtividadeDto);
   }
 
-  @Public()
-  @Get()
+  //@Public()
+  @Get('/poligono/:idpoligono')
   @ApiOkResponse({type: atividadesEntity, isArray: true})
-  async findAll() {
-    return this.atividadesService.findAll();
+  async findAll(@Param('idpoligono') idpoligono: number,) {
+    return this.atividadesService.findByPoligono(idpoligono);
   }
 
   @Public()
