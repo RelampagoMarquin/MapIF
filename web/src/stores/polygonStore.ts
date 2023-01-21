@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { Polygon, PolygonCreate } from '../utils/types';
 import axios from "axios";
-import routes from "../router/index"
+import router from "../router/index"
 
 export const usePolygonStore = defineStore('polygon', {
    state: () => {
@@ -28,7 +28,7 @@ export const usePolygonStore = defineStore('polygon', {
             }}).catch(function (error) {
                 const errorCode = error.response.data.statusCode;
                 if (errorCode == 401){
-                    routes.push('login')
+                    router.push('login')
                     //aqui pode ser feito o Redirecionamento para login caso acontessa um error
                 }
             });
@@ -43,7 +43,7 @@ export const usePolygonStore = defineStore('polygon', {
                 }}).catch(function (error) {
                     const errorCode = error.response.data.statusCode;
                     if (errorCode == 401){
-                        routes.push('login')
+                        router.push('login')
                         //aqui pode ser feito o Redirecionamento para login caso acontessa um error
                     }
                 });
@@ -58,7 +58,7 @@ export const usePolygonStore = defineStore('polygon', {
             }}).catch(function (error) {
                 const errorCode = error.response.data.statusCode;
                 if (errorCode == 401){
-                    routes.push('login')
+                    router.push('login')
                     //aqui pode ser feito o Redirecionamento para login caso acontessa um error
                 }
             });
