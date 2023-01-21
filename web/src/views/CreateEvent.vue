@@ -1,4 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+import {useEventStore} from '../stores/eventStore'
+const eventStore = useEventStore()
+const nome = ref('')
+const dataInicio = ref('')
+const dataFim = ref('')
+
+function createEvent() {
+  const data = {
+    nome: nome.value,
+    comeca: new Date(dataInicio.value),
+    fim: new Date(dataFim.value),
+    grupoId: 1, //quando resolver o bagulho dos grupos, add aqui
+  };
+
+  console.log(data)
+  eventStore.createEvent(data);
+}
+</script>
 
 <template>
   <v-container>
@@ -41,7 +60,7 @@
           </form>
         </div>
         <div>
-              <v-btn class="btn mt-8 p-4" x-large block rounded="lg">
+              <v-btn class="btn mt-8 p-4" x-large block rounded="lg" @click="createEvent()">
                 <span class="mr-4">Cadastrar Evento</span>
               </v-btn>
             </div>
