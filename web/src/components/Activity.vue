@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useDateFormat } from '@vueuse/core'
 defineProps<{
   title: string;
   description: string;
-  date: string;
+  dateInicio: string;
+  dateFim: string;
   location: string;
   verAtividades: {
     type: boolean;
@@ -13,6 +15,7 @@ defineProps<{
     default: false;
   };
 }>();
+
 </script>
 
 <template>
@@ -20,7 +23,7 @@ defineProps<{
     <h5 class="title-secondary">{{ title }}</h5>
     <v-divider class="mb-4"></v-divider>
     <p class="text-secondary-custom">{{ description }}</p>
-    <p class="text-secondary-custom">{{ date }}</p>
+    <p class="text-secondary-custom">{{ useDateFormat(dateInicio, "DD-MM-YYYY").value }} até {{ useDateFormat(dateFim, "DD-MM-YYYY").value }}</p>
     <a href="" class="text-primary-custom">{{ location }}</a>
 
     <v-row class="mt-4" v-if="verAtividades && editar">
@@ -29,7 +32,7 @@ defineProps<{
           class="rounded-lg elevation-2 btn"
           block
           nuxt
-          to="/schedule-activity"
+          to="/create-local"
         >
           <v-icon class="mr-2">mdi-pencil</v-icon>
           Add Atividade

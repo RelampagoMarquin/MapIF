@@ -6,19 +6,22 @@ const activitys = ref([
   {
     title: "Oficina de Artesanato",
     description: "Oficina de Artesanato usando materiais recicláveis",
-    date: "13:00 10/10/2021",
+    horarioInicial: "13:00 10/10/2021",
+    horarioFinal: "14:00 10/10/2021",
     location: "Auditório",
   },
   {
     title: "Oficina de Perfume",
     description: "Oficina de Perfume usando materiais recicláveis",
-    date: "10/10/2021",
+    horarioInicial: "10/10/2021",
+     horarioFinal: "14:00 10/10/2021",
     location: "Salas 1",
   },
   {
     title: "Aula de Yoga",
     description: "Aula de Yoga para iniciantes",
-    date: "12:00 10/10/2021",
+    horarioInicial: "12:00 10/10/2021",
+    horarioFinal: "14:00 10/10/2021",
     location: "Auditório",
   },
 ]);
@@ -46,7 +49,8 @@ const activitys = ref([
               <Activity
                 :title="item.title"
                 :description="item.description"
-                :date="item.date"
+                :dateInicio="item.horarioInicial"
+                :dateFim="item.horarioFinal"
                 :location="item.location"
               ></Activity>
             </v-col>

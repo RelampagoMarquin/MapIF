@@ -1,24 +1,12 @@
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import Activity from "../components/Activity.vue";
+import {useEventStore} from '../stores/eventStore'
 
-const activitys = ref([
-  {
-    title: "Semadec",
-    description: "Jogos Internos do Campus",
-    date: "13:00 10/10/2021",
-  },
-  {
-    title: "Expotec",
-    description: "Exposição de Tecnologias e Ciências",
-    date: "13:00 10/10/2021"
-  },
-  {
-    title: "Semana da Abelha",
-    description: "Semana da Abelha",
-    date: "12:00 10/10/2021",
-  },
-]);
+const eventStore = useEventStore()
+eventStore.getEvents()
+const { events } = storeToRefs(eventStore)
 </script>
 
 <template>
@@ -39,17 +27,18 @@ const activitys = ref([
         <div class="rounded-lg elevation-2 p-4">
           <v-row>
             <v-col
-              v-for="item in activitys"
-              :key="item.title"
+              v-for="item in events"
+              :key="item.nome"
               class="mb-3"
               cols="12"
               md="12"
               lg="6"
             >
               <Activity
-                :title="item.title"
-                :description="item.description"
-                :date="item.date"
+                :title="item.nome"
+                :description="item.descricao"
+                :dateInicio="item.comeca"
+                :dateFim="item.fim"
                 :verAtividades="true"
                 :editar="true"
               ></Activity>
