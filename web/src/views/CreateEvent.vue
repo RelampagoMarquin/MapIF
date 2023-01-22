@@ -5,13 +5,16 @@ const eventStore = useEventStore()
 const nome = ref('')
 const dataInicio = ref('')
 const dataFim = ref('')
+const descricao = ref('')
 
 function createEvent() {
   const data = {
     nome: nome.value,
     comeca: new Date(dataInicio.value),
     fim: new Date(dataFim.value),
+    descricao: descricao.value,
     grupoId: 1, //quando resolver o bagulho dos grupos, add aqui
+    isPublic: true,
   };
 
   console.log(data)
@@ -57,6 +60,8 @@ function createEvent() {
               v-model="dataFim"
               class="form-control input-camp rounded-pill elevation-4"
             />
+            <label for="descricao" class="mt-3 text-label">Descrição</label>
+            <textarea name="descricao" maxlength="225" id="" cols="30" rows="4" class="form-control input-camp rounded-border elevation-4" v-model="descricao"></textarea>
           </form>
         </div>
         <div>

@@ -1,5 +1,9 @@
 <script setup lang="ts">
-
+import { ref } from "vue";
+const nome = ref('')
+const dataInicio = ref('')
+const dataFim = ref('')
+const descricao = ref('')
 </script>
 
 <template>
@@ -22,7 +26,7 @@
             />
             <label for="data-inicio" class="mt-3 text-label">Data do início da Atividade</label>
             <input
-              type="date"
+              type="datetime-local"
               name="data-inicio"
               id="data-inicio"
               v-model="dataInicio"
@@ -30,14 +34,14 @@
             />
             <label for="data-fim" class="mt-3 text-label">Data do fim da Atividade</label>
             <input
-              type="date"
+              type="datetime-local"
               name="data-fim"
               id="data-fim"
               v-model="dataFim"
               class="form-control input-camp rounded-pill elevation-4"
             />
             <label for="descricao" class="mt-3 text-label">Descrição</label>
-            <textarea name="descricao" maxlength="225" id="" cols="30" rows="4" class="form-control input-camp rounded-border elevation-4"></textarea>
+            <textarea name="descricao" maxlength="225" id="" cols="30" rows="4" class="form-control input-camp rounded-border elevation-4" v-model="descricao"></textarea>
           </form>
         </div>
         <div>

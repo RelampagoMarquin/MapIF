@@ -42,6 +42,7 @@ model Eventos {
   fim       DateTime
   grupoId   Int
   isPublic  Boolean     @default(false)
+  descricao String
   grupo     Grupos      @relation(fields: [grupoId], references: [id])
   poligonos Poligonos[]
 }
