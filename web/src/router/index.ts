@@ -16,6 +16,9 @@ const routes = [
     path: "/",
     name: "home",
     component: Home,
+    meta: {
+      auth:true
+    },
   },
   {
     path: "/signup",
@@ -47,6 +50,9 @@ const routes = [
     path: "/schedule-activity",
     name: "schedule-activity",
     component: ScheduleActivity,
+    meta: {
+      auth:true
+    },
   },
   {
     path: "/userprofile/:id",
@@ -74,6 +80,9 @@ const routes = [
     path: "/event-list",
     name: "event-list",
     component: EventList,
+    meta: {
+      auth:true
+    },
   },
 ];
 
