@@ -10,6 +10,9 @@ import CreateLocal from "../views/CreateLocal.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import EventList from "../views/EventList.vue";
 import { useAuthStore } from "../stores/authStore";
+import GroupList from "../views/GroupList.vue";
+import CreateGroup from "../views/CreateGroup.vue";
+import GroupPage from "../views/GroupPage.vue";
 
 const routes = [
   {
@@ -74,6 +77,21 @@ const routes = [
     path: "/event-list",
     name: "event-list",
     component: EventList,
+  },
+  {
+    path: "/group-list",
+    name: "group-list",
+    component: GroupList,
+  },
+  {
+    path: "/create-group",
+    name: "create-group",
+    component: CreateGroup,
+  },
+  {
+    path: "/group/:id",
+    name: "group",
+    component: GroupPage,
   },
 ];
 
