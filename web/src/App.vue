@@ -9,6 +9,8 @@ import Main from "./layout/Main.vue";
 </template>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
 .text-primary-custom {
   color: #389c37 !important;
 }
@@ -27,14 +29,17 @@ import Main from "./layout/Main.vue";
   color: #389c37 !important;
 }
 
+.btn-danger {
+  background-color: #d44747 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  text-transform: capitalize;
+}
+
 .input-camp {
   background-color: #dddddd !important;
   color: #888888 !important;
 }
-
-.text-label {
-}
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 * {
   font-family: "Quicksand", sans-serif;
