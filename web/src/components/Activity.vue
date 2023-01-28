@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { useDateFormat } from '@vueuse/core'
-defineProps<{
+import { useRouter } from 'vue-router'
+import { defineProps } from 'vue'
+
+const router = useRouter();
+const props = defineProps<{
   title: string;
   description: string;
   dateInicio: string;
   dateFim: string;
   location: string;
+  id: {
+    type: string;
+    required: false;
+  }
   verAtividades: {
     type: boolean;
     default: false;
@@ -16,6 +24,10 @@ defineProps<{
   };
 }>();
 
+function redirectToLocal(){
+  const id = props.id
+  router.push({ name: 'create-local', params: { idevent: id } })
+}
 </script>
 
 <template>
@@ -31,8 +43,7 @@ defineProps<{
         <v-btn
           class="rounded-lg elevation-2 btn"
           block
-          nuxt
-          to="/create-local"
+          @click="redirectToLocal()"
         >
           <v-icon class="mr-2">mdi-pencil</v-icon>
           Add Atividade

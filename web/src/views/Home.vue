@@ -4,7 +4,7 @@ import Map from "../components/Map.vue";
 
 <template>
   <div class="main">
-    <Map></Map>
+    <Map :getLocation="true"></Map>
 
     <v-bottom-navigation
       grow

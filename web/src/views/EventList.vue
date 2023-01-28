@@ -36,6 +36,7 @@ const { events } = storeToRefs(eventStore)
             >
               <Activity
                 :title="item.nome"
+                :id="item.id"
                 :description="item.descricao"
                 :dateInicio="item.comeca"
                 :dateFim="item.fim"

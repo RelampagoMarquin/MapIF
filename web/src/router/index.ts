@@ -32,7 +32,7 @@ const routes = [
     name: "create-event",
     component: CreateEvent,
     meta: {
-      auth:true
+      auth: true
     },
   },
   {
@@ -40,7 +40,7 @@ const routes = [
     name: "create-activity",
     component: CreateActivity,
     meta: {
-      auth:true
+      auth: true
     },
   },
   {
@@ -53,16 +53,16 @@ const routes = [
     name: "userprofile",
     component: UserProfile,
     meta: {
-      auth:true
+      auth: true
     },
     props: true,
   },
   {
-    path: "/create-local",
+    path: "/create-local/:idevent",
     name: "create-local",
     component: CreateLocal,
     meta: {
-      auth:true
+      auth: true
     },
   },
   {
@@ -84,12 +84,12 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  if (to.meta?.auth){
+  if (to.meta?.auth) {
     const auth = localStorage.getItem('token')
-    if (auth){
-      if (authStore.isExpired()){
+    if (auth) {
+      if (authStore.isExpired()) {
         next('login');
-      }else{
+      } else {
         next();
       }
     } else {

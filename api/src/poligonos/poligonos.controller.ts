@@ -10,38 +10,39 @@ import { Public } from 'src/auth/auth.decoretor';
 @ApiTags('poligonos')
 @ApiBearerAuth('JWT-auth')
 export class PoligonosController {
-  constructor(private readonly poligonosService: PoligonosService) {}
+  constructor(private readonly poligonosService: PoligonosService) { }
 
   @Post('/evento/:ideventos')
-  @ApiCreatedResponse({type: poligonosEntity})
-  async create(@Param('ideventos') id: number, @Body() locais: any,  createPoligonoDto: CreatePoligonoDto) {
-    locais.toStr
+  @ApiCreatedResponse({ type: poligonosEntity })
+  async create(@Param('ideventos') id: number, @Body() locais: any) {
+    let createPoligonoDto = new CreatePoligonoDto()
+    createPoligonoDto.locais = locais
     createPoligonoDto.eventoId = Number(id)
     return this.poligonosService.create(createPoligonoDto);
   }
 
   @Public()
   @Get('/evento/:ideventos')
-  @ApiOkResponse({type: poligonosEntity, isArray: true})
+  @ApiOkResponse({ type: poligonosEntity, isArray: true })
   async findAll(@Param('ideventos') ideventos: number) {
     return this.poligonosService.findByEvento(ideventos);
   }
 
   @Public()
   @Get(':id')
-  @ApiOkResponse({type: poligonosEntity})
+  @ApiOkResponse({ type: poligonosEntity })
   async findOne(@Param('id') id: string) {
     return this.poligonosService.findOne(+id);
   }
 
   @Patch(':id')
-  @ApiOkResponse({type: poligonosEntity})
+  @ApiOkResponse({ type: poligonosEntity })
   async update(@Param('id') id: string, @Body() updatePoligonoDto: UpdatePoligonoDto) {
     return this.poligonosService.update(+id, updatePoligonoDto);
   }
 
   @Delete(':id')
-  @ApiOkResponse({type: poligonosEntity})
+  @ApiOkResponse({ type: poligonosEntity })
   async remove(@Param('id') id: string) {
     return this.poligonosService.remove(+id);
   }

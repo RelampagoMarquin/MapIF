@@ -5,13 +5,27 @@ import { onMounted } from "@vue/runtime-core";
 import * as L from "leaflet";
 import "@geoman-io/leaflet-geoman-free";
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
+import { useRouter } from "vue-router";
+import { usePolygonStore } from "../stores/polygonStore";
 
+const router = useRouter();
 const mapElement = ref(null);
 var map = ref(null);
 const osmAttrib = "";
 const osmUrl = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
 const osm = ref(L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }));
 var drawnItems = ref(null);
+
+const handleCreate = (e) => {
+  var layer = e.layer;
+  drawnItems.addLayer(layer);
+  console.log(layer);
+};
+
+const handleChange = (e) => {
+  console.log(e);
+};
+
 
 onMounted(() => {
   map.value = L.map(mapElement.value).setView([-6.25309, -36.53401], 19);
@@ -40,29 +54,48 @@ onMounted(() => {
     )
     .addTo(map.value);
 
-  map.value.pm.addControls({
-    position: "topleft",
-    drawMarker: false,
-    drawText: false,
-    cutPolygon: false,
-  });
-
-  map.value.on("pm:create", function (e) {
-    var type = e.layerType,
-      layer = e.layer;
-
+  map.value.on("pm:create", (e) => {
+    var layer = e.layer;
     drawnItems.addLayer(layer);
-    console.log(typeof layer)
+
     console.log(layer);
+
+    layer.on("pm:change", (e) => {
+      console.log(e)
+      var newCoords = e.layer._latlngs[0] ? e.layer._latlngs[0] : e.layer._latlng;
+
+      
+    });
   });
 });
 
-function getLocation() {
-  const e = map.value.locate({ setView: true, maxZoom: 17 });
+function addTools() {
+  map.value.pm.addControls({
+    position: "topleft",
+    drawMarker: false,
+    drawPolyline: false,
+    drawText: false,
+    cutPolygon: false,
+  });
 }
 
+
+const polygonStore = usePolygonStore();
 function saveLocal() {
-  
+  let layers = Object.values(drawnItems._layers);
+  let polygons = layers.map((layer) => layer._latlngs[0] || layer._latlng);
+
+  polygons.forEach((polygon) => {
+    console.log(typeof polygon)
+    const data = {
+      eventoId: parseInt(router.currentRoute.value.params.idevent),
+      locais: JSON.stringify(polygon),
+    };
+
+    console.log(data);
+
+    polygonStore.createPolygon(data);
+  });
 }
 </script>
 
@@ -73,9 +106,9 @@ function saveLocal() {
         <v-row>
           <v-col cols="12">
             <v-btn
-              @click="getLocation()"
+              @click="addTools()"
               :elevation="20"
-              icon="mdi-target-account"
+              icon="mdi-plus"
               color="primary"
               class="elevated btn btn-location"
             ></v-btn>
@@ -94,8 +127,6 @@ function saveLocal() {
         <v-icon>mdi-content-save</v-icon>
         Salvar
       </v-btn>
-
-     
     </v-bottom-navigation>
   </div>
 </template>
@@ -131,7 +162,7 @@ function saveLocal() {
   color: white !important;
 }
 .text-white {
-  color: white  !important;
+  color: white !important;
 }
 
 .v-bottom-navigation {
