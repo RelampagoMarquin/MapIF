@@ -22,6 +22,7 @@ export class PoligonosService {
   }
 
   async findByEvento(ideventos: number) {
+    ideventos = Number(ideventos)
     return this.prisma.poligonos.findMany(
       {
         where: {

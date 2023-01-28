@@ -1,14 +1,24 @@
 <script setup>
 import { ref } from "vue";
 import { onMounted } from "@vue/runtime-core";
-
 import * as L from "leaflet";
 import "@geoman-io/leaflet-geoman-free";
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 import { useRouter } from "vue-router";
 import { usePolygonStore } from "../stores/polygonStore";
+import {storeToRefs} from "pinia"
 
+/* Current router */
 const router = useRouter();
+const eventId = parseInt(router.currentRoute.value.params.idevent)
+
+/* polygon store */
+const polygonStore = usePolygonStore();
+polygonStore.getPolygons(eventId)
+const { polygons } = storeToRefs(polygonStore)
+console.log(polygons)
+
+/* map config */
 const mapElement = ref(null);
 var map = ref(null);
 const osmAttrib = "";
@@ -37,6 +47,8 @@ onMounted(() => {
   drawnItems = new L.FeatureGroup();
 
   map.value.addLayer(drawnItems);
+
+
 
   L.control
     .layers(
@@ -80,7 +92,7 @@ function addTools() {
 }
 
 
-const polygonStore = usePolygonStore();
+/* save local */
 function saveLocal() {
   let layers = Object.values(drawnItems._layers);
   let polygons = layers.map((layer) => layer._latlngs[0] || layer._latlng);
@@ -88,7 +100,7 @@ function saveLocal() {
   polygons.forEach((polygon) => {
     console.log(typeof polygon)
     const data = {
-      eventoId: parseInt(router.currentRoute.value.params.idevent),
+      eventoId: eventId,
       locais: JSON.stringify(polygon),
     };
 
