@@ -7,6 +7,8 @@ import {useEventStore} from '../stores/eventStore'
 const eventStore = useEventStore()
 eventStore.getEvents()
 const { events } = storeToRefs(eventStore)
+
+console.log(events)
 </script>
 
 <template>

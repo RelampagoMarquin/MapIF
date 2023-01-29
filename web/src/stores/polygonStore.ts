@@ -11,12 +11,16 @@ export const usePolygonStore = defineStore('polygon', {
         }
     },
     getters: {
-
+        polygonsGetter: (state) => {
+            console.log(state.polygons)
+            return state.polygons
+        }
     },
     actions: {
         async getPolygons(idEvent: number) {
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/poligonos/evento/${idEvent}`);
-            this.polygons = response.data;
+             this.polygons = response.data
+             return this.polygons
         },
         async getOnePolygon(id: number) {
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/poligonos/${id}`);

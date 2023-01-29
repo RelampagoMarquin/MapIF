@@ -1,22 +1,19 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { onMounted } from "@vue/runtime-core";
 import * as L from "leaflet";
 import "@geoman-io/leaflet-geoman-free";
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 import { useRouter } from "vue-router";
 import { usePolygonStore } from "../stores/polygonStore";
-import {storeToRefs} from "pinia"
+import { storeToRefs } from "pinia";
 
 /* Current router */
 const router = useRouter();
-const eventId = parseInt(router.currentRoute.value.params.idevent)
+const eventId = parseInt(router.currentRoute.value.params.idevent);
+const polygonStore = usePolygonStore();
 
 /* polygon store */
-const polygonStore = usePolygonStore();
-polygonStore.getPolygons(eventId)
-const { polygons } = storeToRefs(polygonStore)
-console.log(polygons)
 
 /* map config */
 const mapElement = ref(null);
@@ -36,8 +33,7 @@ const handleChange = (e) => {
   console.log(e);
 };
 
-
-onMounted(() => {
+onMounted(async () => {
   map.value = L.map(mapElement.value).setView([-6.25309, -36.53401], 19);
   L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
     maxZoom: 23,
@@ -47,8 +43,6 @@ onMounted(() => {
   drawnItems = new L.FeatureGroup();
 
   map.value.addLayer(drawnItems);
-
-
 
   L.control
     .layers(
@@ -73,11 +67,29 @@ onMounted(() => {
     console.log(layer);
 
     layer.on("pm:change", (e) => {
-      console.log(e)
+      console.log(e);
       var newCoords = e.layer._latlngs[0] ? e.layer._latlngs[0] : e.layer._latlng;
-
-      
     });
+
+    //adicionar evento quando o poligono for clicado
+    layer.on("click", (e) => {
+      console.log(e);
+    });
+  });
+
+  await polygonStore.getPolygons(eventId);
+  // const { polygons } = storeToRefs(polygonStore);
+
+  const polygons = computed(() => {
+    return polygonStore.polygonsGetter;
+  });
+
+  polygons.value.forEach((polygon) => {
+    let polygonCoords = polygon.locais;
+    let polygonLayer = L.polygon(polygonCoords, {
+      id: `${polygon.id}`,
+    }).addTo(map.value);
+    drawnItems.addLayer(polygonLayer);
   });
 });
 
@@ -91,20 +103,19 @@ function addTools() {
   });
 }
 
-
 /* save local */
 function saveLocal() {
   let layers = Object.values(drawnItems._layers);
-  let polygons = layers.map((layer) => layer._latlngs[0] || layer._latlng);
+  let newPolygonsOnMap = layers.filter((layer) => !layer.options.id);
+  let saveCoords = newPolygonsOnMap.map((layer) => {
+    return layer._latlngs[0] || layer._latlng;
+  });
 
-  polygons.forEach((polygon) => {
-    console.log(typeof polygon)
+  saveCoords.forEach((polygon) => {
     const data = {
       eventoId: eventId,
       locais: JSON.stringify(polygon),
     };
-
-    console.log(data);
 
     polygonStore.createPolygon(data);
   });

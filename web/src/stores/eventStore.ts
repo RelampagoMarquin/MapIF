@@ -13,8 +13,7 @@ export const useEventStore = defineStore('event', {
     getters: {},
     actions: {
         async getEvents() {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/eventos`);
-            console.log(response)
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/eventos`);         
             this.events = response.data;
         },
         async getOneEvent(id: number) {
