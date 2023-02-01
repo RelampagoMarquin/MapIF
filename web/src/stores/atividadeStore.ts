@@ -13,11 +13,15 @@ export const useActivityStore = defineStore('activity', {
     getters: {},
     actions: {
         async getActivitys(id: number) {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/atividades/poligono/${id}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/atividades/poligono/${id}`, {headers: {
+                'Authorization': `Bearer ${this.token}`
+            }});
                 this.activitys = response.data;
         },
         async getOneActivity(id: number){
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/atividades/${id}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/atividades/${id}`, {headers: {
+                'Authorization': `Bearer ${this.token}`
+            }});
                 const activity = response.data;
                 return activity;
         },

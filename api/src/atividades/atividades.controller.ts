@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/auth/auth.decoretor';
 import { AtividadesService } from './atividades.service';
 import { CreateAtividadeDto } from './dto/create-atividade.dto';
@@ -8,6 +8,7 @@ import { atividadesEntity } from './entities/atividade.entity';
 
 @Controller('atividades')
 @ApiTags('atividades')
+@ApiBearerAuth('JWT-auth')
 export class AtividadesController {
   constructor(private readonly atividadesService: AtividadesService) {}
 
@@ -18,7 +19,6 @@ export class AtividadesController {
     return this.atividadesService.create(createAtividadeDto);
   }
 
-  //@Public()
   @Get('/poligono/:idpoligono')
   @ApiOkResponse({type: atividadesEntity, isArray: true})
   async findAll(@Param('idpoligono') idpoligono: number,) {
