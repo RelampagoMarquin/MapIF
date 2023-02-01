@@ -1,9 +1,23 @@
 <script setup lang="ts">
 import { ref } from "vue";
-const nome = ref('')
-const dataInicio = ref('')
-const dataFim = ref('')
-const descricao = ref('')
+import { useActivityStore } from "../stores/atividadeStore";
+
+const activityStore = useActivityStore();
+
+const nome = ref("");
+const dataInicio = ref("");
+const dataFim = ref("");
+const descricao = ref("");
+
+function addActivity() {
+  activityStore.createActivity({
+    nome: nome.value,
+    horarioInicial: new Date(dataInicio.value),
+    horarioFinal: new Date(dataFim.value),
+    descricao: descricao.value,
+    poligonoId: 25,
+  });
+}
 </script>
 
 <template>
@@ -24,7 +38,9 @@ const descricao = ref('')
               v-model="nome"
               class="form-control input-camp rounded-pill elevation-4"
             />
-            <label for="data-inicio" class="mt-3 text-label">Data do início da Atividade</label>
+            <label for="data-inicio" class="mt-3 text-label"
+              >Data do início da Atividade</label
+            >
             <input
               type="datetime-local"
               name="data-inicio"
@@ -41,24 +57,32 @@ const descricao = ref('')
               class="form-control input-camp rounded-pill elevation-4"
             />
             <label for="descricao" class="mt-3 text-label">Descrição</label>
-            <textarea name="descricao" maxlength="225" id="" cols="30" rows="4" class="form-control input-camp rounded-border elevation-4" v-model="descricao"></textarea>
+            <textarea
+              name="descricao"
+              maxlength="225"
+              id=""
+              cols="30"
+              rows="4"
+              class="form-control input-camp rounded-border elevation-4"
+              v-model="descricao"
+            ></textarea>
           </form>
         </div>
         <div>
-              <v-btn class="btn mt-8 p-4" x-large block rounded="lg">
-                <span class="mr-4">Adicionar atividade</span>
-              </v-btn>
-            </div>
+          <v-btn class="btn mt-8 p-4" x-large block rounded="lg" @click="addActivity()">
+            <span class="mr-4">Adicionar atividade</span>
+          </v-btn>
+        </div>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 * {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 .title-primary {
@@ -90,6 +114,7 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23888888' d='M7 10L12 15L17 10H7Z' /%3E%3C/svg%3E") 96% / 15% no-repeat;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23888888' d='M7 10L12 15L17 10H7Z' /%3E%3C/svg%3E")
+    96% / 15% no-repeat;
 }
 </style>

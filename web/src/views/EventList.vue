@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
 import Activity from "../components/Activity.vue";
 import {useEventStore} from '../stores/eventStore'
 

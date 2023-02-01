@@ -7,13 +7,22 @@ import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 import { useRouter } from "vue-router";
 import { usePolygonStore } from "../stores/polygonStore";
 import { storeToRefs } from "pinia";
+import { useActivityStore } from "../stores/atividadeStore";
+import Activity from "../components/Activity.vue";
 
 /* Current router */
 const router = useRouter();
 const eventId = parseInt(router.currentRoute.value.params.idevent);
-const polygonStore = usePolygonStore();
 
 /* polygon store */
+const polygonStore = usePolygonStore();
+
+/* getActivitys */
+const activityStore = useActivityStore();
+async function getActivitys(idPoligono) {
+  await activityStore.getActivitys(idPoligono);
+}
+const { activitys } = storeToRefs(activityStore);
 
 /* map config */
 const mapElement = ref(null);
@@ -29,9 +38,11 @@ const handleCreate = (e) => {
   console.log(layer);
 };
 
-const handleChange = (e) => {
-  console.log(e);
-};
+/* dialog */
+let dialog = ref(false);
+function toggleDialog() {
+  dialog.value = true;
+}
 
 onMounted(async () => {
   map.value = L.map(mapElement.value).setView([-6.25309, -36.53401], 19);
@@ -66,29 +77,32 @@ onMounted(async () => {
 
     console.log(layer);
 
-    layer.on("pm:change", (e) => {
-      console.log(e);
-      var newCoords = e.layer._latlngs[0] ? e.layer._latlngs[0] : e.layer._latlng;
-    });
-
     //adicionar evento quando o poligono for clicado
-    layer.on("click", (e) => {
-      console.log(e);
+    layer.on("click", function (e) {
+      if (layer.options.id) {
+        getActivitys(layer.options.id);
+      } else {
+        console.log("não tem id");
+        return;
+      }
     });
   });
 
   await polygonStore.getPolygons(eventId);
-  // const { polygons } = storeToRefs(polygonStore);
 
-  const polygons = computed(() => {
-    return polygonStore.polygonsGetter;
-  });
+  const { polygons } = storeToRefs(polygonStore);
 
   polygons.value.forEach((polygon) => {
     let polygonCoords = polygon.locais;
-    let polygonLayer = L.polygon(polygonCoords, {
+    var polygonLayer = L.polygon(polygonCoords, {
       id: `${polygon.id}`,
     }).addTo(map.value);
+
+    polygonLayer.on("click", function (e) {
+      const id = parseInt(polygonLayer.options.id);
+      dialog.value = true;
+      getActivitys(id);
+    });
     drawnItems.addLayer(polygonLayer);
   });
 });
@@ -137,6 +151,52 @@ function saveLocal() {
             ></v-btn>
           </v-col>
         </v-row>
+        <v-row justify="center">
+          <v-dialog
+            v-model="dialog"
+            fullscreen
+            :scrim="false"
+            transition="dialog-bottom-transition"
+          >
+            <v-card>
+              <v-toolbar dark class="primary">
+                <v-btn icon dark @click="dialog = false">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+                <v-toolbar-title>Atividades</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items>
+                  <v-btn variant="text" @click="dialog = false"> Save </v-btn>
+                </v-toolbar-items>
+              </v-toolbar>
+              <v-list lines="two" subheader>
+                <v-list-subheader>Atividades Registradas</v-list-subheader>
+                <div class="rounded-lg elevation-2 p-4">
+                  <v-row>
+                    <v-col
+                      v-for="item in activitys"
+                      :key="item.nome"
+                      class="mb-3"
+                      cols="12"
+                      md="12"
+                      lg="6"
+                    >
+                      <Activity
+                        :title="item.nome"
+                        :id="item.id"
+                        :description="item.descricao"
+                        :dateInicio="item.horarioInicial"
+                        :dateFim="item.horarioFinal"
+                        :verAtividades="false"
+                        :editar="false"
+                      ></Activity>
+                    </v-col>
+                  </v-row>
+                </div>
+              </v-list>
+            </v-card>
+          </v-dialog>
+        </v-row>
       </v-container>
     </div>
     <v-bottom-navigation
@@ -155,10 +215,14 @@ function saveLocal() {
 </template>
 
 <style scoped>
+.dialog-bottom-transition-enter-active,
+.dialog-bottom-transition-leave-active {
+  transition: transform 0.2s ease-in-out;
+}
+
 #map {
   height: 92vh;
   width: 100vw;
-  position: relative;
 }
 
 .elevated {

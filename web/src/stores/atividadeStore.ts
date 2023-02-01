@@ -1,20 +1,20 @@
 import { defineStore } from 'pinia';
-import { Activity, ActivityCreate } from '../utils/types';
+import { ActivityCreate } from '../utils/types';
 import axios from "axios";
 import routes from "../router/index"
 
 export const useActivityStore = defineStore('activity', {
    state: () => {
     return {
-        Activitys: [],
+        activitys: [],
         token: localStorage.getItem('token'),
     }
    },
     getters: {},
     actions: {
-        async getActivitys() {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/atividades`);
-                this.Activitys = response.data;
+        async getActivitys(id: number) {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/atividades/poligono/${id}`);
+                this.activitys = response.data;
         },
         async getOneActivity(id: number){
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/atividades/${id}`);
@@ -22,7 +22,7 @@ export const useActivityStore = defineStore('activity', {
                 return activity;
         },
         async createActivity(activity: ActivityCreate) {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/atividades`, activity,
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/atividades/poligono/${activity.poligonoId}`, activity,
             {headers: {
                 'Authorization': `Bearer ${this.token}`
             }}).catch(function (error) {
@@ -36,7 +36,7 @@ export const useActivityStore = defineStore('activity', {
                 return response.data;
             }
         },
-        async updateActivity(activity: Activity) {
+        async updateActivity(activity: any) {
             const response = await axios.patch(`${import.meta.env.VITE_API_URL}/atividades/${activity.id}`,
                 activity, {headers: {'Authorization': `Bearer ${this.token}`
                 }}).catch(function (error) {

@@ -12,6 +12,7 @@ export class AtividadesService {
   }
 
   async findByPoligono(idpoligono: number) {
+    idpoligono = Number(idpoligono)
     return this.prisma.atividade.findMany({
       where: {
         poligonoId: idpoligono
