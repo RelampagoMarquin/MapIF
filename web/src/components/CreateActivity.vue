@@ -20,7 +20,7 @@ function addActivity() {
     horarioInicial: new Date(dataInicio.value),
     horarioFinal: new Date(dataFim.value),
     descricao: descricao.value,
-    poligono: idPoligono,
+    poligonoId: idPoligono,
   });
 }
 </script>
