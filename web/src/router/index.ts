@@ -2,7 +2,7 @@ import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
 import Start from "../views/Start.vue";
 import CreateEvent from "../views/CreateEvent.vue";
-import CreateActivity from "../views/CreateActivity.vue";
+import CreateActivity from "../components/CreateActivity.vue";
 import ScheduleActivity from "../views/ScheduleActivity.vue";
 import Home from "../views/Home.vue";
 import UserProfile from "../views/UserProfile.vue";
@@ -36,7 +36,7 @@ const routes = [
     },
   },
   {
-    path: "/create-activity",
+    path: "/create-activity/:idpoligono",
     name: "create-activity",
     component: CreateActivity,
     meta: {

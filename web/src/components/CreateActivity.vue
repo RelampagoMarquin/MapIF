@@ -2,6 +2,9 @@
 import { ref } from "vue";
 import { useActivityStore } from "../stores/atividadeStore";
 
+const props = defineProps<{
+  idPoligono: number;
+}>();
 const activityStore = useActivityStore();
 
 const nome = ref("");
@@ -15,7 +18,7 @@ function addActivity() {
     horarioInicial: new Date(dataInicio.value),
     horarioFinal: new Date(dataFim.value),
     descricao: descricao.value,
-    poligonoId: 25,
+    poligonoId: props.idPoligono,
   });
 }
 </script>

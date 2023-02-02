@@ -43,6 +43,7 @@ let dialog = ref(false);
 function toggleDialog() {
   dialog.value = true;
 }
+let currentPolygonId = ref(null);
 
 onMounted(async () => {
   map.value = L.map(mapElement.value).setView([-6.25309, -36.53401], 19);
@@ -88,6 +89,8 @@ onMounted(async () => {
     });
   });
 
+
+  /* adiciona no mapa os polígonos já cadastrados */
   await polygonStore.getPolygons(eventId);
 
   const { polygons } = storeToRefs(polygonStore);
@@ -102,6 +105,7 @@ onMounted(async () => {
       const id = parseInt(polygonLayer.options.id);
       dialog.value = true;
       getActivitys(id);
+      currentPolygonId.value = id;
     });
     drawnItems.addLayer(polygonLayer);
   });
@@ -170,6 +174,16 @@ function saveLocal() {
                 </v-toolbar-items>
               </v-toolbar>
               <v-list lines="two" subheader>
+                <v-col cols="12" md="6" lg="10" class="mb-5" align-self="end">
+                  <v-btn
+                    class="rounded-lg elevation-2 btn"
+                    nuxt
+                    :to="`/create-activity/${currentPolygonId}`"
+                  >
+                    <v-icon class="mr-2">mdi-calendar-plus</v-icon>
+                    Nova Atividade
+                  </v-btn>
+                </v-col>
                 <v-list-subheader>Atividades Registradas</v-list-subheader>
                 <div class="rounded-lg elevation-2 p-4">
                   <v-row>
