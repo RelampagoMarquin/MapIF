@@ -13,15 +13,33 @@ const nome = ref("");
 const dataInicio = ref("");
 const dataFim = ref("");
 const descricao = ref("");
+let snackbarSucess = ref(false);
+let snackbarFailed = ref(false);
 
-function addActivity() {
-  activityStore.createActivity({
+
+function clearForm() {
+  nome.value = "";
+  dataInicio.value = "";
+  dataFim.value = "";
+  descricao.value = "";
+}
+
+async function addActivity() {
+  const data = {
     nome: nome.value,
     horarioInicial: new Date(dataInicio.value),
     horarioFinal: new Date(dataFim.value),
     descricao: descricao.value,
     poligonoId: idPoligono,
-  });
+  };
+
+  const createActivity = await activityStore.createActivity(data);
+  if (createActivity) {
+    snackbarSucess.value = true;
+    clearForm();
+  } else {
+    snackbarFailed.value = true;
+  }
 }
 </script>
 
@@ -80,6 +98,24 @@ function addActivity() {
         </div>
       </v-col>
     </v-row>
+    <v-sheet class="d-flex flex-column">
+      <v-snackbar
+        :timeout="2000"
+        color="green"
+        elevation="24"
+        v-model="snackbarSucess"
+      >
+        Atividade cadastrada com sucesso!
+      </v-snackbar>
+      <v-snackbar
+        :timeout="2000"
+        color="red"
+        elevation="24"
+        v-model="snackbarFailed"
+      >
+        Erro ao cadastrar atividade!
+      </v-snackbar>
+    </v-sheet>
   </v-container>
 </template>
 
