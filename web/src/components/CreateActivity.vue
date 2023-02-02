@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useActivityStore } from "../stores/atividadeStore";
+import { useRouter } from "vue-router";
 
-const props = defineProps<{
-  idPoligono: number;
-}>();
+/* Current router */
+const router = useRouter();
+const idPoligono = parseInt(router.currentRoute.value.params.idpoligono);
+
 const activityStore = useActivityStore();
 
 const nome = ref("");
@@ -18,7 +20,7 @@ function addActivity() {
     horarioInicial: new Date(dataInicio.value),
     horarioFinal: new Date(dataFim.value),
     descricao: descricao.value,
-    poligonoId: props.idPoligono,
+    poligono: idPoligono,
   });
 }
 </script>
