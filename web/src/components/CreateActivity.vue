@@ -57,6 +57,7 @@ async function addActivity() {
             <input
               type="text"
               name="nome"
+              maxlength="45"
               id="nome"
               v-model="nome"
               class="form-control input-camp rounded-pill elevation-4"
@@ -82,7 +83,7 @@ async function addActivity() {
             <label for="descricao" class="mt-3 text-label">Descrição</label>
             <textarea
               name="descricao"
-              maxlength="225"
+              maxlength="100"
               id=""
               cols="30"
               rows="4"
