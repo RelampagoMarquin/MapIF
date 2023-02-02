@@ -21,11 +21,17 @@ export class AtividadesController {
 
   @Get('/poligono/:idpoligono')
   @ApiOkResponse({type: atividadesEntity, isArray: true})
-  async findAll(@Param('idpoligono') idpoligono: number,) {
+  async findAll(@Param('idpoligono') idpoligono: number) {
     return this.atividadesService.findByPoligono(idpoligono);
   }
 
-  @Public()
+
+  @Get('/evento/:idevento')
+  @ApiOkResponse({type: atividadesEntity, isArray: true})
+  async findAllByEvento(@Param('idevento') idevento: number){
+    return this.atividadesService.findByEvento(idevento)
+  }
+
   @Get(':id')
   @ApiOkResponse({type: atividadesEntity})
   async findOne(@Param('id') id: string) {

@@ -18,7 +18,6 @@ export class EventosController {
     return this.eventosService.create(createEventoDto);
   }
 
-  @Public()
   @Get()
   @ApiOkResponse({ type: eventosEntity })
   async findAll() {

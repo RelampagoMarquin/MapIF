@@ -8,7 +8,11 @@ export class AtividadesService {
   constructor(private prisma: PrismaService) { }
 
   async create(createAtividadeDto: CreateAtividadeDto) {
-    return this.prisma.atividade.create({ data: createAtividadeDto });
+    createAtividadeDto.poligonoId = Number(createAtividadeDto.poligonoId)
+    return this.prisma.atividade.create({ 
+      data: createAtividadeDto
+    
+    });
   }
 
   async findByPoligono(idpoligono: number) {
@@ -18,6 +22,21 @@ export class AtividadesService {
         poligonoId: idpoligono
       }
     });
+  }
+  
+  async findByEvento(idevento: number) {
+    return this.prisma.atividade.findMany({
+      where: {
+        poligono: {
+          evento: {
+            id: Number(idevento)
+          }
+        }
+      },
+      include: {
+        poligono: {}
+      }
+    }) 
   }
 
   async findOne(id: number) {
