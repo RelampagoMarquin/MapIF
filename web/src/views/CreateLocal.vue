@@ -22,7 +22,7 @@ const activityStore = useActivityStore();
 async function getActivitys(idPoligono) {
   await activityStore.getActivitys(idPoligono);
 }
-const { activitys } = storeToRefs(activityStore);
+const { activitys, loading } = storeToRefs(activityStore);
 
 /* map config */
 const mapElement = ref(null);
@@ -88,7 +88,6 @@ onMounted(async () => {
       }
     });
   });
-
 
   /* adiciona no mapa os polígonos já cadastrados */
   await polygonStore.getPolygons(eventId);
@@ -174,7 +173,13 @@ function saveLocal() {
                 </v-toolbar-items>
               </v-toolbar>
               <v-list lines="two" subheader>
-                <v-col cols="12" md="6" lg="10" class="mb-5 text-right" align-self="end">
+                <v-col
+                  cols="12"
+                  md="6"
+                  lg="10"
+                  class="mb-5 text-right"
+                  align-self="end"
+                >
                   <v-btn
                     class="rounded-lg elevation-2 btn"
                     nuxt
@@ -185,9 +190,24 @@ function saveLocal() {
                   </v-btn>
                 </v-col>
                 <v-list-subheader>Atividades Registradas</v-list-subheader>
-                <div v-if="activitys.length === 0" class="p-4 text-center">
+
+                <v-col
+                  cols="12"
+                  class="text-center mt-5 mb-5"
+                  v-if="loading > 0"
+                >
+                  <v-progress-circular
+                    model-value="20"
+                    :size="70"
+                    :width="5"
+                    color="green"
+                    indeterminate
+                  ></v-progress-circular>
+                </v-col>
+                <div v-else>
+                  <div v-if="activitys.length === 0" class="p-4 text-center">
                   <v-row>
-                   <p>Não há atividades cadastradas</p>
+                    <p>Não há atividades cadastradas</p>
                   </v-row>
                 </div>
                 <div v-else class="rounded-lg elevation-2 p-4">
@@ -212,6 +232,8 @@ function saveLocal() {
                     </v-col>
                   </v-row>
                 </div>
+                </div>
+                
               </v-list>
             </v-card>
           </v-dialog>

@@ -3,6 +3,7 @@ import { ref, computed } from "vue";
 import Activity from "../components/Activity.vue";
 import {useActivityStore} from '../stores/atividadeStore'
 import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
 
 /* Current router */
 const router = useRouter();
@@ -11,6 +12,7 @@ const idEvento = parseInt(router.currentRoute.value.params.idevento);
 /* getActivitys */
 const activityStore = useActivityStore();
 activityStore.getActivitysByEvent(idEvento);
+const {loading} = storeToRefs(activityStore);
 const activitys = computed(() => activityStore.activitys);
 </script>
 
@@ -23,7 +25,12 @@ const activitys = computed(() => activityStore.activitys);
             Calendário de Atividades
           </h2>
         </div>
-        <div class="rounded-lg elevation-2 p-4">
+        
+        <v-col cols="12" class="text-center mt-5 mb-5" v-if="loading > 0">
+            <v-progress-circular model-value="20" :size="70" :width="5" color="green" indeterminate></v-progress-circular>
+          </v-col>
+
+        <div class="rounded-lg elevation-2 p-4" v-else>
           <v-row>
             <v-col
               v-for="item in activitys"
