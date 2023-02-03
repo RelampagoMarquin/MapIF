@@ -169,9 +169,7 @@ function saveLocal() {
                 </v-btn>
                 <v-toolbar-title>Atividades</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-toolbar-items>
-                  <v-btn variant="text" @click="dialog = false"> Save </v-btn>
-                </v-toolbar-items>
+               
               </v-toolbar>
               <v-list lines="two" subheader>
                 <v-col

@@ -10,6 +10,7 @@ import CreateLocal from "../views/CreateLocal.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import EventList from "../views/EventList.vue";
 import { useAuthStore } from "../stores/authStore";
+import MapActivity from "../views/MapActivity.vue";
 
 const routes = [
   {
@@ -32,7 +33,7 @@ const routes = [
     name: "create-event",
     component: CreateEvent,
     meta: {
-      auth: true
+      auth: true,
     },
   },
   {
@@ -40,7 +41,7 @@ const routes = [
     name: "create-activity",
     component: CreateActivity,
     meta: {
-      auth: true
+      auth: true,
     },
   },
   {
@@ -53,7 +54,7 @@ const routes = [
     name: "userprofile",
     component: UserProfile,
     meta: {
-      auth: true
+      auth: true,
     },
     props: true,
   },
@@ -62,7 +63,7 @@ const routes = [
     name: "create-local",
     component: CreateLocal,
     meta: {
-      auth: true
+      auth: true,
     },
   },
   {
@@ -75,6 +76,11 @@ const routes = [
     name: "event-list",
     component: EventList,
   },
+  {
+    path: "/map-activity/:poligonoid",
+    name: "map-activity",
+    component: MapActivity,
+  },
 ];
 
 const router = createRouter({
@@ -85,19 +91,19 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
   if (to.meta?.auth) {
-    const auth = localStorage.getItem('token')
+    const auth = localStorage.getItem("token");
     if (auth) {
       if (authStore.isExpired()) {
-        next('login');
+        next("login");
       } else {
         next();
       }
     } else {
-      next('login');
+      next("login");
     }
   } else {
     next();
   }
-})
+});
 
 export default router;

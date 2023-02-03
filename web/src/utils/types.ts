@@ -81,3 +81,12 @@ export interface Group {
 export interface GroupCreate {
   name: string;
 }
+
+export interface ActivityType {
+  id: number;
+  nome: string;
+  horarioInicial: Date;
+  horarioFinal: Date;
+  descricao: string;
+  poligonoId: number;
+}
