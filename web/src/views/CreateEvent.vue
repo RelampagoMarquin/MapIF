@@ -16,7 +16,16 @@ function cleanForm() {
   descricao.value = "";
 }
 
+function dateValidation(dateInicio: Date, dateFim: Date) {
+  return dateInicio > dateFim;
+}
+
 async function createEvent() {
+  if (dateValidation(new Date(dataInicio.value), new Date(dataFim.value))) {
+    snackbarFailed.value = true;
+    return;
+  }
+
   const data = {
     nome: nome.value,
     comeca: new Date(dataInicio.value),

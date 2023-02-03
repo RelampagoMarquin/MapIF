@@ -24,7 +24,15 @@ function clearForm() {
   descricao.value = "";
 }
 
+function dateValidation(dateInicio: Date, dateFim: Date) {
+  return dateInicio > dateFim;
+}
+
 async function addActivity() {
+  if (dateValidation(new Date(dataInicio.value), new Date(dataFim.value))) {
+    snackbarFailed.value = true;
+    return;
+  }
   const data = {
     nome: nome.value,
     horarioInicial: new Date(dataInicio.value),
