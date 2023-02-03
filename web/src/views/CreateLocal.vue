@@ -31,6 +31,7 @@ const osmAttrib = "";
 const osmUrl = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
 const osm = ref(L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }));
 var drawnItems = ref(null);
+let appbar = ref(false);
 
 const handleCreate = (e) => {
   var layer = e.layer;
@@ -76,7 +77,7 @@ onMounted(async () => {
     var layer = e.layer;
     drawnItems.addLayer(layer);
 
-    console.log(layer);
+    appbar.value = true;
 
     //adicionar evento quando o poligono for clicado
     layer.on("click", function (e) {
@@ -247,7 +248,7 @@ function saveLocal() {
       color="#000000"
       class="bottom-navigation"
     >
-      <v-btn value="recent" @click="saveLocal()">
+      <v-btn v-if="appbar" value="recent" @click="saveLocal()">
         <v-icon>mdi-content-save</v-icon>
         Salvar
       </v-btn>
