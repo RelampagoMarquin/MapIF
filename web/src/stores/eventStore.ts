@@ -7,25 +7,38 @@ export const useEventStore = defineStore('event', {
     state: () => {
         return {
             events: [],
+            loading: 0,
             token: localStorage.getItem('token'),
         }
     },
     getters: {},
     actions: {
+        addLoader(){
+            this.loading++;
+        },
+        removeLoader(){
+            this.loading--;
+        }
+        ,
         async getEvents() {
+            this.addLoader();
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/eventos`,  {
                 headers: {
                     'Authorization': `Bearer ${this.token}`
                 }
             });         
             this.events = response.data;
+            this.removeLoader();
         },
         async getOneEvent(id: number) {
+            this.addLoader();
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/eventos/${id}`);
             const event = response.data;
+            this.removeLoader();
             return event;
         },
         async createEvent(event: EventCreate) {
+            this.addLoader();
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/eventos`, event,
                 {
                     headers: {
@@ -41,6 +54,7 @@ export const useEventStore = defineStore('event', {
             if (response != null) {
                 return response.data;
             }
+            this.removeLoader();
         },
         async updateEvent(event: Event) {
             const response = await axios.patch(`${import.meta.env.VITE_API_URL}/eventos/${event.id}`,

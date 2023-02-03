@@ -5,7 +5,7 @@ import {useEventStore} from '../stores/eventStore'
 
 const eventStore = useEventStore()
 eventStore.getEvents()
-const { events } = storeToRefs(eventStore)
+const { events, loading } = storeToRefs(eventStore)
 
 console.log(events)
 </script>
@@ -25,7 +25,11 @@ console.log(events)
           </v-btn>
         </v-col>
 
-        <div class="rounded-lg elevation-2 p-4">
+         <v-col cols="12" class="text-center mt-5 mb-5" v-if="loading > 0">
+            <v-progress-circular model-value="20" :size="70" :width="5" color="green" indeterminate></v-progress-circular>
+          </v-col>
+
+        <div class="rounded-lg elevation-2 p-4" v-else>
           <v-row>
             <v-col
               v-for="item in events"
