@@ -15,11 +15,11 @@ console.log(events)
     <v-row justify="center">
       <v-col cols="12" md="6" lg="10">
         <div class="mb-5">
-          <h2 class="mb-8 mt-5 text-center title-primary">Lista de Eventos</h2>
+          <h2 class="mb-3 mt-5 text-center title-primary">Lista de Eventos</h2>
         </div>
 
-        <v-col cols="12" md="6" lg="10" class="mb-5" align-self="end">
-          <v-btn class="rounded-lg elevation-2 btn" nuxt to="/create-event">
+        <v-col cols="12" md="6" lg="10" class="mb-3 text-right" align-self="end">
+          <v-btn class="rounded-lg elevation-2 btn " nuxt to="/create-event">
             <v-icon class="mr-2">mdi-calendar-plus</v-icon>
             Novo Evento
           </v-btn>

@@ -54,7 +54,7 @@ function redirectToLocal(){
           class="rounded-lg elevation-2 btn"
           block
           nuxt
-          to="/schedule-activity"
+          :to="`/schedule-activity/${id}`"
         >
           <v-icon class="mr-2">mdi-calendar</v-icon>
           Ver Atividades

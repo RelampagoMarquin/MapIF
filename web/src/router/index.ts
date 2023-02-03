@@ -44,7 +44,7 @@ const routes = [
     },
   },
   {
-    path: "/schedule-activity",
+    path: "/schedule-activity/:idevento",
     name: "schedule-activity",
     component: ScheduleActivity,
   },

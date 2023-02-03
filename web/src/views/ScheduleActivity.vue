@@ -1,30 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Activity from "../components/Activity.vue";
+import {useActivityStore} from '../stores/atividadeStore'
+import { useRouter } from "vue-router";
 
-const activitys = ref([
-  {
-    title: "Oficina de Artesanato",
-    description: "Oficina de Artesanato usando materiais recicláveis",
-    horarioInicial: "13:00 10/10/2021",
-    horarioFinal: "14:00 10/10/2021",
-    location: "Auditório",
-  },
-  {
-    title: "Oficina de Perfume",
-    description: "Oficina de Perfume usando materiais recicláveis",
-    horarioInicial: "10/10/2021",
-     horarioFinal: "14:00 10/10/2021",
-    location: "Salas 1",
-  },
-  {
-    title: "Aula de Yoga",
-    description: "Aula de Yoga para iniciantes",
-    horarioInicial: "12:00 10/10/2021",
-    horarioFinal: "14:00 10/10/2021",
-    location: "Auditório",
-  },
-]);
+/* Current router */
+const router = useRouter();
+const idEvento = parseInt(router.currentRoute.value.params.idevento);
+
+/* getActivitys */
+const activityStore = useActivityStore();
+activityStore.getActivitysByEvent(idEvento);
+const activitys = computed(() => activityStore.activitys);
 </script>
 
 <template>
@@ -47,8 +34,8 @@ const activitys = ref([
               lg="6"
             >
               <Activity
-                :title="item.title"
-                :description="item.description"
+                :title="item.nome"
+                :description="item.descricao"
                 :dateInicio="item.horarioInicial"
                 :dateFim="item.horarioFinal"
                 :location="item.location"

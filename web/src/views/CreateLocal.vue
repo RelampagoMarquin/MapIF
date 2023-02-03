@@ -174,7 +174,7 @@ function saveLocal() {
                 </v-toolbar-items>
               </v-toolbar>
               <v-list lines="two" subheader>
-                <v-col cols="12" md="6" lg="10" class="mb-5" align-self="end">
+                <v-col cols="12" md="6" lg="10" class="mb-5 text-right" align-self="end">
                   <v-btn
                     class="rounded-lg elevation-2 btn"
                     nuxt

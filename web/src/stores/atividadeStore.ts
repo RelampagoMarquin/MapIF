@@ -25,6 +25,13 @@ export const useActivityStore = defineStore('activity', {
                 const activity = response.data;
                 return activity;
         },
+        async getActivitysByEvent(id: number) {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/atividades/evento/${id}`, {headers: {
+                'Authorization': `Bearer ${this.token}`
+            }})
+                this.activitys = response.data;
+        }
+        ,
         async createActivity(activity: ActivityCreate) {
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/atividades/poligono/${activity.poligonoId}`, activity,
             {headers: {
