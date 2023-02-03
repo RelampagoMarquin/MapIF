@@ -185,7 +185,12 @@ function saveLocal() {
                   </v-btn>
                 </v-col>
                 <v-list-subheader>Atividades Registradas</v-list-subheader>
-                <div class="rounded-lg elevation-2 p-4">
+                <div v-if="activitys.length === 0" class="p-4 text-center">
+                  <v-row>
+                   <p>Não há atividades cadastradas</p>
+                  </v-row>
+                </div>
+                <div v-else class="rounded-lg elevation-2 p-4">
                   <v-row>
                     <v-col
                       v-for="item in activitys"
