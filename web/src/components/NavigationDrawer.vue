@@ -14,25 +14,25 @@ const listNavigationDrawer: Drawer[] = [
   {
     icon: "mdi-map-marker",
     title: "Events",
-    value: "wallets",
+    value: "events",
     router: "/event-list",
   },
   {
     icon: "mdi-calendar",
     title: "Atividades",
-    value: "wallets",
+    value: "activitys",
     router: "/schedule-activity",
   },
   {
     icon: "mdi-account",
     title: "Perfil",
-    value: "wallets",
+    value: "profile",
     router: "/userprofile",
   },
   {
     icon: "mdi-account-group",
     title: "Grupos",
-    value: "wallets",
+    value: "groups",
     router: "/group-list",
   },
 ];
