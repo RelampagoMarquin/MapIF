@@ -28,6 +28,13 @@ import Main from "./layout/Main.vue";
   color: #389c37 !important;
 }
 
+.btn-danger {
+  background-color: #d44747 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  text-transform: capitalize;
+}
+
 .input-camp {
   background-color: #dddddd !important;
   color: #888888 !important;

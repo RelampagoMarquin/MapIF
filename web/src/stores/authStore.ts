@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import { UserLogin } from '../utils/types';
 import axios from "axios";
 import decode from "jwt-decode"
+import router from '../router/index';
 
 
 export const useAuthStore = defineStore('auth', {
@@ -14,10 +15,14 @@ export const useAuthStore = defineStore('auth', {
        },
     getters: {},
     actions: {
+        
         async login(login: UserLogin) {
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, login)
             localStorage.setItem('token', response.data.Authorization)
             localStorage.setItem('user', JSON.stringify(response.data.data))
+            if (response){
+              router.go(-1)
+            }
         },
     
         async signOut(){
@@ -36,7 +41,10 @@ export const useAuthStore = defineStore('auth', {
             } catch (error) {   // O "jwt-decode" lança erros pra tokens inválidos.
               return true; // Com um token inválido o usuário não está assinado.
             }
-          }
+          },
 
+          isLogged() {
+            return window.localStorage.getItem("token");
+        },
     }
 })

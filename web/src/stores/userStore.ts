@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { User, UserCreate, UserLogin } from '../utils/types';
 import axios from "axios";
-import routes from "../router/index"
+import router from "../router/index"
 
 export const useUserStore = defineStore('users', {
    state: () => {
@@ -19,7 +19,7 @@ export const useUserStore = defineStore('users', {
             }}).catch(function (error) {
                 const errorCode = error.response.data.statusCode;
                 if (errorCode == 401){
-                    routes.push('login')
+                    router.push('login')
                     //aqui pode ser feito o Redirecionamento para login caso acontessa um error
                 }
             });
@@ -34,7 +34,7 @@ export const useUserStore = defineStore('users', {
             }}).catch(function (error) {
                 const errorCode = error.response.data.statusCode;
                 if (errorCode == 401){
-                    routes.push('login')
+                    router.push('login')
                     //aqui pode ser feito o Redirecionamento para login caso acontessa um error
                 }
             });
@@ -54,7 +54,7 @@ export const useUserStore = defineStore('users', {
                 }}).catch(function (error) {
                     const errorCode = error.response.data.statusCode;
                     if (errorCode == 401){
-                        routes.push('login')
+                        router.push('login')
                         //aqui pode ser feito o Redirecionamento para login caso acontessa um error
                     }
                 });

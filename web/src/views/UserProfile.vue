@@ -5,7 +5,7 @@
 <template>
   <div>
     <div class="fundo d-flex flex-column justify-center align-center">
-      <img src="/userphoto.png" alt="foto de perfil do usuário" class="mb-10">
+      <v-icon color="#ffffff" size="72px">mdi-account</v-icon>
       <span class="h2 primary font-weight-bold">NOME</span>
     </div>
     <v-container>
@@ -53,7 +53,7 @@
 <style scoped>
   .fundo {
   width: 100%;
-  height: 35vh;
+  height: 20vh;
   background-color: #389c37;
 }
 </style>
