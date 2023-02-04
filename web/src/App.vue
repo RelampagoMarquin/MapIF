@@ -9,8 +9,7 @@ import Main from "./layout/Main.vue";
 </template>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
-
+  @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 .text-primary-custom {
   color: #389c37 !important;
 }
@@ -42,6 +41,7 @@ import Main from "./layout/Main.vue";
 }
 
 * {
+
   font-family: "Quicksand", sans-serif;
   font-weight: 700 !important;
 }

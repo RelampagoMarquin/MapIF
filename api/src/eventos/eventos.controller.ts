@@ -18,7 +18,6 @@ export class EventosController {
     return this.eventosService.create(createEventoDto);
   }
 
-  @Public()
   @Get()
   @ApiOkResponse({ type: eventosEntity })
   async findAll() {
@@ -43,4 +42,11 @@ export class EventosController {
   async remove(@Param('id') id: string) {
     return this.eventosService.remove(+id);
   }
+
+  @Public()
+  @Get('publico')
+  async publicEvents(){
+    return this.eventosService.publicEvents()
+  }
+
 }

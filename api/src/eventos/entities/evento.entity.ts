@@ -20,4 +20,7 @@ export class eventosEntity implements Eventos {
 
     @ApiProperty()
     isPublic: boolean;
+
+    @ApiProperty()
+    descricao: string;
 }

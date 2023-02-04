@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useEventStore } from "../stores/eventStore";
-const eventStore = useEventStore();
+import { useActivityStore } from "../stores/atividadeStore";
+import { useRouter } from "vue-router";
+
+/* Current router */
+const router = useRouter();
+const idPoligono = parseInt(router.currentRoute.value.params.idpoligono);
+
+const activityStore = useActivityStore();
+
 const nome = ref("");
 const dataInicio = ref("");
 const dataFim = ref("");
@@ -9,7 +16,8 @@ const descricao = ref("");
 let snackbarSucess = ref(false);
 let snackbarFailed = ref(false);
 
-function cleanForm() {
+
+function clearForm() {
   nome.value = "";
   dataInicio.value = "";
   dataFim.value = "";
@@ -20,25 +28,23 @@ function dateValidation(dateInicio: Date, dateFim: Date) {
   return dateInicio > dateFim;
 }
 
-async function createEvent() {
+async function addActivity() {
   if (dateValidation(new Date(dataInicio.value), new Date(dataFim.value))) {
     snackbarFailed.value = true;
     return;
   }
-
   const data = {
     nome: nome.value,
-    comeca: new Date(dataInicio.value),
-    fim: new Date(dataFim.value),
+    horarioInicial: new Date(dataInicio.value),
+    horarioFinal: new Date(dataFim.value),
     descricao: descricao.value,
-    grupoId: 1, //quando resolver o bagulho dos grupos, add aqui
-    isPublic: true,
+    poligonoId: idPoligono,
   };
 
-  const createEvent = await eventStore.createEvent(data);
-  if (createEvent) {
+  const createActivity = await activityStore.createActivity(data);
+  if (createActivity) {
     snackbarSucess.value = true;
-    cleanForm();
+    clearForm();
   } else {
     snackbarFailed.value = true;
   }
@@ -48,9 +54,9 @@ async function createEvent() {
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" md="6" lg="6">
+      <v-col cols="12" md="6" lg="4">
         <div class="mb-5">
-          <h1 class="mb-8 mt-5 text-center title-primary">Criar Evento</h1>
+          <h1 class="mb-8 mt-5 text-center title-primary">Criar Atividade</h1>
         </div>
         <!-- FORM -->
         <div class="rounded-lg elevation-2 p-4">
@@ -65,20 +71,18 @@ async function createEvent() {
               class="form-control input-camp rounded-pill elevation-4"
             />
             <label for="data-inicio" class="mt-3 text-label"
-              >Data do início da Exibição</label
+              >Data do início da Atividade</label
             >
             <input
-              type="date"
+              type="datetime-local"
               name="data-inicio"
               id="data-inicio"
               v-model="dataInicio"
               class="form-control input-camp rounded-pill elevation-4"
             />
-            <label for="data-fim" class="mt-3 text-label"
-              >Data do fim da Exibição</label
-            >
+            <label for="data-fim" class="mt-3 text-label">Data do fim da Atividade</label>
             <input
-              type="date"
+              type="datetime-local"
               name="data-fim"
               id="data-fim"
               v-model="dataFim"
@@ -97,14 +101,8 @@ async function createEvent() {
           </form>
         </div>
         <div>
-          <v-btn
-            class="btn mt-8 p-4"
-            x-large
-            block
-            rounded="lg"
-            @click="createEvent()"
-          >
-            <span class="mr-4">Cadastrar Evento</span>
+          <v-btn class="btn mt-8 p-4" x-large block rounded="lg" @click="addActivity()">
+            <span class="mr-4">Adicionar atividade</span>
           </v-btn>
         </div>
       </v-col>
@@ -116,7 +114,7 @@ async function createEvent() {
         elevation="24"
         v-model="snackbarSucess"
       >
-        Evento cadastrado com sucesso!
+        Atividade cadastrada com sucesso!
       </v-snackbar>
       <v-snackbar
         :timeout="2000"
@@ -124,7 +122,7 @@ async function createEvent() {
         elevation="24"
         v-model="snackbarFailed"
       >
-        Erro ao cadastrar evento!
+        Erro ao cadastrar atividade!
       </v-snackbar>
     </v-sheet>
   </v-container>
@@ -151,5 +149,22 @@ async function createEvent() {
 
 .disabled {
   background-color: #888888 !important;
+}
+
+.rounded-border {
+  border-radius: 15px;
+  resize: none;
+}
+
+.block {
+  display: block;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23888888' d='M7 10L12 15L17 10H7Z' /%3E%3C/svg%3E")
+    96% / 15% no-repeat;
 }
 </style>

@@ -2,6 +2,9 @@
 import { ref } from "vue";
 import { onMounted } from "@vue/runtime-core";
 
+
+
+
 function localizacao(posicao) {
   var lat = posicao.coords.latitude;
   var lon = posicao.coords.longitude;
@@ -47,6 +50,7 @@ onMounted(() => {
 function getLocation() {
   const e = map.value.locate({ setView: true, maxZoom: 17 });
 }
+
 </script>
 
 <template>
@@ -54,13 +58,15 @@ function getLocation() {
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-btn
+          <v-btn 
+           
             @click="getLocation()"
             :elevation="20"
             icon="mdi-target-account"
             color="primary"
             class="elevated btn"
           ></v-btn>
+
         </v-col>
       </v-row>
     </v-container>

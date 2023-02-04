@@ -34,6 +34,7 @@ export interface Event {
   comeca: Date;
   fim: Date;
   grupoId: number;
+  descricao: string;
 }
 
 export interface EventCreate {
@@ -41,6 +42,7 @@ export interface EventCreate {
   comeca: Date;
   fim: Date;
   grupoId: number;
+  descricao: string;
 }
 
 export interface Polygon {
@@ -84,4 +86,12 @@ export interface UsuarioGrupo {
   usuarioId: number;
   grupoId: number;
   isAdmin: boolean;
+}
+export interface ActivityType {
+  id: number;
+  nome: string;
+  horarioInicial: Date;
+  horarioFinal: Date;
+  descricao: string;
+  poligonoId: number;
 }

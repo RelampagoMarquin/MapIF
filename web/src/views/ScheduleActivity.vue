@@ -1,27 +1,20 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Activity from "../components/Activity.vue";
+import { useActivityStore } from "../stores/atividadeStore";
+import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
+import { ActivityType } from "../utils/types";
 
-const activitys = ref([
-  {
-    title: "Oficina de Artesanato",
-    description: "Oficina de Artesanato usando materiais recicláveis",
-    date: "13:00 10/10/2021",
-    location: "Auditório",
-  },
-  {
-    title: "Oficina de Perfume",
-    description: "Oficina de Perfume usando materiais recicláveis",
-    date: "10/10/2021",
-    location: "Salas 1",
-  },
-  {
-    title: "Aula de Yoga",
-    description: "Aula de Yoga para iniciantes",
-    date: "12:00 10/10/2021",
-    location: "Auditório",
-  },
-]);
+/* Current router */
+const router = useRouter();
+const idEvento = parseInt(router.currentRoute.value.params.idevento);
+
+/* getActivitys */
+const activityStore = useActivityStore();
+activityStore.getActivitysByEvent(idEvento);
+const { loading } = storeToRefs(activityStore);
+const activitys = computed((): ActivityType[] => activityStore.activitys);
 </script>
 
 <template>
@@ -29,25 +22,35 @@ const activitys = ref([
     <v-row justify="center">
       <v-col cols="12" md="6" lg="10">
         <div class="mb-5">
-          <h2 class="mb-8 mt-5 text-center title-primary">
-            Calendário de Atividades
-          </h2>
+          <h2 class="mb-8 mt-5 text-center title-primary">Calendário de Atividades</h2>
         </div>
-        <div class="rounded-lg elevation-2 p-4">
+
+        <v-col cols="12" class="text-center mt-5 mb-5" v-if="loading > 0">
+          <v-progress-circular
+            model-value="20"
+            :size="70"
+            :width="5"
+            color="green"
+            indeterminate
+          ></v-progress-circular>
+        </v-col>
+
+        <div class="rounded-lg elevation-2 p-4" v-else>
           <v-row>
             <v-col
               v-for="item in activitys"
-              :key="item.title"
+              :key="item.nome"
               class="mb-3"
               cols="12"
               md="12"
               lg="6"
             >
               <Activity
-                :title="item.title"
-                :description="item.description"
-                :date="item.date"
-                :location="item.location"
+                :title="item.nome"
+                :description="item.descricao"
+                :dateInicio="item.horarioInicial"
+                :dateFim="item.horarioFinal"
+                :poligonoId="item.poligonoId"
               ></Activity>
             </v-col>
           </v-row>
