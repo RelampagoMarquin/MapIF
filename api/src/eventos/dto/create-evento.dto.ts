@@ -15,4 +15,7 @@ export class CreateEventoDto {
 
     @ApiProperty()
     isPublic: boolean
+
+    @ApiProperty()
+    descricao: string;
 }

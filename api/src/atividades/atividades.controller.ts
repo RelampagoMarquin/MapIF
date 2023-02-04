@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/auth/auth.decoretor';
 import { AtividadesService } from './atividades.service';
 import { CreateAtividadeDto } from './dto/create-atividade.dto';
@@ -8,6 +8,7 @@ import { atividadesEntity } from './entities/atividade.entity';
 
 @Controller('atividades')
 @ApiTags('atividades')
+@ApiBearerAuth('JWT-auth')
 export class AtividadesController {
   constructor(private readonly atividadesService: AtividadesService) {}
 
@@ -18,14 +19,19 @@ export class AtividadesController {
     return this.atividadesService.create(createAtividadeDto);
   }
 
-  @Public()
-  @Get()
+  @Get('/poligono/:idpoligono')
   @ApiOkResponse({type: atividadesEntity, isArray: true})
-  async findAll() {
-    return this.atividadesService.findAll();
+  async findAll(@Param('idpoligono') idpoligono: number) {
+    return this.atividadesService.findByPoligono(idpoligono);
   }
 
-  @Public()
+
+  @Get('/evento/:idevento')
+  @ApiOkResponse({type: atividadesEntity, isArray: true})
+  async findAllByEvento(@Param('idevento') idevento: number){
+    return this.atividadesService.findByEvento(idevento)
+  }
+
   @Get(':id')
   @ApiOkResponse({type: atividadesEntity})
   async findOne(@Param('id') id: string) {
