@@ -1,20 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import Group from  "../components/Group.vue";
 
-const groups = ref([
-  {
-    name: "Semadec"
-  },
-  {
-    name: "Expotec"
-  },
-  {
-    name: "Semana da Abelha"
-  },
-]);
 </script>
-
 <template>
   <v-container>
     <v-row justify="center">
@@ -34,13 +20,13 @@ const groups = ref([
           <v-row>
             <v-col
               v-for="item in groups"
-              :key="item.name"
+              :key="item.id"
               cols="12"
               md="12"
               lg="6"
             >
               <Group
-                :name="item.name"
+                :name="item.nome"
                 :verGrupos="true"
               ></Group>
             </v-col>

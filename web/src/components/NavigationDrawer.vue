@@ -23,6 +23,18 @@ const listNavigationDrawer: Drawer[] = [
     value: "wallets",
     router: "/schedule-activity",
   },
+  {
+    icon: "mdi-account",
+    title: "Perfil",
+    value: "wallets",
+    router: "/userprofile",
+  },
+  {
+    icon: "mdi-account-group",
+    title: "Grupos",
+    value: "wallets",
+    router: "/group-list",
+  },
 ];
 </script>
 

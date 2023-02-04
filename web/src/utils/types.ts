@@ -79,3 +79,9 @@ export interface Group {
 export interface GroupCreate {
   name: string;
 }
+
+export interface UsuarioGrupo {
+  usuarioId: number;
+  grupoId: number;
+  isAdmin: boolean;
+}

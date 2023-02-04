@@ -48,7 +48,7 @@ export const useUserStore = defineStore('users', {
             return response.data;
         },
         async updateUser(user: User) {
-            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/usuario/${user.id}`,
+            const response = await axios.patch(`${import.meta.env.VITE_API_URL}/usuarios/${user.id}`,
                 user, {headers: {
                     'Authorization': `Bearer ${this.token}`
                 }}).catch(function (error) {

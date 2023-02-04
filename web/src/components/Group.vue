@@ -1,10 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   name: string;
-  verGrupos: {
-    type: boolean;
-    default: false;
-  };
+  verGrupos: boolean
 }>();
 </script>
 
