@@ -59,13 +59,12 @@ const routes = [
     },
   },
   {
-    path: "/userprofile/:id",
+    path: "/userprofile",
     name: "userprofile",
     component: UserProfile,
     meta: {
       auth: true,
     },
-    props: true,
   },
   {
     path: "/create-local/:idevent",
@@ -92,16 +91,25 @@ const routes = [
     path: "/group-list",
     name: "group-list",
     component: GroupList,
+    meta: {
+      auth:true
+    },
   },
   {
     path: "/create-group",
     name: "create-group",
     component: CreateGroup,
+    meta: {
+      auth:true
+    },
   },
   {
     path: "/group/:id",
     name: "group",
     component: GroupPage,
+    meta: {
+      auth:true
+    },
   },
   {
     path: "/map-activity/:poligonoid",

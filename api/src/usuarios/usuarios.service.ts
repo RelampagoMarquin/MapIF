@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { compare } from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { LoginUsuarioDto } from './dto/login-user.dto';
@@ -27,10 +27,24 @@ export class UsuariosService {
   }
 
   async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-    return this.prisma.usuarios.update({
-      where: { id },
-      data: updateUsuarioDto,
-      });
+    const {nome, email, senha} = updateUsuarioDto;
+    if(senha){
+      const saltOrRounds = await bcrypt.genSalt()
+      const password = await bcrypt.hash(senha, saltOrRounds)
+      updateUsuarioDto.senha = password
+      return this.prisma.usuarios.update({
+        where: { id },
+        data: updateUsuarioDto,
+        });
+    } else {
+      return this.prisma.usuarios.update({
+        where: { id },
+        data: {
+          nome: nome,
+          email: email
+        },
+        });
+    }
   }
 
   async remove(id: number) {
@@ -50,7 +64,7 @@ export class UsuariosService {
    }
 
    // compare passwords
-   const areEqual = await compare(senha, user.senha);
+   const areEqual = await bcrypt.compare(senha, user.senha);
 
    if (!areEqual) {
      throw new HttpException("invalid_credentials",

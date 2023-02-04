@@ -9,8 +9,8 @@ import router from '../router/index';
 export const useAuthStore = defineStore('auth', {
     state: () => {
         return {
-            token: (localStorage.getItem('token')),
-            user: ref(localStorage.getItem('user'))
+            token: String,
+            user: Object
         }
        },
     getters: {},
@@ -19,7 +19,9 @@ export const useAuthStore = defineStore('auth', {
         async login(login: UserLogin) {
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, login)
             localStorage.setItem('token', response.data.Authorization)
+            this.token = response.data.Authorization;
             localStorage.setItem('user', JSON.stringify(response.data.data))
+            this.user = response.data.data;
             if (response){
               router.go(-1)
             }

@@ -82,6 +82,11 @@ export interface GroupCreate {
   name: string;
 }
 
+export interface UsuarioGrupo {
+  usuarioId: number;
+  grupoId: number;
+  isAdmin: boolean;
+}
 export interface ActivityType {
   id: number;
   nome: string;

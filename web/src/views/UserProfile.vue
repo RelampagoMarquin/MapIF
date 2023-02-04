@@ -1,4 +1,24 @@
 <script setup lang="ts">
+import { useAuthStore } from "../stores/authStore";
+import { useUserStore } from "../stores/userStore";
+import { ref } from "vue";
+const authStore = useAuthStore();
+const userStore = useUserStore();
+const user = JSON.parse(localStorage.getItem('user'))
+
+const nome = ref(user.nome);
+const email = ref(user.email);
+const senha = ref('');
+
+function update() {
+  const data = {
+    id: user.id,
+    nome: nome.value,
+    email: email.value,
+    senha: senha.value,
+  };
+  return userStore.updateUser(data);
+}
 
 </script>
 
@@ -6,7 +26,7 @@
   <div>
     <div class="fundo d-flex flex-column justify-center align-center">
       <v-icon color="#ffffff" size="72px">mdi-account</v-icon>
-      <span class="h2 primary font-weight-bold">NOME</span>
+      <span class="h2 primary font-weight-bold text-capitalize">{{ user.nome }}</span>
     </div>
     <v-container>
       <v-row justify="center">
