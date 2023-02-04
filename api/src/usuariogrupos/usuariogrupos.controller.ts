@@ -2,11 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsuariogruposService } from './usuariogrupos.service';
 import { CreateUsuariogrupoDto } from './dto/create-usuariogrupo.dto';
 import { UpdateUsuariogrupoDto } from './dto/update-usuariogrupo.dto';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { usuariogrupoEntity } from './entities/usuariogrupo.entity';
 
 @Controller('usuariogrupos')
 @ApiTags('usuariogrupos')
+@ApiBearerAuth('JWT-auth')
 export class UsuariogruposController {
   constructor(private readonly usuariogruposService: UsuariogruposService) {}
 

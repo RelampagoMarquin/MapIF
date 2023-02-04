@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePoligonoDto } from './dto/create-poligono.dto';
 import { UpdatePoligonoDto } from './dto/update-poligono.dto';

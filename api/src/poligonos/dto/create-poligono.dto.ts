@@ -8,3 +8,4 @@ export class CreatePoligonoDto {
     @ApiProperty()
     locais: string;
 }
+
