@@ -136,6 +136,7 @@ function saveLocal() {
     };
 
     polygonStore.createPolygon(data);
+    router.go(0)
   });
 }
 </script>

@@ -81,4 +81,6 @@ import Main from "./layout/Main.vue";
   background-color: #389c37 !important;
   color: #fff !important;
 }
+
+.leaflet-control {z-index: 1 !important;}
 </style>
