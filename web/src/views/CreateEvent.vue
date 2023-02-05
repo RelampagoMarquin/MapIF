@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useEventStore } from "../stores/eventStore";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 const eventStore = useEventStore();
 const nome = ref("");
 const dataInicio = ref("");
@@ -9,12 +12,6 @@ const descricao = ref("");
 let snackbarSucess = ref(false);
 let snackbarFailed = ref(false);
 
-function cleanForm() {
-  nome.value = "";
-  dataInicio.value = "";
-  dataFim.value = "";
-  descricao.value = "";
-}
 
 function dateValidation(dateInicio: Date, dateFim: Date) {
   return dateInicio > dateFim;
@@ -38,7 +35,10 @@ async function createEvent() {
   const createEvent = await eventStore.createEvent(data);
   if (createEvent) {
     snackbarSucess.value = true;
-    cleanForm();
+    setTimeout(() => {
+      router.push("/event-list")
+    }, 4000);
+    ;
   } else {
     snackbarFailed.value = true;
   }

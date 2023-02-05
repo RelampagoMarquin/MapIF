@@ -169,7 +169,6 @@ function saveLocal() {
                 </v-btn>
                 <v-toolbar-title>Atividades</v-toolbar-title>
                 <v-spacer></v-spacer>
-               
               </v-toolbar>
               <v-list lines="two" subheader>
                 <v-col
@@ -205,34 +204,33 @@ function saveLocal() {
                 </v-col>
                 <div v-else>
                   <div v-if="activitys.length === 0" class="p-4 text-center">
-                  <v-row>
-                    <p>Não há atividades cadastradas</p>
-                  </v-row>
+                    <v-row>
+                      <p>Não há atividades cadastradas</p>
+                    </v-row>
+                  </div>
+                  <div v-else class="rounded-lg elevation-2 p-4">
+                    <v-row>
+                      <v-col
+                        v-for="item in activitys"
+                        :key="item.nome"
+                        class="mb-3"
+                        cols="12"
+                        md="12"
+                        lg="6"
+                      >
+                        <Activity
+                          :title="item.nome"
+                          :id="item.id"
+                          :description="item.descricao"
+                          :dateInicio="item.horarioInicial"
+                          :dateFim="item.horarioFinal"
+                          :verAtividades="false"
+                          :editar="false"
+                        ></Activity>
+                      </v-col>
+                    </v-row>
+                  </div>
                 </div>
-                <div v-else class="rounded-lg elevation-2 p-4">
-                  <v-row>
-                    <v-col
-                      v-for="item in activitys"
-                      :key="item.nome"
-                      class="mb-3"
-                      cols="12"
-                      md="12"
-                      lg="6"
-                    >
-                      <Activity
-                        :title="item.nome"
-                        :id="item.id"
-                        :description="item.descricao"
-                        :dateInicio="item.horarioInicial"
-                        :dateFim="item.horarioFinal"
-                        :verAtividades="false"
-                        :editar="false"
-                      ></Activity>
-                    </v-col>
-                  </v-row>
-                </div>
-                </div>
-                
               </v-list>
             </v-card>
           </v-dialog>

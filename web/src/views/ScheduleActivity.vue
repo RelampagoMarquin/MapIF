@@ -22,7 +22,9 @@ const activitys = computed((): ActivityType[] => activityStore.activitys);
     <v-row justify="center">
       <v-col cols="12" md="6" lg="10">
         <div class="mb-5">
-          <h2 class="mb-8 mt-5 text-center title-primary">Calendário de Atividades</h2>
+          <h2 class="mb-8 mt-5 text-center title-primary">
+            Calendário de Atividades
+          </h2>
         </div>
 
         <v-col cols="12" class="text-center mt-5 mb-5" v-if="loading > 0">
@@ -36,7 +38,12 @@ const activitys = computed((): ActivityType[] => activityStore.activitys);
         </v-col>
 
         <div class="rounded-lg elevation-2 p-4" v-else>
-          <v-row>
+          <div v-if="activitys.length === 0" class="p-4 text-center">
+            <v-row>
+              <p>Não há atividades cadastradas</p>
+            </v-row>
+          </div>
+          <v-row v-else>
             <v-col
               v-for="item in activitys"
               :key="item.nome"
