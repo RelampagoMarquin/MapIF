@@ -20,7 +20,7 @@ function login() {
     <v-row class="justify-center">
       <v-col cols="10" md="4">
         <div>
-          <h1 class="mb-5 mt-5 text-center">LOGO AQUI</h1>
+          <img class="mb-5 mt-5 text-center" width="300" src="/logo.png" alt="Lodo do MapIF">
         </div>
         <h2 class="text-primary-custom mb-5 text-center">Login</h2>
         <v-form>

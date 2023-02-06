@@ -7,6 +7,7 @@
     <div class="fundo d-flex flex-column justify-center align-center">
       <div class="primary rounded-pill text-center">
         <h1 class="font-weight-bold text-h4">Bem vindo ao</h1>
+        <img class="mb-5 mt-5 text-center" width="300" src="/logo-alternative.png" alt="Lodo do MapIF">
       </div>
     </div>
     <v-container class="align-center">
