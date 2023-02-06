@@ -56,7 +56,7 @@ const listNavigationDrawer: Drawer[] = [
         title="Logout"
         value="exit"
         nuxt
-        to="/"
+        to="login"
         @click="authStore.signOut"
       ></v-list-item>
       <v-list-item v-else

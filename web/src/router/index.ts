@@ -28,11 +28,17 @@ const routes = [
     path: "/signup",
     name: "signup",
     component: SignUp,
+    meta: {
+      auth:false
+    },
   },
   {
     path: "/start",
     name: "start",
     component: Start,
+    meta: {
+      auth:false
+    },
   },
   {
     path: "/create-event",
@@ -78,6 +84,9 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+    meta: {
+      auth:false
+    },
   },
   {
     path: "/event-list",
@@ -125,8 +134,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
+  const auth = localStorage.getItem("token");
   if (to.meta?.auth) {
-    const auth = localStorage.getItem("token");
     if (auth) {
       if (authStore.isExpired()) {
         next("login");
@@ -137,8 +146,13 @@ router.beforeEach((to, from, next) => {
       next("login");
     }
   } else {
-    next();
-  }
+      if(auth){
+        next("/");
+      }
+      else{
+        next()
+      }
+    }
 });
 
 export default router;
