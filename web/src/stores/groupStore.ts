@@ -7,12 +7,21 @@ export const useGroupStore = defineStore('group', {
    state: () => {
     return {
         groups: [],
+        group: {},
+        loading: 0,
         token: localStorage.getItem('token'),
     }
    },
     getters: {},
     actions: {
+        addLoader() {
+            this.loading++;
+        },
+        removeLoader() {
+        this.loading--;
+        },
         async getGroups() {
+            this.addLoader();
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/grupos`, {headers: {
                 'Authorization': `Bearer ${this.token}`
             }}).catch(function (error) {
@@ -24,9 +33,11 @@ export const useGroupStore = defineStore('group', {
             });
             if(response != null){
                 this.groups = response.data;
+                this.removeLoader();
             }
         },
         async getOneGroup(id: number){
+            this.addLoader();
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/grupos/${id}`, {headers: {
                 'Authorization': `Bearer ${this.token}`
             }}).catch(function (error) {
@@ -37,8 +48,8 @@ export const useGroupStore = defineStore('group', {
                 }
             });
             if(response != null){
-                const group = response.data;
-                return group;
+                this.group = response.data;
+                this.removeLoader();
             }
         },
         async createGroup(group: GroupCreate) {

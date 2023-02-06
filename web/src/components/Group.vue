@@ -1,8 +1,15 @@
 <script setup lang="ts">
-defineProps<{
+import { defineProps } from "vue";
+
+const props = defineProps<{
+  id: {
+    type: string;
+    required: false;
+  };
   name: string;
   verGrupos: boolean
 }>();
+
 </script>
 
 <template>
@@ -15,7 +22,7 @@ defineProps<{
           class="rounded-lg elevation-2 btn"
           block
           nuxt
-          to="/"
+          :to="`/group/${props.id}`"
         >
           <v-icon class="mr-2">mdi-eye</v-icon>
           Ver Grupo

@@ -1,32 +1,29 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
 import GroupUser from  "../components/GroupUser.vue";
+import { useGroupStore } from "../stores/groupStore";
+import { useRouter } from "vue-router";
 
-const users = ref([
-  {
-    name: "Andre"
-  },
-  {
-    name: "Natália"
-  },
-  {
-    name: "Marcos"
-  },
-  {
-    name: "Valmir"
-  },
-]);
+const groupStore = useGroupStore();
+const router = useRouter();
+const idGroup = parseInt(router.currentRoute.value.params.id);
+groupStore.getOneGroup(idGroup);
+const { group, loading } = storeToRefs(groupStore)
 </script>
 
 <template>
   <div>
     <div class="fundo d-flex flex-column justify-center align-center">
       <v-icon color="#ffffff" size="72px">mdi-account-group</v-icon>
-      <span class="h2 primary font-weight-bold">NOME</span>
+      <span class="h2 primary font-weight-bold">{{ group.nome }}</span>
     </div>
     <v-container>
     <v-row justify="center">
       <v-col cols="12" md="6" lg="10" class="mb-5" align-self="end">
+        <v-col cols="12" class="text-center mt-5 mb-5" v-if="loading > 0">
+          <v-progress-circular model-value="20" :size="70" :width="5" color="green" indeterminate></v-progress-circular>
+        </v-col>
         <v-btn class="rounded-lg elevation-2 btn" nuxt to="/create-group">
           <v-icon class="mr-2">mdi-account-plus</v-icon>
           Adicionar membro
