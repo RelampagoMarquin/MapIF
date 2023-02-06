@@ -1,20 +1,25 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useEventStore } from "../stores/eventStore";
+import {useGroupStore} from "../stores/groupStore";
+import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
+
+const router = useRouter();
 const eventStore = useEventStore();
 const nome = ref("");
 const dataInicio = ref("");
 const dataFim = ref("");
 const descricao = ref("");
+const grupoId = ref('');
 let snackbarSucess = ref(false);
 let snackbarFailed = ref(false);
 
-function cleanForm() {
-  nome.value = "";
-  dataInicio.value = "";
-  dataFim.value = "";
-  descricao.value = "";
-}
+
+/*group store*/
+const groupStore = useGroupStore();
+groupStore.getGroups();
+const {groups} = storeToRefs(groupStore);
 
 function dateValidation(dateInicio: Date, dateFim: Date) {
   return dateInicio > dateFim;
@@ -31,14 +36,17 @@ async function createEvent() {
     comeca: new Date(dataInicio.value),
     fim: new Date(dataFim.value),
     descricao: descricao.value,
-    grupoId: 1, //quando resolver o bagulho dos grupos, add aqui
+    grupoId: grupoId.value, //quando resolver o bagulho dos grupos, add aqui
     isPublic: true,
   };
 
   const createEvent = await eventStore.createEvent(data);
   if (createEvent) {
     snackbarSucess.value = true;
-    cleanForm();
+    setTimeout(() => {
+      router.push("/event-list")
+    }, 4000);
+    ;
   } else {
     snackbarFailed.value = true;
   }
@@ -84,6 +92,16 @@ async function createEvent() {
               v-model="dataFim"
               class="form-control input-camp rounded-pill elevation-4"
             />
+            <label for="data-fim" class="mt-3 text-label"
+              >Grupo</label
+            >
+            <select
+              name="grupo"
+              id="grupo"
+              v-model="grupoId"
+              class="form-control input-camp rounded-pill elevation-4">
+              <option class="select-option input-camp rounded-pill elevation-4 p-4 " v-for="grupo in groups" :value="grupo.id">{{ grupo.nome }}</option>
+              </select>
             <label for="descricao" class="mt-3 text-label">Descrição</label>
             <textarea
               name="descricao"
@@ -151,5 +169,9 @@ async function createEvent() {
 
 .disabled {
   background-color: #888888 !important;
+}
+
+.select-option{
+  size: 10px;
 }
 </style>

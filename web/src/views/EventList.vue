@@ -7,7 +7,6 @@ const eventStore = useEventStore()
 eventStore.getEvents()
 const { events, loading } = storeToRefs(eventStore)
 
-console.log(events)
 </script>
 
 <template>

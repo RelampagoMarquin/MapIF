@@ -44,7 +44,10 @@ async function addActivity() {
   const createActivity = await activityStore.createActivity(data);
   if (createActivity) {
     snackbarSucess.value = true;
-    clearForm();
+    setTimeout(() => {
+      clearForm();
+      router.back()
+    }, 4000);
   } else {
     snackbarFailed.value = true;
   }

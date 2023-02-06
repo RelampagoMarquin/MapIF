@@ -1,9 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { onMounted } from "@vue/runtime-core";
-
-
-
+import { onMounted } from "@vue/runtime-core"
 
 function localizacao(posicao) {
   var lat = posicao.coords.latitude;
@@ -78,11 +75,11 @@ function getLocation() {
   height: 92vh;
   width: 100vw;
 }
-
+/* 
 .elevated {
   position: absolute;
   z-index: 1000;
-}
+} */
 
 .v-btn {
   top: 86%;
