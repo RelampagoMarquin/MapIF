@@ -10,6 +10,11 @@ const router = useRouter();
 const idGroup = parseInt(router.currentRoute.value.params.id);
 groupStore.getOneGroup(idGroup);
 const { group, loading } = storeToRefs(groupStore)
+console.log(group.value)
+
+const users = [
+  {name: "João", email: "joao@gmail.com" }
+]
 </script>
 
 <template>
@@ -24,7 +29,7 @@ const { group, loading } = storeToRefs(groupStore)
         <v-col cols="12" class="text-center mt-5 mb-5" v-if="loading > 0">
           <v-progress-circular model-value="20" :size="70" :width="5" color="green" indeterminate></v-progress-circular>
         </v-col>
-        <v-btn class="rounded-lg elevation-2 btn" nuxt to="/create-group">
+        <v-btn class="rounded-lg elevation-2 btn" :to="`/add-user-to-group/${idGroup}`">
           <v-icon class="mr-2">mdi-account-plus</v-icon>
           Adicionar membro
         </v-btn>

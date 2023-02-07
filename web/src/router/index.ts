@@ -14,6 +14,7 @@ import MapActivity from "../views/MapActivity.vue";
 import GroupList from "../views/GroupList.vue";
 import CreateGroup from "../views/CreateGroup.vue";
 import GroupPage from "../views/GroupPage.vue";
+import AddUserToGroup from "../views/AddUserToGroup.vue";
 
 const routes = [
   {
@@ -21,7 +22,7 @@ const routes = [
     name: "home",
     component: Home,
     meta: {
-      auth:true
+      auth: true,
     },
   },
   {
@@ -29,7 +30,7 @@ const routes = [
     name: "signup",
     component: SignUp,
     meta: {
-      auth:false
+      auth: false,
     },
   },
   {
@@ -37,7 +38,7 @@ const routes = [
     name: "start",
     component: Start,
     meta: {
-      auth:false
+      auth: false,
     },
   },
   {
@@ -61,7 +62,7 @@ const routes = [
     name: "schedule-activity",
     component: ScheduleActivity,
     meta: {
-      auth:true
+      auth: true,
     },
   },
   {
@@ -85,7 +86,7 @@ const routes = [
     name: "login",
     component: Login,
     meta: {
-      auth:false
+      auth: false,
     },
   },
   {
@@ -93,7 +94,7 @@ const routes = [
     name: "event-list",
     component: EventList,
     meta: {
-      auth:true
+      auth: true,
     },
   },
   {
@@ -101,7 +102,7 @@ const routes = [
     name: "group-list",
     component: GroupList,
     meta: {
-      auth:true
+      auth: true,
     },
   },
   {
@@ -109,7 +110,7 @@ const routes = [
     name: "create-group",
     component: CreateGroup,
     meta: {
-      auth:true
+      auth: true,
     },
   },
   {
@@ -117,13 +118,24 @@ const routes = [
     name: "group",
     component: GroupPage,
     meta: {
-      auth:true
+      auth: true,
     },
   },
   {
     path: "/map-activity/:poligonoid",
     name: "map-activity",
     component: MapActivity,
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: "/add-user-to-group/:grupoid",
+    name: "add-user-to-group",
+    component: AddUserToGroup,
+    meta: {
+      auth: true,
+    },
   },
 ];
 
@@ -146,13 +158,12 @@ router.beforeEach((to, from, next) => {
       next("login");
     }
   } else {
-      if(auth){
-        next("/");
-      }
-      else{
-        next()
-      }
+    if (auth) {
+      next("/");
+    } else {
+      next();
     }
+  }
 });
 
 export default router;

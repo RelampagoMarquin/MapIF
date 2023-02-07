@@ -16,7 +16,9 @@ export class GruposService {
   }
 
   async findOne(id: number) {
-    return this.prisma.grupos.findUnique({where: {id}});
+    return this.prisma.grupos.findUnique({where: {id},
+    include: {usuarioGrupo: {include: {usuario: true}}}
+    });
   }
 
   async update(id: number, updateGrupoDto: UpdateGrupoDto) {
