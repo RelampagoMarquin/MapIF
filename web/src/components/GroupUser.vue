@@ -2,6 +2,12 @@
 defineProps<{
   name: string;
 }>();
+
+const emit = defineEmits([ 'removerUsuario'])
+
+function buttonClick() {
+  emit('removerUsuario')
+}
 </script>
 
 <template>
@@ -33,7 +39,7 @@ defineProps<{
           class="rounded-lg elevation-2 btn-danger"
           block
           nuxt
-          to="/"
+          @click="buttonClick()"
         >
           <v-icon class="mr-2">mdi-close</v-icon>
           Retirar

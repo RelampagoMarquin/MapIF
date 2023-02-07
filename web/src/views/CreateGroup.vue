@@ -1,31 +1,44 @@
 <script setup lang="ts">
-import { useGroupStore } from "../stores/groupStore"
-import { useUsuarioGroupStore } from "../stores/usuarioGruposStore"
+import { useGroupStore } from "../stores/groupStore";
+import { useUsuarioGroupStore } from "../stores/usuarioGruposStore";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter()
 const groupStore = useGroupStore();
 const usuarioGroupStore = useUsuarioGroupStore();
-const user = JSON.parse(localStorage.getItem('user'))
+const user = JSON.parse(localStorage.getItem("user"));
 
 const nome = ref("");
+let snackbarSucess = ref(false);
+let snackbarFailed = ref(false);
 
 async function create() {
-  if(nome.value){
+  if (nome.value) {
     const groupData = {
-      nome: nome.value
+      nome: nome.value,
     };
     const lastItem = await groupStore.createGroup(groupData);
     const usuarioGroupData = {
       usuarioId: user.id,
       grupoId: lastItem.id,
-      isAdmin: true
+      isAdmin: true,
+    };
+    const createGroup = await usuarioGroupStore.createUsuarioGroup(
+      usuarioGroupData
+    );
+
+    if (createGroup) {
+      snackbarSucess.value = true;
+      setTimeout(() => {
+      router.push("/group-list")
+    }, 4000);
+    } else {
+      snackbarFailed.value = true;
     }
-    usuarioGroupStore.createUsuarioGroup(usuarioGroupData);
   } else {
-    return alert("Preencha o campo")
+    return alert("Preencha o campo");
   }
-
 }
-
 </script>
 
 <template>
@@ -49,11 +62,35 @@ async function create() {
           </v-form>
         </div>
         <div>
-              <v-btn class="btn mt-8 p-4" x-large block rounded="lg" @click="create()">
-                <span class="mr-4">Criar grupo</span>
-              </v-btn>
-            </div>
+          <v-btn
+            class="btn mt-8 p-4"
+            x-large
+            block
+            rounded="lg"
+            @click="create()"
+          >
+            <span class="mr-4">Criar grupo</span>
+          </v-btn>
+        </div>
       </v-col>
     </v-row>
+    <v-sheet class="d-flex flex-column">
+      <v-snackbar
+        :timeout="2000"
+        color="green"
+        elevation="24"
+        v-model="snackbarSucess"
+      >
+        Grupo adicionado com sucesso!
+      </v-snackbar>
+      <v-snackbar
+        :timeout="2000"
+        color="red"
+        elevation="24"
+        v-model="snackbarFailed"
+      >
+        Erro ao criar grupo!
+      </v-snackbar>
+    </v-sheet>
   </v-container>
 </template>

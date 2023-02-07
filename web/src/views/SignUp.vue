@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import { useUserStore } from "../stores/userStore";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
 const userStore = useUserStore();
+
+const router = useRouter();
 
 const nome = ref("");
 const senha = ref("");
 const confirmarSenha = ref("");
 const email = ref("");
+let snackbarSucess = ref(false);
+let snackbarFailed = ref(false);
 
-function signup() {
+async function signup() {
   const data = {
     nome: nome.value,
     email: email.value,
@@ -17,7 +23,17 @@ function signup() {
   if (senha.value !== confirmarSenha.value)
     return alert("As senhas não conferem");
   else {
-    userStore.createUser(data);
+   const createUser = await userStore.createUser(data);
+
+  if (createUser) {
+    snackbarSucess.value = true;
+    setTimeout(() => {
+      router.push("/login")
+    }, 4000);
+    ;
+  } else {
+    snackbarFailed.value = true;
+  }
   }
 }
 </script>
@@ -77,6 +93,24 @@ function signup() {
         </p>
       </v-col>
     </v-row>
+    <v-sheet class="d-flex flex-column">
+      <v-snackbar
+        :timeout="2000"
+        color="green"
+        elevation="24"
+        v-model="snackbarSucess"
+      >
+        Usuário cadastrado com sucesso!
+      </v-snackbar>
+      <v-snackbar
+        :timeout="2000"
+        color="red"
+        elevation="24"
+        v-model="snackbarFailed"
+      >
+        Erro ao cadastrar usuário!
+      </v-snackbar>
+    </v-sheet>
   </v-container>
 </template>
 

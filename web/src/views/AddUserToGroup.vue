@@ -9,20 +9,31 @@ const usuarioGroupStore = useUsuarioGroupStore();
 const router = useRouter();
 console.log(router)
 
+let snackbarSucess = ref(false);
+let snackbarFailed = ref(false);
+
 const userStore = useUserStore();
 userStore.getUsers();
 const { users } = storeToRefs(userStore);
 const userId = ref("");
 
 
-function create() {
+async function create() {
   const data = {
-    usuarioId: userId,
-    grupoId: parseInt(router.currentRoute.value.params.grupoid),
-    isAdmin: true
+    usuarioId: userId.value,
+    grupoId: Number(router.currentRoute.value.params.grupoid),
+    isAdmin: false
   };
 
-  usuarioGroupStore.createUsuarioGroup(data);
+  const addUser = await usuarioGroupStore.createUsuarioGroup(data);
+
+  if (addUser) {
+    snackbarSucess.value = true;
+  } else {
+    snackbarFailed.value = true;
+  }
+
+
 }
 </script>
 
@@ -66,5 +77,23 @@ function create() {
         </div>
       </v-col>
     </v-row>
+    <v-sheet class="d-flex flex-column">
+      <v-snackbar
+        :timeout="2000"
+        color="green"
+        elevation="24"
+        v-model="snackbarSucess"
+      >
+        Usuario adicionado com sucesso!
+      </v-snackbar>
+      <v-snackbar
+        :timeout="2000"
+        color="red"
+        elevation="24"
+        v-model="snackbarFailed"
+      >
+        Erro ao adicionar usuário usuário!
+      </v-snackbar>
+    </v-sheet>
   </v-container>
 </template>

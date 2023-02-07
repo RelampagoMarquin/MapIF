@@ -3,18 +3,23 @@ import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import GroupUser from  "../components/GroupUser.vue";
 import { useGroupStore } from "../stores/groupStore";
+import {useUsuarioGroupStore} from "../stores/usuarioGruposStore"
 import { useRouter } from "vue-router";
 
 const groupStore = useGroupStore();
+const usuarioGroupStore = useUsuarioGroupStore()
 const router = useRouter();
-const idGroup = parseInt(router.currentRoute.value.params.id);
+const idGroup = Number(router.currentRoute.value.params.id);
 groupStore.getOneGroup(idGroup);
 const { group, loading } = storeToRefs(groupStore)
 console.log(group.value)
 
-const users = [
-  {name: "João", email: "joao@gmail.com" }
-]
+
+function removerUsuario(idUser:  number, idGroup: number){
+  console.log(idUser, idGroup)
+  usuarioGroupStore.deleteUsuarioGroup(idUser, idGroup)
+  router.go(0)
+}
 </script>
 
 <template>
@@ -38,14 +43,15 @@ const users = [
         <div class="rounded-lg elevation-2 p-4">
           <v-row>
             <v-col
-              v-for="item in users"
+              v-for="item in group.usuarioGrupo"
               :key="item.name"
               cols="12"
               md="12"
               lg="6"
             >
               <GroupUser
-                :name="item.name"
+                @remover-usuario="removerUsuario(item.usuarioId, item.grupoId)"
+                :name="item.usuario.nome"
               ></GroupUser>
             </v-col>
           </v-row>
@@ -58,7 +64,7 @@ const users = [
         </v-btn>
       </v-col>
       <v-col cols="12" md="6" lg="10" class="mb-5" align-self="end">
-        <v-btn class="rounded-lg elevation-2 btn-danger" nuxt to="/create-group">
+        <v-btn class="rounded-lg elevation-2 btn-danger" nuxt to="/create-group" >
           <v-icon class="mr-2">mdi-delete</v-icon>
           Sair do Grupo
         </v-btn>

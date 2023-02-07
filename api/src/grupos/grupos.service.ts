@@ -16,8 +16,21 @@ export class GruposService {
   }
 
   async findOne(id: number) {
-    return this.prisma.grupos.findUnique({where: {id},
-    include: {usuarioGrupo: {include: {usuario: true}}}
+    return this.prisma.grupos.findUnique({
+      where: {id},
+      include: {
+        usuarioGrupo: {
+          include: {
+            usuario: {
+              select: {
+                nome:true,
+                email:true
+              }
+            }
+          }
+        }
+      }
+      
     });
   }
 
