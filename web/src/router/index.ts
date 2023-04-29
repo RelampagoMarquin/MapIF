@@ -87,6 +87,7 @@ const routes = [
     component: Login,
     meta: {
       auth: false,
+      layout: "EmptyLayout",
     },
   },
   {
