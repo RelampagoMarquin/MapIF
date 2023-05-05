@@ -23,4 +23,8 @@ export class eventosEntity implements Eventos {
 
     @ApiProperty()
     descricao: string;
+
+    constructor(partial: Partial<eventosEntity>) {
+        Object.assign(this, partial);
+    }
 }

@@ -19,4 +19,8 @@ export class atividadesEntity implements Atividade {
 
     @ApiProperty()
     poligonoId: number;
+
+    constructor(partial: Partial<atividadesEntity>) {
+        Object.assign(this, partial);
+    }
 }
