@@ -11,4 +11,8 @@ export class usuariogrupoEntity implements usuarioGrupo {
 
     @ApiProperty()
     isAdmin: boolean;
+
+    constructor(partial: Partial<usuariogrupoEntity>) {
+        Object.assign(this, partial);
+    }
 }

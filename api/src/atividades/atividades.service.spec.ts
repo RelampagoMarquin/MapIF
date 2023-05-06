@@ -3,7 +3,7 @@ import { AtividadesService } from './atividades.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { atividadesEntity } from './entities/atividade.entity';
 
-const atividade: atividadesEntity[] = [
+const mockBd: atividadesEntity[] = [
   new atividadesEntity({
     id: 1, 
     nome: 'xadrez',
@@ -32,11 +32,11 @@ const atividade: atividadesEntity[] = [
 
 const serviceMock = {
   atividade: {
-    create: jest.fn().mockReturnValue(atividade[0]),
-    findMany: jest.fn().mockResolvedValue(atividade),
-    findUnique: jest.fn().mockResolvedValue(atividade[0]),
-    update: jest.fn().mockResolvedValue(atividade[0]),
-    delete: jest.fn().mockReturnValue(atividade[0]),
+    create: jest.fn().mockReturnValue(mockBd[0]),
+    findMany: jest.fn().mockResolvedValue(mockBd),
+    findUnique: jest.fn().mockResolvedValue(mockBd[0]),
+    update: jest.fn().mockResolvedValue(mockBd[0]),
+    delete: jest.fn().mockReturnValue(mockBd[0]),
   },
 }
 
@@ -64,15 +64,15 @@ describe('AtividadesService', () => {
     expect(service).toBeDefined();
   });
 
-  // neste teste verificamos se o create envia a data de forma correta
   describe('create', () => {
+    // neste teste verificamos se o create envia a data de forma correta
     it('espero retornar a atividade criada', async () =>{
-      const result = await service.create(atividade[0]);
+      const result = await service.create(mockBd[0]);
 
-      expect(result).toBe(atividade[0])
+      expect(result).toBe(mockBd[0])
       expect(prisma.atividade.create).toHaveBeenCalledTimes(1);
       expect(prisma.atividade.create).toHaveBeenCalledWith({
-        data: atividade[0],
+        data: mockBd[0],
       });
     });
     // o tratamento impede um erro antes de entrar no create, logo não posso testar um create com erro de input
@@ -83,7 +83,7 @@ describe('AtividadesService', () => {
     it('espero retornar uma lista de atividades', async () =>{
       const result = await service.findByPoligono(1);
 
-      expect(result).toBe(atividade)
+      expect(result).toBe(mockBd)
       expect(prisma.atividade.findMany).toHaveBeenCalledTimes(1);
       expect(prisma.atividade.findMany).toHaveBeenCalledWith({"where": {"poligonoId": 1,}});
     });
@@ -100,13 +100,12 @@ describe('AtividadesService', () => {
   });
 
   describe('findByEvent', () => {
-    // neste teste verificamos se o argumento id de evento é o mesmo valor enviado pelo metodo findByEvent, além de
-    // verificar se o poligono é enviado também
+    // neste teste verificamos o funcionamento de findByEvent
     it('espero retornar uma lista de atividades', async () =>{
-      jest.spyOn(prisma.atividade, 'findMany').mockResolvedValue(atividade);
+      jest.spyOn(prisma.atividade, 'findMany').mockResolvedValue(mockBd);
       const result = await service.findByEvento(1);
 
-      expect(result).toBe(atividade)
+      expect(result).toBe(mockBd)
       expect(prisma.atividade.findMany).toHaveBeenCalledTimes(1);
     });
 
@@ -126,7 +125,7 @@ describe('AtividadesService', () => {
     it('espero retornar uma atividade apenas',async () => {
       const result = await service.findOne(1);
 
-      expect(result).toBe(atividade[0])
+      expect(result).toBe(mockBd[0])
       expect(prisma.atividade.findUnique).toHaveBeenCalledTimes(1);
       expect(prisma.atividade.findUnique).toHaveBeenCalledWith({"where": {"id": 1}});
     });
@@ -147,13 +146,13 @@ describe('AtividadesService', () => {
   describe('update', () => {
     // neste teste verificamos o retorno do update
     it('espero retornar uma tividade', async () => {
-      const result = await service.update(1, atividade[0]);
+      const result = await service.update(1, mockBd[0]);
   
-      expect(result).toBe(atividade[0]);
+      expect(result).toBe(mockBd[0]);
       expect(prisma.atividade.update).toHaveBeenCalledTimes(1);
       expect(prisma.atividade.update).toHaveBeenCalledWith({
         "where": { "id": 1 },
-        "data": atividade[0]
+        "data": mockBd[0]
       });
     });
 
@@ -162,7 +161,7 @@ describe('AtividadesService', () => {
       jest.spyOn(prisma.atividade, 'update').mockRejectedValue(new Error('RecordNotFound'))
 
       try {
-        await service.update(42, atividade[0]);
+        await service.update(42, mockBd[0]);
       } catch (error) {
         expect(error).toEqual(new Error('RecordNotFound'));
       }
@@ -174,7 +173,7 @@ describe('AtividadesService', () => {
     it(`espero retornar uma tividade`, async () => {
       const response = await service.remove(1);
 
-      expect(response).toBe(atividade[0]);
+      expect(response).toBe(mockBd[0]);
       expect(prisma.atividade.delete).toHaveBeenCalledTimes(1);
       expect(prisma.atividade.delete).toHaveBeenCalledWith({
         "where": { "id": 1 }

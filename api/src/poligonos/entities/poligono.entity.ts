@@ -10,4 +10,8 @@ export class poligonosEntity implements Poligonos {
 
     @ApiProperty()
     locais: string;
+
+    constructor(partial: Partial<poligonosEntity>) {
+        Object.assign(this, partial);
+    }
 }

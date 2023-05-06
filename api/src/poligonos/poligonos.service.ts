@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreatePoligonoDto } from './dto/create-poligono.dto';
 import { UpdatePoligonoDto } from './dto/update-poligono.dto';
 
@@ -36,10 +36,10 @@ export class PoligonosService {
   }
 
   async update(id: number, updatePoligonoDto: UpdatePoligonoDto) {
-    /* return this.prisma.poligonos.update({
+    return this.prisma.poligonos.update({
       where: {id},
       data: updatePoligonoDto
-    }); */
+    });
   }
 
   async remove(id: number) {

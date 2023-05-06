@@ -15,4 +15,7 @@ export class usuariosEntity implements Usuarios {
     @ApiProperty()
     senha: string
 
+    constructor(partial: Partial<usuariosEntity>) {
+        Object.assign(this, partial);
+    }
 }

@@ -11,7 +11,6 @@ export class AtividadesService {
     createAtividadeDto.poligonoId = Number(createAtividadeDto.poligonoId)
     return this.prisma.atividade.create({ 
       data: createAtividadeDto
-    
     });
   }
 

@@ -8,4 +8,8 @@ export class GruposEntity implements Grupos {
 
     @ApiProperty()
     nome: string;
+
+    constructor(partial: Partial<GruposEntity>) {
+        Object.assign(this, partial);
+    }
 }
