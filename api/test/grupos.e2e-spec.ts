@@ -21,7 +21,6 @@ describe('grupos integração', () => {
 
     it('findAll', async () => {
         const result = await controller.findAll();
-        console.log(result)
         expect(Array.isArray(result)).toBe(true);
         expect(result.length).toBeGreaterThan(0);
     })

@@ -21,6 +21,7 @@ export declare type EnvironmentContext = {
 
 export default class PrismaTestEnvironment extends NodeEnvironment {
   private connectionString: string;
+  private connection: any
   private db: string;
 
   constructor(config: JestEnvironmentConfig) {
@@ -28,29 +29,26 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
 
     const dbUser = process.env.DATABASE_USER;
     const dbPass = process.env.DATABASE_PASS;
-    const dbName = process.env.DATABASE_NAME;
     const dbHost = process.env.DATABASE_HOST;
     const dbPort = Number(process.env.DATABASE_PORT);
 
     this.db = `test_${crypto.randomInt(0, 100)}`;
-    console.log(this.db)
     this.connectionString = `mysql://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${this.db}`;
   }
 
   async setup() {
-    console.log(this.db)
     process.env.DATABASE_URL = this.connectionString;
     this.global.process.env.DATABASE_URL = this.connectionString;
     await execSync(`mysql -u ${process.env.DATABASE_USER} -p${process.env.DATABASE_PASS} -h ${process.env.DATABASE_HOST} -e "CREATE DATABASE IF NOT EXISTS ${this.db}"`);
     await execSync(`${prismaBinary} migrate deploy`);
-    await execSync(`mysql -u ${process.env.DATABASE_USER} -p${process.env.DATABASE_PASS} -h ${process.env.DATABASE_HOST} -e "USE ${this.db} ${popular}"`);
+    this.connection = await createConnection(this.connectionString);
+    await this.connection.query(`USE ${this.db}`);
+    await this.connection.query(popular)
     return super.setup();
   }
 
   async teardown() {
-    console.log(this.db)
-    const connection = await createConnection(this.connectionString);
-    await connection.execute(`DROP DATABASE ${this.db}`);
-    await connection.end();
+    await this.connection.execute(`DROP DATABASE ${this.db}`);
+    await this.connection.end();
   }
 }
