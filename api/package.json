@@ -31,6 +31,7 @@
     "@vueuse/core": "^9.6.0",
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.3",
     "mysql": "^2.18.1",
     "mysql2": "^3.3.0",
