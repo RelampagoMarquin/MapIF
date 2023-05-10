@@ -18,10 +18,28 @@ describe('grupos integração', () => {
         controller = module.get<GruposController>(GruposController);
         Service = module.get<GruposService>(GruposService);
     });
+    
+    describe('FindAll', () => {
+        it('Devo retornar uma array de objetos', async () => {
+            const result = await controller.findAll();
+            expect(Array.isArray(result)).toBe(true);
+            expect(result.length).toBeGreaterThan(0);
+        });
+    });
 
-    it('findAll', async () => {
-        const result = await controller.findAll();
-        expect(Array.isArray(result)).toBe(true);
-        expect(result.length).toBeGreaterThan(0);
+    describe('FindOne', () => {
+        it('Devo retornar um objeto grupo com o mesmo id que foi informado no teste', async () => {
+            const result = await controller.findOne('2');
+            expect(result.nome).toBe('teste2');
+            //deve ser o mesmo id que foi informado no input do controller
+            expect(result.id).toBe(2); 
+        })
+        it('devo retornar um erro pois o id não existe no banco', async () => {
+            try {
+                const result = await controller.findOne('90');
+            } catch( error){
+                expect(error).toThrowError();
+            }
+        })
     })
 });
