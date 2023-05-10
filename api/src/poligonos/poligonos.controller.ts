@@ -4,7 +4,7 @@ import { CreatePoligonoDto } from './dto/create-poligono.dto';
 import { UpdatePoligonoDto } from './dto/update-poligono.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { poligonosEntity } from './entities/poligono.entity';
-import { Public } from 'src/auth/auth.decoretor';
+import { Public } from '../auth/auth.decoretor';
 
 @Controller('poligonos')
 @ApiTags('poligonos')

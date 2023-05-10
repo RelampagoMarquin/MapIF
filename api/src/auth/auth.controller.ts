@@ -4,7 +4,7 @@ import {
     Post,
 } from '@nestjs/common';
 import { AuthService } from "./auth.service";
-import { LoginUsuarioDto } from "src/usuarios/dto/login-user.dto";
+import { LoginUsuarioDto } from "../usuarios/dto/login-user.dto";
 import { ApiTags } from "@nestjs/swagger";
 import { Public } from './auth.decoretor';
 

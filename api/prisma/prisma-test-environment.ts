@@ -4,6 +4,7 @@ import NodeEnvironment from 'jest-environment-node';
 import { createConnection } from 'mysql2/promise';
 import { promisify } from 'util';
 import { JestEnvironmentConfig } from '@jest/environment';
+import { popular} from './popular';
 
 config({ path: '.env.testing' });
 const execSync = promisify(exec);
@@ -18,7 +19,6 @@ export declare type EnvironmentContext = {
 };
 
 export default class PrismaTestEnvironment extends NodeEnvironment {
-  private schema: string;
   private connectionString: string;
 
   constructor(config: JestEnvironmentConfig) {
@@ -30,24 +30,21 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
     const dbHost = process.env.DATABASE_HOST;
     const dbPort = Number(process.env.DATABASE_PORT);
 
-    this.schema = `test_`;
-    this.connectionString = `mysql://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}?schema=${this.schema}`;
+    this.connectionString = `mysql://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}`;
   }
 
   async setup() {
     process.env.DATABASE_URL = this.connectionString;
     this.global.process.env.DATABASE_URL = this.connectionString;
-    await execSync(`mysql -u ${process.env.DATABASE_USER} -p${process.env.DATABASE_PASS} -h ${process.env.DATABASE_HOST} -e "CREATE DATABASE IF NOT EXISTS ${this.schema}"`);
+    await execSync(`mysql -u ${process.env.DATABASE_USER} -p${process.env.DATABASE_PASS} -h ${process.env.DATABASE_HOST} -e "CREATE DATABASE IF NOT EXISTS ${process.env.DATABASE_NAME}"`);
     await execSync(`${prismaBinary} migrate deploy`);
-
+    await execSync(`mysql -u ${process.env.DATABASE_USER} -p${process.env.DATABASE_PASS} -h ${process.env.DATABASE_HOST} -e "USE ${process.env.DATABASE_NAME} ${popular}"`);
     return super.setup();
   }
 
   async teardown() {
     const connection = await createConnection(this.connectionString);
-
-    await connection.execute(`DROP DATABASE mapif_test`);
-
+    await connection.execute(`DROP DATABASE ${process.env.DATABASE_NAME}`);
     await connection.end();
   }
 }

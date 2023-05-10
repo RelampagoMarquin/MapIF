@@ -38,7 +38,6 @@ export class UsuariogruposController {
   @Delete('/:usuarioId/:grupoId')
   @ApiOkResponse({type: usuariogrupoEntity})
   async remove(@Param('usuarioId' ) usuarioId: string, @Param('grupoId') grupoId: string ) {
-    console.log(usuarioId, grupoId)
     return this.usuariogruposService.remove(+usuarioId, +grupoId);
   }
 }

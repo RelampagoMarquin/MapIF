@@ -6,8 +6,5 @@
   },
   "coverageDirectory": "../coverage",
   "testEnvironment": "../prisma/prisma-test-environment.ts",
-  "testRegex": ".e2e-spec.ts$",
-  "moduleNameMapper": {
-    "^@/(.*)$": "<rootDir>/src/$1"
-  }
+  "testRegex": ".e2e-spec.ts$"
 }
