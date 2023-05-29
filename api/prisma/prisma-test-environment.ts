@@ -4,7 +4,7 @@ import NodeEnvironment from 'jest-environment-node';
 import { createConnection } from 'mysql2/promise';
 import { promisify } from 'util';
 import { JestEnvironmentConfig } from '@jest/environment';
-import { popular} from './popular';
+import { usuarios, grupos} from './popular';
 
 const crypto = require('crypto');
 config({ path: '.env.testing' });
@@ -43,7 +43,8 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
     await execSync(`${prismaBinary} migrate deploy`);
     this.connection = await createConnection(this.connectionString);
     await this.connection.query(`USE ${this.db}`);
-    await this.connection.query(popular)
+    await this.connection.query(grupos)
+    await this.connection.query(usuarios)
     return super.setup();
   }
 

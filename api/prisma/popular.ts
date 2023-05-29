@@ -1,1 +1,2 @@
-export const popular = "INSERT INTO grupos (id, nome) VALUES (1, 'teste1'), (2, 'teste2'), (3, 'teste3');"
+export const grupos = "INSERT INTO grupos (id, nome) VALUES (1, 'teste1'), (2, 'teste2'), (3, 'teste3');"
+export const usuarios = "INSERT INTO usuarios (id, nome, email, senha) VALUES (1, 'valmir', 'valmir@gmail.com', 'valmir123'), (2, 'marcos', 'marcos@gmail.com', 'marcos123'), (3, 'andré', 'andre@gmail.com', 'andre123');"
