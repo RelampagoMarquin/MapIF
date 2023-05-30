@@ -4,7 +4,7 @@ import { GruposService } from '../src/grupos/grupos.service';
 import { PrismaService } from '../src/prisma/prisma.service';
 import { GruposModule } from '../src/grupos/grupos.module';
 import { CreateGrupoDto } from '../src/grupos/dto/create-grupo.dto';
-import { UpdateAtividadeDto } from '../src/atividades/dto/update-atividade.dto';
+import { UpdateGrupoDto } from '../src/grupos/dto/update-grupo.dto';
 
 describe('grupos integração', () => {
     let controller: GruposController;
@@ -70,7 +70,7 @@ describe('grupos integração', () => {
 
     describe('update', () => {
         it('Devo retornar um objeto grupo com o mesmo nome e id que foi informado no teste', async () => {
-            const dto = new UpdateAtividadeDto
+            const dto = new UpdateGrupoDto
             dto.nome = 'teste de alteracao'
             const result = await controller.update('1', dto);
             expect(result.nome).toBe(dto.nome);
@@ -78,7 +78,7 @@ describe('grupos integração', () => {
             expect(result.id).toBe(1); 
         });
         it('devo retornar um erro pois o id não existe no banco', async () => {
-            const dto = new UpdateAtividadeDto
+            const dto = new UpdateGrupoDto
             try {
                 await controller.update('30', dto);
             } catch(err){

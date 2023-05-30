@@ -1,2 +1,4 @@
 export const grupos = "INSERT INTO grupos (id, nome) VALUES (1, 'teste1'), (2, 'teste2'), (3, 'teste3');"
 export const usuarios = "INSERT INTO usuarios (id, nome, email, senha) VALUES (1, 'valmir', 'valmir@gmail.com', 'valmir123'), (2, 'marcos', 'marcos@gmail.com', 'marcos123'), (3, 'andré', 'andre@gmail.com', 'andre123');"
+export const eventos = "INSERT INTO eventos (id, nome, comeca, fim, grupoId, isPublic, descricao) VALUES (1, 'semana do esporte', '2023-05-29T12:34:56.789Z', '2023-05-29T12:34:56.789Z', 1, true, 'evento esportivo de esportes'), (2, 'semana de amostras cientificas', '2023-05-29T12:34:56.789Z', '2023-05-29T12:34:56.789Z', 2, false, 'evento cientifica');"
+export const usuarioGrupos = "INSERT INTO usuariogrupo (usuarioId, grupoId, isAdmin) VALUES (1, 1, true), (2, 1, false), (3, 2, true);"
