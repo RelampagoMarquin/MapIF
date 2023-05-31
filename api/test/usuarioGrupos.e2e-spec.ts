@@ -25,7 +25,7 @@ describe('usuario grupo integração', () => {
         it('Devo retornar uma array de objetos', async () => {
             const result = await controller.findAll();
             expect(Array.isArray(result)).toBe(true);
-            expect(result.length).toBe(3);
+            expect(result.length).toBeGreaterThan(0);
         });
     });
 

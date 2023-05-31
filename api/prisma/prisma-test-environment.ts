@@ -4,7 +4,7 @@ import NodeEnvironment from 'jest-environment-node';
 import { createConnection } from 'mysql2/promise';
 import { promisify } from 'util';
 import { JestEnvironmentConfig } from '@jest/environment';
-import { usuarios, grupos, eventos, usuarioGrupos} from './popular';
+import { usuarios, grupos, eventos, usuarioGrupos, poligonos, atividades} from './popular';
 
 const crypto = require('crypto');
 config({ path: '.env.testing' });
@@ -47,6 +47,8 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
     await this.connection.query(usuarios)
     await this.connection.query(eventos)
     await this.connection.query(usuarioGrupos)
+    await this.connection.query(poligonos)
+    await this.connection.query(atividades)
     return super.setup();
   }
 

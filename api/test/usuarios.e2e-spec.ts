@@ -138,7 +138,6 @@ describe('Usuários integração', () => {
             expect(result.nome).toBe('natalia');
         });
         it('devo retornar um erro por não achar um usuário com o email informado', async () => {
-            // primeiro eu vou criar o usuário que vai testar o login por conta da senha encriptada
             let email = 'anderson@gmail.com';
             let senha = 'anderson123';
             try{
@@ -150,7 +149,6 @@ describe('Usuários integração', () => {
             }
         });
         it('devo retornar um erro por a senha não ser a mesma do banco', async () => {
-            // primeiro eu vou criar o usuário que vai testar o login por conta da senha encriptada
             let email = 'natalia@gmail.com';
             let senha = 'natalia12';
             try{
