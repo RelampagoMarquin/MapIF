@@ -45,4 +45,19 @@ export class PoligonosService {
   async remove(id: number) {
     return this.prisma.poligonos.delete({ where: { id } });
   }
+
+  async findPublic(){
+    return this.prisma.poligonos.findMany(
+      { where: { evento: { isPublic:true } } 
+    });
+  }
+
+  async findPublicAtividade(id: number){
+    return this.prisma.poligonos.findMany(
+      { where: {
+        id,
+        evento: { isPublic:true } 
+      } 
+    });
+  }
 }

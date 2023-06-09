@@ -21,14 +21,12 @@ export class PoligonosController {
     return this.poligonosService.create(createPoligonoDto);
   }
 
-  @Public()
   @Get('/evento/:ideventos')
   @ApiOkResponse({ type: poligonosEntity, isArray: true })
   async findAll(@Param('ideventos') ideventos: number) {
     return this.poligonosService.findByEvento(ideventos);
   }
 
-  @Public()
   @Get(':id')
   @ApiOkResponse({ type: poligonosEntity })
   async findOne(@Param('id') id: string) {
@@ -45,5 +43,19 @@ export class PoligonosController {
   @ApiOkResponse({ type: poligonosEntity })
   async remove(@Param('id') id: string) {
     return this.poligonosService.remove(+id);
+  }
+
+  @Public()
+  @Get('/evento/:ideventos/public')
+  @ApiOkResponse({type: poligonosEntity, isArray: true})
+  async findAllPublic(@Param('idpoligono') idpoligono: number) {
+    return this.poligonosService.findPublic();
+  }
+
+  @Public()
+  @Get('/:id/public')
+  @ApiOkResponse({type: poligonosEntity, isArray: true})
+  async findByIdPublic(@Param('id') id: number) {
+    return this.poligonosService.findPublicAtividade(id);
   }
 }

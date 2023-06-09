@@ -38,6 +38,20 @@ export class AtividadesService {
     }) 
   }
 
+  async findByEventoAndPublic(idEvento: number){
+    return this.prisma.atividade.findMany({
+      where: { 
+        isPublic: true,
+        poligono:{
+          evento: {id: idEvento}
+        },
+      },
+      include:{
+        poligono: {}
+      }
+    })
+  }
+
   async findOne(id: number) {
     return this.prisma.atividade.findUnique({ where: { id } });
   }

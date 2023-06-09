@@ -24,7 +24,6 @@ export class EventosController {
     return this.eventosService.findAll();
   }
 
-  @Public()
   @Get(':id')
   @ApiOkResponse({ type: eventosEntity })
   async findOne(@Param('id') id: string) {
@@ -44,7 +43,7 @@ export class EventosController {
   }
 
   @Public()
-  @Get('publico')
+  @Get('public')
   async publicEvents(){
     return this.eventosService.publicEvents()
   }

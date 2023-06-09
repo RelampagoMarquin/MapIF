@@ -4,6 +4,7 @@ import { AtividadesService } from './atividades.service';
 import { CreateAtividadeDto } from './dto/create-atividade.dto';
 import { UpdateAtividadeDto } from './dto/update-atividade.dto';
 import { atividadesEntity } from './entities/atividade.entity';
+import { Public } from 'src/auth/auth.decoretor';
 
 @Controller('atividades')
 @ApiTags('atividades')
@@ -24,6 +25,12 @@ export class AtividadesController {
     return this.atividadesService.findByPoligono(idpoligono);
   }
 
+  @Public()
+  @Get('/evento/:idevento/public')
+  @ApiOkResponse({type: atividadesEntity, isArray: true})
+  async findAllPublic(@Param('idevento') idevento: number) {
+    return this.atividadesService.findByEventoAndPublic(idevento);
+  }
 
   @Get('/evento/:idevento')
   @ApiOkResponse({type: atividadesEntity, isArray: true})

@@ -15,17 +15,17 @@ model Usuarios {
   nome         String
   email        String         @unique
   senha        String
-  usuarioGrupo usuarioGrupo[]
+  usuarioGrupo UsuarioGrupo[]
 }
 
 model Grupos {
   id           Int            @id @default(autoincrement())
   nome         String
-  usuarioGrupo usuarioGrupo[]
+  usuarioGrupo UsuarioGrupo[]
   eventos      Eventos[]
 }
 
-model usuarioGrupo {
+model UsuarioGrupo {
   usuarioId Int
   grupoId   Int
   isAdmin   Boolean  @default(false)
@@ -38,6 +38,8 @@ model usuarioGrupo {
 model Eventos {
   id        Int         @id @default(autoincrement())
   nome      String
+  latitude  String      @default("")
+  longitude String      @default("")
   comeca    DateTime
   fim       DateTime
   grupoId   Int
@@ -48,11 +50,11 @@ model Eventos {
 }
 
 model Poligonos {
-  id        Int         @id @default(autoincrement())
-  eventoId  Int
-  locais    Json?
-  evento    Eventos     @relation(fields: [eventoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  atividade Atividade[]
+  id         Int         @id @default(autoincrement())
+  eventoId   Int
+  locais     Json?
+  evento     Eventos     @relation(fields: [eventoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  atividades Atividade[]
 }
 
 model Atividade {
@@ -61,6 +63,7 @@ model Atividade {
   horarioInicial DateTime
   horarioFinal   DateTime
   descricao      String
+  isPublic       Boolean   @default(false)
   poligonoId     Int
   poligono       Poligonos @relation(fields: [poligonoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }

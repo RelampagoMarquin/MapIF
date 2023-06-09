@@ -5,6 +5,12 @@ export class CreateEventoDto {
     nome: string;
 
     @ApiProperty()
+    latitude?: string;
+
+    @ApiProperty()
+    longitude?: string;
+
+    @ApiProperty()
     comeca: Date;
 
     @ApiProperty()

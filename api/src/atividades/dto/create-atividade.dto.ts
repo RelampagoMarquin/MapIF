@@ -6,6 +6,9 @@ export class CreateAtividadeDto {
     nome: string;
 
     @ApiProperty()
+    isPublic: boolean
+
+    @ApiProperty()
     horarioInicial: Date;
 
     @ApiProperty()

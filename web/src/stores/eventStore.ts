@@ -22,24 +22,50 @@ export const useEventStore = defineStore("event", {
     async getEvents() {
       this.addLoader();
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/eventos`,
-        {
+        `${import.meta.env.VITE_API_URL}/eventos`, {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
+        })
+        .catch(function (error) {
+          const errorCode = error.response.data.statusCode;
+          if (errorCode == 401) {
+            routes.push("login");
+            //aqui pode ser feito o Redirecionamento para login caso acontessa um error
+          }
+        })
+        if (response != null) {
+          this.removeLoader();
+          this.events = response.data
+          return this.events;
         }
-      );
+    },
+    async getPublicEvents() {
+      this.addLoader();
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/eventos/public`);
       this.events = response.data;
       this.removeLoader();
     },
     async getOneEvent(id: number) {
       this.addLoader();
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/eventos/${id}`
-      );
-      const event = response.data;
-      this.removeLoader();
-      return event;
+        `${import.meta.env.VITE_API_URL}/eventos/${id}`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .catch(function (error) {
+          const errorCode = error.response.data.statusCode;
+          if (errorCode == 401) {
+            routes.push("login");
+            //aqui pode ser feito o Redirecionamento para login caso acontessa um error
+          }
+        });
+      if (response != null) {
+          this.removeLoader();
+          return response.data;
+        }
     },
     async createEvent(event: EventCreate) {
       const response = await axios

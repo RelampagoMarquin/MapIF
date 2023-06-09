@@ -18,12 +18,30 @@ export const usePolygonStore = defineStore('polygon', {
     },
     actions: {
         async getPolygons(idEvent: number) {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/poligonos/evento/${idEvent}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/poligonos/evento/${idEvent}`, {
+                headers: {
+                  Authorization: `Bearer ${this.token}`,
+                }
+              });
              this.polygons = response.data
              return this.polygons
         },
         async getOnePolygon(id: number) {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/poligonos/${id}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/poligonos/${id}`, {
+                headers: {
+                  Authorization: `Bearer ${this.token}`,
+                }
+              });
+            const polygon = response.data;
+            return polygon;
+        },
+        async getPolygonsPublic(idEvent: number) {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/poligonos/evento/${idEvent}/public`);
+             this.polygons = response.data
+             return this.polygons
+        },
+        async getOnePolygonPublic(id: number) {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/poligonos/${id}/public`);
             const polygon = response.data;
             return polygon;
         },
