@@ -29,8 +29,8 @@ model usuarioGrupo {
   usuarioId Int
   grupoId   Int
   isAdmin   Boolean  @default(false)
-  usuario   Usuarios @relation(fields: [usuarioId], references: [id])
-  grupo     Grupos   @relation(fields: [grupoId], references: [id])
+  usuario   Usuarios @relation(fields: [usuarioId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  grupo     Grupos   @relation(fields: [grupoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@id([usuarioId, grupoId])
 }
@@ -43,7 +43,7 @@ model Eventos {
   grupoId   Int
   isPublic  Boolean     @default(false)
   descricao String
-  grupo     Grupos      @relation(fields: [grupoId], references: [id])
+  grupo     Grupos      @relation(fields: [grupoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   poligonos Poligonos[]
 }
 
@@ -51,7 +51,7 @@ model Poligonos {
   id        Int         @id @default(autoincrement())
   eventoId  Int
   locais    Json?
-  evento    Eventos     @relation(fields: [eventoId], references: [id])
+  evento    Eventos     @relation(fields: [eventoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   atividade Atividade[]
 }
 
@@ -62,5 +62,5 @@ model Atividade {
   horarioFinal   DateTime
   descricao      String
   poligonoId     Int
-  poligono       Poligonos @relation(fields: [poligonoId], references: [id])
+  poligono       Poligonos @relation(fields: [poligonoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
