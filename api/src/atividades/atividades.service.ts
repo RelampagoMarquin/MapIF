@@ -39,11 +39,15 @@ export class AtividadesService {
   }
 
   async findByEventoAndPublic(idEvento: number){
+    console.log(typeof(idEvento))
     return this.prisma.atividade.findMany({
       where: { 
         isPublic: true,
         poligono:{
-          evento: {id: idEvento}
+          evento:{
+            isPublic: true,
+            id: Number(idEvento)
+          }
         },
       },
       include:{

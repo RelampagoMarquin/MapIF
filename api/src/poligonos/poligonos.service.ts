@@ -46,9 +46,14 @@ export class PoligonosService {
     return this.prisma.poligonos.delete({ where: { id } });
   }
 
-  async findPublic(){
+  async findPublicByEventos(idEvento: number){
     return this.prisma.poligonos.findMany(
-      { where: { evento: { isPublic:true } } 
+      { where: { 
+        evento: {
+        id: idEvento,
+        isPublic:true
+      } 
+      } 
     });
   }
 

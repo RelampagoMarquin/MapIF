@@ -4,7 +4,7 @@ import { CreateEventoDto } from './dto/create-evento.dto';
 import { UpdateEventoDto } from './dto/update-evento.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { eventosEntity } from './entities/evento.entity';
-import { Public } from '../auth/auth.decoretor';
+import { Public } from 'src/auth/auth.decoretor';
 
 @Controller('eventos')
 @ApiTags('eventos')
@@ -18,8 +18,15 @@ export class EventosController {
     return this.eventosService.create(createEventoDto);
   }
 
+  @Public()
+  @ApiOkResponse({ type: eventosEntity, isArray: true })
+  @Get('/eventos-publico')
+  async publicEvents(){
+    return this.eventosService.publicEvents()
+  }
+
   @Get()
-  @ApiOkResponse({ type: eventosEntity })
+  @ApiOkResponse({ type: eventosEntity, isArray: true  })
   async findAll() {
     return this.eventosService.findAll();
   }
@@ -40,12 +47,6 @@ export class EventosController {
   @ApiOkResponse({ type: eventosEntity })
   async remove(@Param('id') id: string) {
     return this.eventosService.remove(+id);
-  }
-
-  @Public()
-  @Get('public')
-  async publicEvents(){
-    return this.eventosService.publicEvents()
   }
 
 }

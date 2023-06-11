@@ -48,14 +48,14 @@ export class PoligonosController {
   @Public()
   @Get('/evento/:ideventos/public')
   @ApiOkResponse({type: poligonosEntity, isArray: true})
-  async findAllPublic(@Param('idpoligono') idpoligono: number) {
-    return this.poligonosService.findPublic();
+  async findAllPublic(@Param('ideventos') idEventos: string) {
+    return this.poligonosService.findPublicByEventos(+idEventos);
   }
 
   @Public()
   @Get('/:id/public')
   @ApiOkResponse({type: poligonosEntity, isArray: true})
   async findByIdPublic(@Param('id') id: number) {
-    return this.poligonosService.findPublicAtividade(id);
+    return this.poligonosService.findPublicAtividade(+id);
   }
 }
