@@ -35,7 +35,7 @@ function redirectToLocal() {
 </script>
 
 <template>
-  <div class="rounded-lg elevation-2 p-3">
+  <v-container class="rounded-lg elevation-2 p-3">
     <h5 class="title-secondary">{{ title }}</h5>
     <v-divider class="mb-4"></v-divider>
     <p class="text-secondary-custom">{{ description }}</p>
@@ -44,17 +44,25 @@ function redirectToLocal() {
       {{ useDateFormat(dateFim, "DD-MM-YYYY").value }}
     </p>
 
-    <v-btn
-      v-if="poligonoId"
-      :to="`/map-activity/${poligonoId}`"
-      class="text-primary-custom text-end"
-      variant="text"
-      >Ver no mapa</v-btn
-    >
+    <v-row class="mt-4" v-if="poligonoId" justify="end">
+      <v-col cols="12" md="12" lg="12">
+        <v-btn
+          :to="`/map-activity/${poligonoId}`"
+          class="rounded-lg elevation-2 btn"
+          variant="text"
+        >
+          <v-icon class="mr-2">mdi-map</v-icon> Ver no Mapa</v-btn
+        >
+      </v-col>
+    </v-row>
 
     <v-row class="mt-4" v-if="verAtividades && editar">
       <v-col cols="12" md="6" lg="6">
-        <v-btn class="rounded-lg elevation-2 btn" block @click="redirectToLocal()">
+        <v-btn
+          class="rounded-lg elevation-2 btn"
+          block
+          @click="redirectToLocal()"
+        >
           <v-icon class="mr-2">mdi-pencil</v-icon>
           Add Atividade
         </v-btn>
@@ -71,7 +79,7 @@ function redirectToLocal() {
         </v-btn>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <style scoped>
