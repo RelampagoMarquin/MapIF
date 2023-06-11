@@ -37,7 +37,7 @@ export class EventosService {
         fim: {
           //lt and lte is way to compare variable, lt is low than e lte is low than or equal
           //gt and gte is way to compare variable, gt is greater than e lte is greater than or equal
-          lte: new Date(Date.now())
+          gte: new Date(Date.now())
         }
       }}
     )
