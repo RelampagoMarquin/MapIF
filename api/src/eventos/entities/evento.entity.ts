@@ -24,6 +24,12 @@ export class eventosEntity implements Eventos {
     @ApiProperty()
     descricao: string;
 
+    @ApiProperty()
+    latitude: string;
+
+    @ApiProperty()
+    longitude: string;
+
     constructor(partial: Partial<eventosEntity>) {
         Object.assign(this, partial);
     }

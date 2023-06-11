@@ -12,6 +12,9 @@ export class atividadesEntity implements Atividade {
     horarioInicial: Date;
 
     @ApiProperty()
+    isPublic: boolean;
+
+    @ApiProperty()
     horarioFinal: Date;
 
     @ApiProperty()

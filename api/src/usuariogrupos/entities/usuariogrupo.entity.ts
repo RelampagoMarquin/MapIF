@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { usuarioGrupo } from "@prisma/client";
+import { UsuarioGrupo } from "@prisma/client";
 
-export class usuariogrupoEntity implements usuarioGrupo {
+export class usuariogrupoEntity implements UsuarioGrupo {
 
     @ApiProperty()
     usuarioId: number;
