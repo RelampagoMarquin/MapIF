@@ -31,6 +31,7 @@ const routes = [
     component: SignUp,
     meta: {
       auth: false,
+      layout: "EmptyLayout",
     },
   },
   {
@@ -39,6 +40,7 @@ const routes = [
     component: Start,
     meta: {
       auth: false,
+      layout: "EmptyLayout",
     },
   },
   {
@@ -87,6 +89,7 @@ const routes = [
     component: Login,
     meta: {
       auth: false,
+      layout: "EmptyLayout",
     },
   },
   {

@@ -1,11 +1,19 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import Main from "./layout/Main.vue";
+import { useRouter } from "vue-router";
+
+const { currentRoute } = useRouter();
+
+const layout = computed(() => {
+  return currentRoute.value.meta.layout || Main;
+});
 </script>
 
 <template>
-  <Main>
-    <div><router-view /></div>
-  </Main>
+  <component :is="layout">
+    <router-view />
+  </component>
 </template>
 
 <style>
