@@ -4,11 +4,11 @@ import { useUserStore } from "../stores/userStore";
 import { ref } from "vue";
 const authStore = useAuthStore();
 const userStore = useUserStore();
-const user = JSON.parse(localStorage.getItem('user'))
+const user = JSON.parse(localStorage.getItem("user"));
 
 const nome = ref(user.nome);
 const email = ref(user.email);
-const senha = ref('');
+const senha = ref("");
 
 function update() {
   const data = {
@@ -19,18 +19,19 @@ function update() {
   };
   return userStore.updateUser(data);
 }
-
 </script>
 
 <template>
   <div>
     <div class="fundo d-flex flex-column justify-center align-center">
       <v-icon color="#ffffff" size="72px">mdi-account</v-icon>
-      <span class="h2 primary font-weight-bold text-capitalize">{{ user.nome }}</span>
+      <span class="h2 primary font-weight-bold text-capitalize">{{
+        user.nome
+      }}</span>
     </div>
     <v-container>
       <v-row justify="center">
-        <v-col cols="12" md="6" lg="4">
+        <v-col cols="12" md="12" lg="6">
           <div class="rounded-lg elevation-2 p-4 my-4">
             <form action="#" method="post" class="text-start">
               <label for="nome" class="text-label">Nome</label>
@@ -60,8 +61,14 @@ function update() {
             </form>
           </div>
           <div>
-            <v-btn class="btn mt-8 p-4 primary" x-large block rounded="lg" @click="update()">
-                <span class="mr-4">Salvar</span>
+            <v-btn
+              class="btn mt-8 p-4 primary"
+              x-large
+              block
+              rounded="lg"
+              @click="update()"
+            >
+              <span class="mr-4">Salvar</span>
             </v-btn>
           </div>
         </v-col>
@@ -71,7 +78,7 @@ function update() {
 </template>
 
 <style scoped>
-  .fundo {
+.fundo {
   width: 100%;
   height: 20vh;
   background-color: #389c37;
