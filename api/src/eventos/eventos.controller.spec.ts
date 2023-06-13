@@ -8,6 +8,8 @@ const eventos: eventosEntity[] = [
   new eventosEntity({
     id: 1,
     nome: 'Exponovos',
+    latitude: '',
+    longitude: '',
     comeca: new Date(2021, 10, 5, 16, 15, 15.30),
     fim: new Date(2021, 10, 15, 16, 15, 19.30),
     grupoId: 1,
@@ -17,6 +19,8 @@ const eventos: eventosEntity[] = [
   new eventosEntity({
     id: 2,
     nome: 'Exponovos 2022',
+    latitude: '',
+    longitude: '',
     comeca: new Date(2022, 10, 5, 16, 15, 15.30),
     fim: new Date(2022, 10, 15, 16, 15, 19.30),
     grupoId: 2,
@@ -26,6 +30,8 @@ const eventos: eventosEntity[] = [
   new eventosEntity({
     id: 3,
     nome: 'Exponovos 2023',
+    latitude: '',
+    longitude: '',
     comeca: new Date(2023, 10, 5, 16, 15, 15.30),
     fim: new Date(2023, 10, 15, 16, 15, 19.30),
     grupoId: 3,
@@ -37,6 +43,8 @@ const eventos: eventosEntity[] = [
 const updateventoEntity = new eventosEntity({
   id: 3,
   nome: 'Exponovos 2023',
+  latitude: '',
+  longitude: '',
   comeca: new Date(2023, 10, 5, 16, 15, 15.30),
   fim: new Date(2023, 10, 15, 16, 15, 19.30),
   grupoId: 3,

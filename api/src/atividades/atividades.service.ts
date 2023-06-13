@@ -39,7 +39,6 @@ export class AtividadesService {
   }
 
   async findByEventoAndPublic(idEvento: number){
-    console.log(typeof(idEvento))
     return this.prisma.atividade.findMany({
       where: { 
         isPublic: true,

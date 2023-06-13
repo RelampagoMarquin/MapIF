@@ -5,7 +5,7 @@ import { UpdateEventoDto } from './dto/update-evento.dto';
 
 @Injectable()
 export class EventosService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async create(createEventoDto: CreateEventoDto) {
     return this.prisma.eventos.create({ data: createEventoDto });
@@ -16,7 +16,7 @@ export class EventosService {
   }
 
   async findOne(id: number) {
-    return this.prisma.eventos.findUnique({ where: { id } })
+    return this.prisma.eventos.findUnique({ where: { id } });
   }
 
   async update(id: number, updateEventoDto: UpdateEventoDto) {
@@ -30,16 +30,16 @@ export class EventosService {
     return this.prisma.eventos.delete({ where: { id } });
   }
 
-  async publicEvents(){
-    return this.prisma.eventos.findMany(
-      {where: {
+  async publicEvents() {
+    return this.prisma.eventos.findMany({
+      where: {
         isPublic: true,
         fim: {
           //lt and lte is way to compare variable, lt is low than e lte is low than or equal
           //gt and gte is way to compare variable, gt is greater than e lte is greater than or equal
-          gte: new Date(Date.now())
-        }
-      }}
-    )
+          gte: new Date(Date.now()),
+        },
+      },
+    });
   }
 }
