@@ -4,7 +4,7 @@ import { CreateEventoDto } from './dto/create-evento.dto';
 import { UpdateEventoDto } from './dto/update-evento.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { eventosEntity } from './entities/evento.entity';
-import { Public } from 'src/auth/auth.decoretor';
+import { Public } from '../auth/auth.decoretor';
 
 @Controller('eventos')
 @ApiTags('eventos')

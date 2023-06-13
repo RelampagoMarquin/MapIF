@@ -4,7 +4,7 @@ import { AtividadesService } from './atividades.service';
 import { CreateAtividadeDto } from './dto/create-atividade.dto';
 import { UpdateAtividadeDto } from './dto/update-atividade.dto';
 import { atividadesEntity } from './entities/atividade.entity';
-import { Public } from 'src/auth/auth.decoretor';
+import { Public } from '../auth/auth.decoretor';
 
 @Controller('atividades')
 @ApiTags('atividades')

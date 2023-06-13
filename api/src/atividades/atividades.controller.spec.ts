@@ -109,6 +109,7 @@ describe('AtividadesController', () => {
     it('Criar atividade ', async () =>{
       const body: CreateAtividadeDto={
         nome: 'Futsal',
+        isPublic: false,
         horarioInicial: new Date(2023, 4, 4, 16, 30, 0.0),
         horarioFinal: new Date(2023, 4, 5, 16, 30, 0.0),
         descricao: 'Futsal masculino semifinal',
@@ -128,6 +129,7 @@ describe('AtividadesController', () => {
     it('Erro no create',()=>{
       const body: CreateAtividadeDto={
         nome: 'Futsal',
+        isPublic: false,
         horarioInicial: new Date(2023, 4, 4, 16, 30, 0.0),
         horarioFinal: new Date(2023, 4, 5, 16, 30, 0.0),
         descricao: 'Futsal masculino semifinal',
