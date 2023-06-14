@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import Activity from "../components/Activity.vue";
 import { useActivityStore } from "../stores/atividadeStore";
 import { useRouter } from "vue-router";
@@ -15,6 +15,22 @@ const activityStore = useActivityStore();
 activityStore.getActivitysByEvent(idEvento);
 const { loading } = storeToRefs(activityStore);
 const activitys = computed((): ActivityType[] => activityStore.activitys);
+
+/* Search */
+
+const search = ref("");
+
+/* Filter */
+
+const filteredActivitys = computed(() => {
+  if (search.value === "") {
+    return activitys.value;
+  } else {
+    return activitys.value.filter((item) => {
+      return item.nome.toLowerCase().includes(search.value.toLowerCase());
+    });
+  }
+});
 </script>
 
 <template>
@@ -26,6 +42,25 @@ const activitys = computed((): ActivityType[] => activityStore.activitys);
             Calendário de Atividades
           </h2>
         </div>
+
+        <v-row justify="end" class="mb-1">
+          <v-col
+            cols="12"
+            md="8"
+            lg="5"
+            class="mb-3 text-right"
+            align-self="end"
+          >
+            <!-- implement a search bar -->
+            <v-text-field
+              label="Pesquisar"
+              v-model="search"
+              variant="solo"
+              compact
+              append-inner-icon="mdi-magnify"
+            ></v-text-field>
+          </v-col>
+        </v-row>
 
         <v-col cols="12" class="text-center mt-5 mb-5" v-if="loading > 0">
           <v-progress-circular
@@ -45,7 +80,7 @@ const activitys = computed((): ActivityType[] => activityStore.activitys);
           </div>
           <v-row v-else>
             <v-col
-              v-for="item in activitys"
+              v-for="item in filteredActivitys"
               :key="item.nome"
               class="mb-3"
               cols="12"
