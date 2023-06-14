@@ -167,6 +167,12 @@ router.beforeEach((to, from, next) => {
       next();
     }
   }
+
+  if (!to.matched.length) {
+    next({ name: "home" });
+  } else {
+    next();
+  }
 });
 
 export default router;
