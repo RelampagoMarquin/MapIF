@@ -3,7 +3,7 @@ import { useGroupStore } from "../stores/groupStore";
 import { useUsuarioGroupStore } from "../stores/usuarioGruposStore";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-const router = useRouter()
+const router = useRouter();
 const groupStore = useGroupStore();
 const usuarioGroupStore = useUsuarioGroupStore();
 const user = JSON.parse(localStorage.getItem("user"));
@@ -30,8 +30,8 @@ async function create() {
     if (createGroup) {
       snackbarSucess.value = true;
       setTimeout(() => {
-      router.push("/group-list")
-    }, 4000);
+        router.push("/group-list");
+      }, 4000);
     } else {
       snackbarFailed.value = true;
     }
@@ -44,7 +44,7 @@ async function create() {
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" md="6" lg="4">
+      <v-col cols="12" md="6" lg="6">
         <div class="mb-5">
           <h1 class="mb-8 mt-5 text-center title-primary">Criar Grupo</h1>
         </div>

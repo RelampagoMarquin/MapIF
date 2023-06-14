@@ -16,7 +16,6 @@ const descricao = ref("");
 let snackbarSucess = ref(false);
 let snackbarFailed = ref(false);
 
-
 function clearForm() {
   nome.value = "";
   dataInicio.value = "";
@@ -46,7 +45,7 @@ async function addActivity() {
     snackbarSucess.value = true;
     setTimeout(() => {
       clearForm();
-      router.back()
+      router.back();
     }, 4000);
   } else {
     snackbarFailed.value = true;
@@ -57,7 +56,7 @@ async function addActivity() {
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" md="6" lg="4">
+      <v-col cols="12" md="6" lg="8">
         <div class="mb-5">
           <h1 class="mb-8 mt-5 text-center title-primary">Criar Atividade</h1>
         </div>
@@ -83,7 +82,9 @@ async function addActivity() {
               v-model="dataInicio"
               class="form-control input-camp rounded-pill elevation-4"
             />
-            <label for="data-fim" class="mt-3 text-label">Data do fim da Atividade</label>
+            <label for="data-fim" class="mt-3 text-label"
+              >Data do fim da Atividade</label
+            >
             <input
               type="datetime-local"
               name="data-fim"
@@ -104,7 +105,13 @@ async function addActivity() {
           </form>
         </div>
         <div>
-          <v-btn class="btn mt-8 p-4" x-large block rounded="lg" @click="addActivity()">
+          <v-btn
+            class="btn mt-8 p-4"
+            x-large
+            block
+            rounded="lg"
+            @click="addActivity()"
+          >
             <span class="mr-4">Adicionar atividade</span>
           </v-btn>
         </div>

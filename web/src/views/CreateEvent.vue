@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useEventStore } from "../stores/eventStore";
-import {useGroupStore} from "../stores/groupStore";
+import { useGroupStore } from "../stores/groupStore";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 
@@ -11,15 +11,14 @@ const nome = ref("");
 const dataInicio = ref("");
 const dataFim = ref("");
 const descricao = ref("");
-const grupoId = ref('');
+const grupoId = ref("");
 let snackbarSucess = ref(false);
 let snackbarFailed = ref(false);
-
 
 /*group store*/
 const groupStore = useGroupStore();
 groupStore.getGroups();
-const {groups} = storeToRefs(groupStore);
+const { groups } = storeToRefs(groupStore);
 
 function dateValidation(dateInicio: Date, dateFim: Date) {
   return dateInicio > dateFim;
@@ -44,9 +43,8 @@ async function createEvent() {
   if (createEvent) {
     snackbarSucess.value = true;
     setTimeout(() => {
-      router.push("/event-list")
+      router.push("/event-list");
     }, 4000);
-    ;
   } else {
     snackbarFailed.value = true;
   }
@@ -56,7 +54,7 @@ async function createEvent() {
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" md="6" lg="6">
+      <v-col cols="12" md="6" lg="8">
         <div class="mb-5">
           <h1 class="mb-8 mt-5 text-center title-primary">Criar Evento</h1>
         </div>
@@ -92,16 +90,21 @@ async function createEvent() {
               v-model="dataFim"
               class="form-control input-camp rounded-pill elevation-4"
             />
-            <label for="data-fim" class="mt-3 text-label"
-              >Grupo</label
-            >
+            <label for="data-fim" class="mt-3 text-label">Grupo</label>
             <select
               name="grupo"
               id="grupo"
               v-model="grupoId"
-              class="form-control input-camp rounded-pill elevation-4">
-              <option class="select-option input-camp rounded-pill elevation-4 p-4 " v-for="grupo in groups" :value="grupo.id">{{ grupo.nome }}</option>
-              </select>
+              class="form-control input-camp rounded-pill elevation-4"
+            >
+              <option
+                class="select-option input-camp rounded-pill elevation-4 p-4"
+                v-for="grupo in groups"
+                :value="grupo.id"
+              >
+                {{ grupo.nome }}
+              </option>
+            </select>
             <label for="descricao" class="mt-3 text-label">Descrição</label>
             <textarea
               name="descricao"
@@ -171,7 +174,7 @@ async function createEvent() {
   background-color: #888888 !important;
 }
 
-.select-option{
+.select-option {
   size: 10px;
 }
 </style>

@@ -42,7 +42,7 @@ console.log(groups);
           ></v-progress-circular>
         </v-col>
 
-        <div class="rounded-lg elevation-2 p-4">
+        <div class="rounded-lg elevation-2 p-4" v-else>
           <v-row>
             <v-col
               v-for="item in groups"

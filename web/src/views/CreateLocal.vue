@@ -47,7 +47,7 @@ function toggleDialog() {
 let currentPolygonId = ref(null);
 
 onMounted(async () => {
-  map.value = L.map(mapElement.value).setView([-6.25309, -36.53401], 19);
+  map.value = L.map(mapElement.value).setView([-6.264359, -36.516165], 19);
   L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
     maxZoom: 23,
     maxNativeZoom: 19,
@@ -65,6 +65,8 @@ onMounted(async () => {
           "http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}",
           {
             attribution: "google",
+            maxZoom: 23,
+            maxNativeZoom: 19,
           }
         ),
       },
@@ -136,7 +138,7 @@ function saveLocal() {
     };
 
     polygonStore.createPolygon(data);
-    router.go(0)
+    router.go(0);
   });
 }
 </script>
@@ -172,66 +174,71 @@ function saveLocal() {
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-list lines="two" subheader>
-                <v-col
-                  cols="12"
-                  md="6"
-                  lg="10"
-                  class="mb-5 text-right"
-                  align-self="end"
-                >
-                  <v-btn
-                    class="rounded-lg elevation-2 btn"
-                    nuxt
-                    :to="`/create-activity/${currentPolygonId}`"
-                  >
-                    <v-icon class="mr-2">mdi-calendar-plus</v-icon>
-                    Nova Atividade
-                  </v-btn>
-                </v-col>
-                <v-list-subheader>Atividades Registradas</v-list-subheader>
-
-                <v-col
-                  cols="12"
-                  class="text-center mt-5 mb-5"
-                  v-if="loading > 0"
-                >
-                  <v-progress-circular
-                    model-value="20"
-                    :size="70"
-                    :width="5"
-                    color="green"
-                    indeterminate
-                  ></v-progress-circular>
-                </v-col>
-                <div v-else>
-                  <div v-if="activitys.length === 0" class="p-4 text-center">
-                    <v-row>
-                      <p>Não há atividades cadastradas</p>
-                    </v-row>
-                  </div>
-                  <div v-else class="rounded-lg elevation-2 p-4">
-                    <v-row>
-                      <v-col
-                        v-for="item in activitys"
-                        :key="item.nome"
-                        class="mb-3"
-                        cols="12"
-                        md="12"
-                        lg="6"
+                <v-container>
+                  <v-row justify="end" class="mb-4">
+                    <v-col
+                      cols="12"
+                      md="6"
+                      lg="10"
+                      class="mb-5 text-right"
+                      align-self="end"
+                    >
+                      <v-btn
+                        class="rounded-lg elevation-2 btn"
+                        nuxt
+                        :to="`/create-activity/${currentPolygonId}`"
                       >
-                        <Activity
-                          :title="item.nome"
-                          :id="item.id"
-                          :description="item.descricao"
-                          :dateInicio="item.horarioInicial"
-                          :dateFim="item.horarioFinal"
-                          :verAtividades="false"
-                          :editar="false"
-                        ></Activity>
-                      </v-col>
-                    </v-row>
+                        <v-icon class="mr-2">mdi-calendar-plus</v-icon>
+                        Nova Atividade
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+
+                  <v-list-subheader>Atividades Registradas</v-list-subheader>
+
+                  <v-col
+                    cols="12"
+                    class="text-center mt-5 mb-5"
+                    v-if="loading > 0"
+                  >
+                    <v-progress-circular
+                      model-value="20"
+                      :size="70"
+                      :width="5"
+                      color="green"
+                      indeterminate
+                    ></v-progress-circular>
+                  </v-col>
+                  <div v-else>
+                    <div v-if="activitys.length === 0" class="p-4 text-center">
+                      <v-row>
+                        <p>Não há atividades cadastradas</p>
+                      </v-row>
+                    </div>
+                    <div v-else class="rounded-lg elevation-2 p-4">
+                      <v-row>
+                        <v-col
+                          v-for="item in activitys"
+                          :key="item.nome"
+                          class="mb-3"
+                          cols="12"
+                          md="12"
+                          lg="6"
+                        >
+                          <Activity
+                            :title="item.nome"
+                            :id="item.id"
+                            :description="item.descricao"
+                            :dateInicio="item.horarioInicial"
+                            :dateFim="item.horarioFinal"
+                            :verAtividades="false"
+                            :editar="false"
+                          ></Activity>
+                        </v-col>
+                      </v-row>
+                    </div>
                   </div>
-                </div>
+                </v-container>
               </v-list>
             </v-card>
           </v-dialog>
