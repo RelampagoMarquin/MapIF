@@ -48,7 +48,8 @@ export const useEventStore = defineStore("event", {
       this.events = response.data;
       this.removeLoader();
     },
-    async getOneEvent(id: number) {
+    async getOneEvent(id: string) {
+      console.log("id", id);
       this.addLoader();
       const response = await axios
         .get(`${import.meta.env.VITE_API_URL}/eventos/${id}`, {
@@ -86,7 +87,8 @@ export const useEventStore = defineStore("event", {
         return response.data;
       }
     },
-    async updateEvent(event: Event) {
+    async updateEvent(event: any) {
+      console.log("event", event);
       const response = await axios
         .patch(`${import.meta.env.VITE_API_URL}/eventos/${event.id}`, event, {
           headers: {

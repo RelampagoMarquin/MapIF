@@ -61,6 +61,17 @@ function deleteFunction(id: any) {
     }, 1000);
   }
 }
+
+/* edit */
+
+function editItem() {
+  const id = props.id;
+  id.toString();
+  console.log(typeof id);
+  if (!props.poligonoId) {
+    router.push("/edit-event/" + id);
+  }
+}
 </script>
 
 <template>
@@ -71,9 +82,7 @@ function deleteFunction(id: any) {
       </v-col>
 
       <v-col cols="2" xs="2" sm="2" md="2" lg="2" class="pa-0 mt-2">
-        <v-icon color="green-darken-1" @click="console.log('click')"
-          >mdi-pencil</v-icon
-        >
+        <v-icon color="green-darken-1" @click="editItem">mdi-pencil</v-icon>
         <v-icon color="red-darken-3" @click="dialogDelete = true"
           >mdi-delete</v-icon
         >
