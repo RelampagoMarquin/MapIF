@@ -36,7 +36,7 @@ const filteredActivitys = computed(() => {
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" md="6" lg="10">
+      <v-col cols="12" xs="12" sm="8" md="10" lg="10">
         <div class="mb-5">
           <h2 class="mb-8 mt-5 text-center title-primary">
             Calendário de Atividades
@@ -84,10 +84,12 @@ const filteredActivitys = computed(() => {
               :key="item.nome"
               class="mb-3"
               cols="12"
-              md="12"
+              sm="12"
+              md="6"
               lg="6"
             >
               <Activity
+                :id="item.id"
                 :title="item.nome"
                 :description="item.descricao"
                 :dateInicio="item.horarioInicial"
