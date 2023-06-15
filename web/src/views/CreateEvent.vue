@@ -12,6 +12,7 @@ const dataInicio = ref("");
 const dataFim = ref("");
 const descricao = ref("");
 const grupoId = ref("");
+const isPublic = ref(true);
 let snackbarSucess = ref(false);
 let snackbarFailed = ref(false);
 
@@ -35,8 +36,8 @@ async function createEvent() {
     comeca: new Date(dataInicio.value),
     fim: new Date(dataFim.value),
     descricao: descricao.value,
-    grupoId: grupoId.value, //quando resolver o bagulho dos grupos, add aqui
-    isPublic: true,
+    grupoId: grupoId.value,
+    isPublic: isPublic.value,
   };
 
   const createEvent = await eventStore.createEvent(data);
@@ -56,7 +57,7 @@ async function createEvent() {
     <v-row justify="center">
       <v-col cols="12" md="6" lg="8">
         <div class="mb-5">
-          <h1 class="mb-8 mt-5 text-center title-primary">Criar Evento</h1>
+          <h1 class="mb-5 mt-5 text-center title-primary">Criar Evento</h1>
         </div>
         <!-- FORM -->
         <div class="rounded-lg elevation-2 p-4">
@@ -105,6 +106,7 @@ async function createEvent() {
                 {{ grupo.nome }}
               </option>
             </select>
+
             <label for="descricao" class="mt-3 text-label">Descrição</label>
             <textarea
               name="descricao"
@@ -115,11 +117,18 @@ async function createEvent() {
               class="form-control input-camp rounded-border elevation-4"
               v-model="descricao"
             ></textarea>
+
+            <!-- isPublic -->
+
+            <label for="isPublic" class="text-label mt-4"
+              >O Evento será público?</label
+            >
+            <v-switch color="success" inset v-model="isPublic"> </v-switch>
           </form>
         </div>
         <div>
           <v-btn
-            class="btn mt-8 p-4"
+            class="btn mt-3 p-4"
             x-large
             block
             rounded="lg"

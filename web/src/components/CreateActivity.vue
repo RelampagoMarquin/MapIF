@@ -13,6 +13,7 @@ const nome = ref("");
 const dataInicio = ref("");
 const dataFim = ref("");
 const descricao = ref("");
+const isPublic = ref(true);
 let snackbarSucess = ref(false);
 let snackbarFailed = ref(false);
 
@@ -38,6 +39,7 @@ async function addActivity() {
     horarioFinal: new Date(dataFim.value),
     descricao: descricao.value,
     poligonoId: idPoligono,
+    isPublic: isPublic.value,
   };
 
   const createActivity = await activityStore.createActivity(data);
@@ -102,6 +104,11 @@ async function addActivity() {
               class="form-control input-camp rounded-border elevation-4"
               v-model="descricao"
             ></textarea>
+
+            <label for="isPublic" class="text-label mt-4"
+              >A atividade será pública?</label
+            >
+            <v-switch color="success" inset v-model="isPublic"> </v-switch>
           </form>
         </div>
         <div>

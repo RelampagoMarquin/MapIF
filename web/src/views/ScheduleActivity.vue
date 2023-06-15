@@ -43,11 +43,11 @@ const filteredActivitys = computed(() => {
           </h2>
         </div>
 
-        <v-row justify="end" class="mb-1">
+        <v-row justify="center" class="mb-1">
           <v-col
             cols="12"
             md="8"
-            lg="5"
+            lg="8"
             class="mb-3 text-right"
             align-self="end"
           >
