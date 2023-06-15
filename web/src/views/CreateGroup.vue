@@ -3,6 +3,7 @@ import { useGroupStore } from "../stores/groupStore";
 import { useUsuarioGroupStore } from "../stores/usuarioGruposStore";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import GoBack from "../components/GoBackButton.vue";
 const router = useRouter();
 const groupStore = useGroupStore();
 const usuarioGroupStore = useUsuarioGroupStore();
@@ -45,8 +46,9 @@ async function create() {
   <v-container>
     <v-row justify="center">
       <v-col cols="12" md="6" lg="6">
-        <div class="mb-5">
+        <div class="mb-5 position-relative">
           <h1 class="mb-8 mt-5 text-center title-primary">Criar Grupo</h1>
+          <GoBack/>
         </div>
         <!-- FORM -->
         <div class="rounded-lg elevation-2 p-4">

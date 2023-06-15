@@ -4,6 +4,7 @@ import { useUserStore } from "../stores/userStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import {useRouter} from "vue-router";
+import GoBack from "../components/GoBackButton.vue";
 
 const usuarioGroupStore = useUsuarioGroupStore();
 const router = useRouter();
@@ -41,8 +42,9 @@ async function create() {
   <v-container>
     <v-row justify="center">
       <v-col cols="12" md="6" lg="4">
-        <div class="mb-5">
+        <div class="mb-5 position-relative">
           <h1 class="mb-8 mt-5 text-center title-primary">Adicionar Usuário</h1>
+          <GoBack/>
         </div>
         <!-- FORM -->
         <div class="rounded-lg elevation-2 p-4">

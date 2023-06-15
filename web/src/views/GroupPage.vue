@@ -5,6 +5,7 @@ import GroupUser from  "../components/GroupUser.vue";
 import { useGroupStore } from "../stores/groupStore";
 import {useUsuarioGroupStore} from "../stores/usuarioGruposStore"
 import { useRouter } from "vue-router";
+import GoBack from "../components/GoBackButton.vue";
 
 const groupStore = useGroupStore();
 const usuarioGroupStore = useUsuarioGroupStore()
@@ -28,8 +29,9 @@ function removerUsuario(idUser:  number, idGroup: number){
       <v-icon color="#ffffff" size="72px">mdi-account-group</v-icon>
       <span class="h2 primary font-weight-bold">{{ group.nome }}</span>
     </div>
-    <v-container>
+    <v-container class="position-relative">
     <v-row justify="center">
+      <GoBack class="margin"/>
       <v-col cols="12" md="6" lg="10" class="mb-5" align-self="end">
         <v-col cols="12" class="text-center mt-5 mb-5" v-if="loading > 0">
           <v-progress-circular model-value="20" :size="70" :width="5" color="green" indeterminate></v-progress-circular>

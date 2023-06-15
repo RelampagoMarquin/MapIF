@@ -5,6 +5,7 @@ import { useActivityStore } from "../stores/atividadeStore";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { ActivityType } from "../utils/types";
+import GoBack from "../components/GoBackButton.vue"
 
 /* Current router */
 const router = useRouter();
@@ -21,10 +22,11 @@ const activitys = computed((): ActivityType[] => activityStore.activitys);
   <v-container>
     <v-row justify="center">
       <v-col cols="12" md="6" lg="10">
-        <div class="mb-5">
+        <div class="mb-5 position-relative">
           <h2 class="mb-8 mt-5 text-center title-primary">
             Calendário de Atividades
           </h2>
+          <GoBack/>
         </div>
 
         <v-col cols="12" class="text-center mt-5 mb-5" v-if="loading > 0">

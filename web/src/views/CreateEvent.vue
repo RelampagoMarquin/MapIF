@@ -4,6 +4,7 @@ import { useEventStore } from "../stores/eventStore";
 import { useGroupStore } from "../stores/groupStore";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
+import GoBack from "../components/GoBackButton.vue"
 
 const router = useRouter();
 const eventStore = useEventStore();
@@ -55,8 +56,9 @@ async function createEvent() {
   <v-container>
     <v-row justify="center">
       <v-col cols="12" md="6" lg="8">
-        <div class="mb-5">
+        <div class="mb-5 position-relative">
           <h1 class="mb-8 mt-5 text-center title-primary">Criar Evento</h1>
+          <GoBack/>
         </div>
         <!-- FORM -->
         <div class="rounded-lg elevation-2 p-4">

@@ -9,6 +9,7 @@ import { usePolygonStore } from "../stores/polygonStore";
 import { storeToRefs } from "pinia";
 import { useActivityStore } from "../stores/atividadeStore";
 import Activity from "../components/Activity.vue";
+import GoBack from "../components/GoBackButton.vue";
 
 /* Current router */
 const router = useRouter();
@@ -144,6 +145,7 @@ function saveLocal() {
 </script>
 
 <template>
+  <GoBack class="margin"/>
   <div class="main">
     <div id="map" ref="mapElement">
       <v-container>

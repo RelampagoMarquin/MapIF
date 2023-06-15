@@ -7,6 +7,7 @@ import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 import { useRouter } from "vue-router";
 import { usePolygonStore } from "../stores/polygonStore";
 import { storeToRefs } from "pinia";
+import GoBack from "../components/GoBackButton.vue";
 
 /* Current router */
 const router = useRouter();
@@ -38,7 +39,7 @@ function toggleDialog() {
 let currentPolygonId = ref(null);
 
 onMounted(async () => {
-  map.value = L.map(mapElement.value).setView([-6.25309, -36.53401], 19);
+  map.value = L.map(mapElement.value).setView([-6.264359, -36.516165], 19);
   L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
     maxZoom: 23,
     maxNativeZoom: 19,
@@ -85,6 +86,7 @@ function addTools() {
 </script>
 
 <template>
+  <GoBack class="margin"/>
   <div class="main">
     <div id="map" ref="mapElement">
       <v-container>

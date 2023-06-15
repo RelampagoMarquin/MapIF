@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useActivityStore } from "../stores/atividadeStore";
 import { useRouter } from "vue-router";
+import GoBack from "../components/GoBackButton.vue"
 
 /* Current router */
 const router = useRouter();
@@ -57,8 +58,9 @@ async function addActivity() {
   <v-container>
     <v-row justify="center">
       <v-col cols="12" md="6" lg="8">
-        <div class="mb-5">
+        <div class="mb-5 position-relative">
           <h1 class="mb-8 mt-5 text-center title-primary">Criar Atividade</h1>
+          <GoBack/>
         </div>
         <!-- FORM -->
         <div class="rounded-lg elevation-2 p-4">
