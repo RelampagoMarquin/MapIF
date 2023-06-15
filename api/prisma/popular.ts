@@ -4,8 +4,8 @@ export const usuarios = `INSERT INTO usuarios (id, nome, email, senha) VALUES
         (2, 'marcos', 'marcos@gmail.com', 'marcos123'), 
         (3, 'andré', 'andre@gmail.com', 'andre123');`;
 export const eventos = `INSERT INTO eventos (id, nome, latitude, longitude, comeca, fim, grupoId, isPublic, descricao) VALUES 
-        (1, 'semana do esporte', '', '', now(), date_add(now(), interval 7 day), 1, true, 'evento esportivo de esportes'), 
-        (2, 'semana de amostras cientificas', '', '', now(), date_add(now(), interval 7 day), 2, false, 'evento cientifica');`;
+        (1, 'semana do esporte', '', '', now(), date_add(now(), interval 7 day), 1, false, 'evento esportivo de esportes'), 
+        (2, 'semana de amostras cientificas', '', '', now(), date_add(now(), interval 7 day), 2, true, 'evento cientifica');`;
 export const usuarioGrupos = `INSERT INTO usuariogrupo (usuarioId, grupoId, isAdmin) VALUES 
         (1, 1, true), (2, 1, false), (3, 2, true);`;
 export const poligonos = `INSERT INTO poligonos (id, eventoId, locais) VALUES (1, 1, '123'), (2, 1, '123'), (3, 2, '123')`;
