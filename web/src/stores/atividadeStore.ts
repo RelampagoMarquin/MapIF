@@ -32,7 +32,7 @@ export const useActivityStore = defineStore("activity", {
       this.activitys = response.data;
       this.removeLoader();
     },
-    async getOneActivity(id: number) {
+    async getOneActivity(id: string) {
       this.addLoader();
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/atividades/${id}`,
@@ -62,11 +62,12 @@ export const useActivityStore = defineStore("activity", {
     async getActivitysByEventPublic(id: number) {
       this.addLoader();
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/atividades/evento/${id}/public`);
+        `${import.meta.env.VITE_API_URL}/atividades/evento/${id}/public`
+      );
       this.activitys = response.data;
       this.removeLoader();
     },
-    
+
     async createActivity(activity: ActivityCreate) {
       const response = await axios
         .post(

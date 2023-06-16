@@ -70,6 +70,8 @@ function editItem() {
   console.log(typeof id);
   if (!props.poligonoId) {
     router.push("/edit-event/" + id);
+  } else {
+    router.push("/edit-activity/" + id);
   }
 }
 </script>

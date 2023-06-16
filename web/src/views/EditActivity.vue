@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useEventStore } from "../stores/eventStore";
-import { useGroupStore } from "../stores/groupStore";
+import { useActivityStore } from "../stores/atividadeStore";
 import { useRouter } from "vue-router";
-import { storeToRefs } from "pinia";
 import moment from "moment";
 
+/* Current router */
 const router = useRouter();
-const eventId = parseInt(router.currentRoute.value.params.idevento);
+const idatividade = parseInt(router.currentRoute.value.params.idatividade);
 
-/*event store*/
-const eventStore = useEventStore();
+const activityStore = useActivityStore();
 
 const nome = ref("");
 const dataInicio = ref("");
@@ -21,41 +19,50 @@ let snackbarSucess = ref(false);
 let snackbarFailed = ref(false);
 
 onMounted(async () => {
-  const currentEvent = await eventStore.getOneEvent(eventId);
+  const currentActivity = await activityStore.getOneActivity(idatividade);
 
-  nome.value = currentEvent.nome;
-  dataInicio.value = moment(currentEvent.comeca).format("YYYY-MM-DD");
-  dataFim.value = moment(currentEvent.fim).format("YYYY-MM-DD");
-  descricao.value = currentEvent.descricao;
-  isPublic.value = currentEvent.isPublic;
+  nome.value = currentActivity.nome;
+  dataInicio.value = moment(currentActivity.horarioInicial).format(
+    "YYYY-MM-DDTHH:mm"
+  );
+  dataFim.value = moment(currentActivity.horarioFinal).format(
+    "YYYY-MM-DDTHH:mm"
+  );
+  descricao.value = currentActivity.descricao;
+  isPublic.value = currentActivity.isPublic;
 });
+
+function clearForm() {
+  nome.value = "";
+  dataInicio.value = "";
+  dataFim.value = "";
+  descricao.value = "";
+}
 
 function dateValidation(dateInicio: Date, dateFim: Date) {
   return dateInicio > dateFim;
 }
 
-async function updateEvent() {
+async function updateActivity() {
   if (dateValidation(new Date(dataInicio.value), new Date(dataFim.value))) {
     snackbarFailed.value = true;
     return;
   }
-
   const data = {
-    id: eventId,
+    id: idatividade,
     nome: nome.value,
-    comeca: new Date(dataInicio.value),
-    fim: new Date(dataFim.value),
+    horarioInicial: new Date(dataInicio.value),
+    horarioFinal: new Date(dataFim.value),
     descricao: descricao.value,
     isPublic: isPublic.value,
   };
 
-  console.log(data);
-
-  const createEvent = await eventStore.updateEvent(data);
-  if (createEvent) {
+  const createActivity = await activityStore.updateActivity(data);
+  if (createActivity) {
     snackbarSucess.value = true;
     setTimeout(() => {
-      router.push("/event-list");
+      clearForm();
+      router.back();
     }, 4000);
   } else {
     snackbarFailed.value = true;
@@ -68,7 +75,7 @@ async function updateEvent() {
     <v-row justify="center">
       <v-col cols="12" md="6" lg="8">
         <div class="mb-5">
-          <h1 class="mb-5 mt-5 text-center title-primary">Editar Evento</h1>
+          <h1 class="mb-8 mt-5 text-center title-primary">Editar Atividade</h1>
         </div>
         <!-- FORM -->
         <div class="rounded-lg elevation-2 p-4">
@@ -83,26 +90,25 @@ async function updateEvent() {
               class="form-control input-camp rounded-pill elevation-4"
             />
             <label for="data-inicio" class="mt-3 text-label"
-              >Data do início da Exibição</label
+              >Data do início da Atividade</label
             >
             <input
-              type="date"
+              type="datetime-local"
               name="data-inicio"
               id="data-inicio"
               v-model="dataInicio"
               class="form-control input-camp rounded-pill elevation-4"
             />
             <label for="data-fim" class="mt-3 text-label"
-              >Data do fim da Exibição</label
+              >Data do fim da Atividade</label
             >
             <input
-              type="date"
+              type="datetime-local"
               name="data-fim"
               id="data-fim"
               v-model="dataFim"
               class="form-control input-camp rounded-pill elevation-4"
             />
-
             <label for="descricao" class="mt-3 text-label">Descrição</label>
             <textarea
               name="descricao"
@@ -114,23 +120,21 @@ async function updateEvent() {
               v-model="descricao"
             ></textarea>
 
-            <!-- isPublic -->
-
             <label for="isPublic" class="text-label mt-4"
-              >O Evento será público?</label
+              >A atividade será pública?</label
             >
             <v-switch color="success" inset v-model="isPublic"> </v-switch>
           </form>
         </div>
         <div>
           <v-btn
-            class="btn mt-3 p-4"
+            class="btn mt-8 p-4"
             x-large
             block
             rounded="lg"
-            @click="updateEvent()"
+            @click="updateActivity()"
           >
-            <span class="mr-4">Editar Evento</span>
+            <span class="mr-4">Editar atividade</span>
           </v-btn>
         </div>
       </v-col>
@@ -142,7 +146,7 @@ async function updateEvent() {
         elevation="24"
         v-model="snackbarSucess"
       >
-        Evento atualizado com sucesso!
+        Atividade atualizada com sucesso!
       </v-snackbar>
       <v-snackbar
         :timeout="2000"
@@ -150,7 +154,7 @@ async function updateEvent() {
         elevation="24"
         v-model="snackbarFailed"
       >
-        Erro ao editar evento!
+        Erro ao atualizar atividade!
       </v-snackbar>
     </v-sheet>
   </v-container>
@@ -179,7 +183,20 @@ async function updateEvent() {
   background-color: #888888 !important;
 }
 
-.select-option {
-  size: 10px;
+.rounded-border {
+  border-radius: 15px;
+  resize: none;
+}
+
+.block {
+  display: block;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23888888' d='M7 10L12 15L17 10H7Z' /%3E%3C/svg%3E")
+    96% / 15% no-repeat;
 }
 </style>
