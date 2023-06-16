@@ -38,7 +38,7 @@ function toggleDialog() {
 let currentPolygonId = ref(null);
 
 onMounted(async () => {
-  map.value = L.map(mapElement.value).setView([-6.25309, -36.53401], 19);
+  map.value = L.map(mapElement.value).setView([-6.264359, -36.516165], 19);
   L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
     maxZoom: 23,
     maxNativeZoom: 19,

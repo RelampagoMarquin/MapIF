@@ -15,6 +15,8 @@ import GroupList from "../views/GroupList.vue";
 import CreateGroup from "../views/CreateGroup.vue";
 import GroupPage from "../views/GroupPage.vue";
 import AddUserToGroup from "../views/AddUserToGroup.vue";
+import EditEvent from "../views/EditEvent.vue";
+import EditActivity from "../views/EditActivity.vue";
 
 const routes = [
   {
@@ -136,6 +138,22 @@ const routes = [
     path: "/add-user-to-group/:grupoid",
     name: "add-user-to-group",
     component: AddUserToGroup,
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: "/edit-event/:idevento",
+    name: "edit-event",
+    component: EditEvent,
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: "/edit-activity/:idatividade",
+    name: "edit-activity",
+    component: EditActivity,
     meta: {
       auth: true,
     },

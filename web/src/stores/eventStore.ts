@@ -21,36 +21,8 @@ export const useEventStore = defineStore("event", {
     },
     async getEvents() {
       this.addLoader();
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/eventos`, {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-        })
-        .catch(function (error) {
-          const errorCode = error.response.data.statusCode;
-          if (errorCode == 401) {
-            routes.push("login");
-            //aqui pode ser feito o Redirecionamento para login caso acontessa um error
-          }
-        })
-        if (response != null) {
-          this.removeLoader();
-          this.events = response.data
-          return this.events;
-        }
-    },
-    async getPublicEvents() {
-      this.addLoader();
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/eventos/public`);
-      this.events = response.data;
-      this.removeLoader();
-    },
-    async getOneEvent(id: number) {
-      this.addLoader();
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/eventos/${id}`, {
+      const response = await axios
+        .get(`${import.meta.env.VITE_API_URL}/eventos`, {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
@@ -63,9 +35,39 @@ export const useEventStore = defineStore("event", {
           }
         });
       if (response != null) {
-          this.removeLoader();
-          return response.data;
-        }
+        this.removeLoader();
+        this.events = response.data;
+        return this.events;
+      }
+    },
+    async getPublicEvents() {
+      this.addLoader();
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/eventos/public`
+      );
+      this.events = response.data;
+      this.removeLoader();
+    },
+    async getOneEvent(id: string) {
+      console.log("id", id);
+      this.addLoader();
+      const response = await axios
+        .get(`${import.meta.env.VITE_API_URL}/eventos/${id}`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .catch(function (error) {
+          const errorCode = error.response.data.statusCode;
+          if (errorCode == 401) {
+            routes.push("login");
+            //aqui pode ser feito o Redirecionamento para login caso acontessa um error
+          }
+        });
+      if (response != null) {
+        this.removeLoader();
+        return response.data;
+      }
     },
     async createEvent(event: EventCreate) {
       const response = await axios
@@ -85,7 +87,8 @@ export const useEventStore = defineStore("event", {
         return response.data;
       }
     },
-    async updateEvent(event: Event) {
+    async updateEvent(event: any) {
+      console.log("event", event);
       const response = await axios
         .patch(`${import.meta.env.VITE_API_URL}/eventos/${event.id}`, event, {
           headers: {
@@ -114,7 +117,7 @@ export const useEventStore = defineStore("event", {
           const errorCode = error.response.data.statusCode;
           if (errorCode == 401) {
             routes.push("login");
-            //aqui pode ser feito o Redirecionamento para login caso acontessa um error
+            //aqui pode ser feito o Redirecionamento para login caso aconteça um error
           }
         });
       if (response != null) {

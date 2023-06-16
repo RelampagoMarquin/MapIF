@@ -1,46 +1,57 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useEventStore } from "../stores/eventStore";
 import { useGroupStore } from "../stores/groupStore";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
+import moment from "moment";
 
 const router = useRouter();
+const eventId = parseInt(router.currentRoute.value.params.idevento);
+
+/*event store*/
 const eventStore = useEventStore();
+
 const nome = ref("");
 const dataInicio = ref("");
 const dataFim = ref("");
 const descricao = ref("");
-const grupoId = ref("");
 const isPublic = ref(true);
 let snackbarSucess = ref(false);
 let snackbarFailed = ref(false);
 
-/*group store*/
-const groupStore = useGroupStore();
-groupStore.getGroups();
-const { groups } = storeToRefs(groupStore);
+onMounted(async () => {
+  const currentEvent = await eventStore.getOneEvent(eventId);
+
+  nome.value = currentEvent.nome;
+  dataInicio.value = moment(currentEvent.comeca).format("YYYY-MM-DD");
+  dataFim.value = moment(currentEvent.fim).format("YYYY-MM-DD");
+  descricao.value = currentEvent.descricao;
+  isPublic.value = currentEvent.isPublic;
+});
 
 function dateValidation(dateInicio: Date, dateFim: Date) {
   return dateInicio > dateFim;
 }
 
-async function createEvent() {
+async function updateEvent() {
   if (dateValidation(new Date(dataInicio.value), new Date(dataFim.value))) {
     snackbarFailed.value = true;
     return;
   }
 
   const data = {
+    id: eventId,
     nome: nome.value,
     comeca: new Date(dataInicio.value),
     fim: new Date(dataFim.value),
     descricao: descricao.value,
-    grupoId: grupoId.value,
     isPublic: isPublic.value,
   };
 
-  const createEvent = await eventStore.createEvent(data);
+  console.log(data);
+
+  const createEvent = await eventStore.updateEvent(data);
   if (createEvent) {
     snackbarSucess.value = true;
     setTimeout(() => {
@@ -57,7 +68,7 @@ async function createEvent() {
     <v-row justify="center">
       <v-col cols="12" md="6" lg="8">
         <div class="mb-5">
-          <h1 class="mb-5 mt-5 text-center title-primary">Criar Evento</h1>
+          <h1 class="mb-5 mt-5 text-center title-primary">Editar Evento</h1>
         </div>
         <!-- FORM -->
         <div class="rounded-lg elevation-2 p-4">
@@ -91,21 +102,6 @@ async function createEvent() {
               v-model="dataFim"
               class="form-control input-camp rounded-pill elevation-4"
             />
-            <label for="data-fim" class="mt-3 text-label">Grupo</label>
-            <select
-              name="grupo"
-              id="grupo"
-              v-model="grupoId"
-              class="form-control input-camp rounded-pill elevation-4"
-            >
-              <option
-                class="select-option input-camp rounded-pill elevation-4 p-4"
-                v-for="grupo in groups"
-                :value="grupo.id"
-              >
-                {{ grupo.nome }}
-              </option>
-            </select>
 
             <label for="descricao" class="mt-3 text-label">Descrição</label>
             <textarea
@@ -132,9 +128,9 @@ async function createEvent() {
             x-large
             block
             rounded="lg"
-            @click="createEvent()"
+            @click="updateEvent()"
           >
-            <span class="mr-4">Cadastrar Evento</span>
+            <span class="mr-4">Editar Evento</span>
           </v-btn>
         </div>
       </v-col>
@@ -146,7 +142,7 @@ async function createEvent() {
         elevation="24"
         v-model="snackbarSucess"
       >
-        Evento cadastrado com sucesso!
+        Evento atualizado com sucesso!
       </v-snackbar>
       <v-snackbar
         :timeout="2000"
@@ -154,7 +150,7 @@ async function createEvent() {
         elevation="24"
         v-model="snackbarFailed"
       >
-        Erro ao cadastrar evento!
+        Erro ao editar evento!
       </v-snackbar>
     </v-sheet>
   </v-container>

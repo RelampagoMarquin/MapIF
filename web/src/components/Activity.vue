@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { useDateFormat } from "@vueuse/core";
+import { set, useDateFormat } from "@vueuse/core";
 import { useRouter } from "vue-router";
-import { defineProps } from "vue";
+import { defineProps, ref } from "vue";
+import { useActivityStore } from "../stores/atividadeStore";
+import { useEventStore } from "../stores/eventStore";
 
 const router = useRouter();
 const props = defineProps<{
@@ -11,7 +13,7 @@ const props = defineProps<{
   dateFim: string | Date;
   location: string;
   id: {
-    type: string;
+    type: string | number;
     required: false;
   };
   verAtividades: {
@@ -32,11 +34,63 @@ function redirectToLocal() {
   const id = props.id;
   router.push({ name: "create-local", params: { idevent: id } });
 }
+
+/* delete  */
+
+const dialogDelete = ref(false);
+
+function confirmDelete() {
+  dialogDelete.value = true;
+
+  deleteFunction(props.id);
+}
+
+const activityStore = useActivityStore();
+const eventStore = useEventStore();
+
+function deleteFunction(id: any) {
+  if (!props.poligonoId) {
+    eventStore.deleteEvent(id);
+    setTimeout(() => {
+      router.go(0);
+    }, 1000);
+  } else {
+    activityStore.deleteActivity(id);
+    setTimeout(() => {
+      router.go(0);
+    }, 1000);
+  }
+}
+
+/* edit */
+
+function editItem() {
+  const id = props.id;
+  id.toString();
+  console.log(typeof id);
+  if (!props.poligonoId) {
+    router.push("/edit-event/" + id);
+  } else {
+    router.push("/edit-activity/" + id);
+  }
+}
 </script>
 
 <template>
   <v-container class="rounded-lg elevation-2 p-3">
-    <h5 class="title-secondary">{{ title }}</h5>
+    <v-row class="pa-0">
+      <v-col cols="10" xs="8" sm="10" md="10" lg="10" class="pb-0">
+        <h5 class="title-secondary">{{ title }}</h5>
+      </v-col>
+
+      <v-col cols="2" xs="2" sm="2" md="2" lg="2" class="pa-0 mt-2">
+        <v-icon color="green-darken-1" @click="editItem">mdi-pencil</v-icon>
+        <v-icon color="red-darken-3" @click="dialogDelete = true"
+          >mdi-delete</v-icon
+        >
+      </v-col>
+    </v-row>
+
     <v-divider class="mb-4"></v-divider>
     <p class="text-secondary-custom">{{ description }}</p>
     <p class="text-secondary-custom">
@@ -79,6 +133,22 @@ function redirectToLocal() {
         </v-btn>
       </v-col>
     </v-row>
+
+    <v-dialog v-model="dialogDelete" max-width="400px">
+      <v-card>
+        <v-card-title class="headline">Confirmar exclusão</v-card-title>
+        <v-card-text>
+          Tem certeza de que deseja excluir permanentemente este item?
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="success" text @click="dialogDelete = false"
+            >Cancelar</v-btn
+          >
+          <v-btn color="red" text @click="confirmDelete">Excluir</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 

@@ -19,9 +19,13 @@ function login() {
   <v-container class="align-center">
     <v-row class="justify-center">
       <v-col cols="10" md="4">
-        <div>
-          <img class="mb-5 mt-5 text-center" width="300" src="/logo.png" alt="Lodo do MapIF">
-        </div>
+        <v-row class="justify-center">
+          <img
+            class="mb-5 mt-5 text-center"
+            width="300"
+            src="/logo.png"
+            alt="Lodo do MapIF"
+        /></v-row>
         <h2 class="text-primary-custom mb-5 text-center">Login</h2>
         <v-form>
           <label for="email" class="text-label">Email</label>

@@ -23,17 +23,16 @@ async function signup() {
   if (senha.value !== confirmarSenha.value)
     return alert("As senhas não conferem");
   else {
-   const createUser = await userStore.createUser(data);
+    const createUser = await userStore.createUser(data);
 
-  if (createUser) {
-    snackbarSucess.value = true;
-    setTimeout(() => {
-      router.push("/login")
-    }, 4000);
-    ;
-  } else {
-    snackbarFailed.value = true;
-  }
+    if (createUser) {
+      snackbarSucess.value = true;
+      setTimeout(() => {
+        router.push("/login");
+      }, 4000);
+    } else {
+      snackbarFailed.value = true;
+    }
   }
 }
 </script>
@@ -42,9 +41,13 @@ async function signup() {
   <v-container class="align-center">
     <v-row class="justify-center">
       <v-col cols="10" md="4">
-        <div>
-          <img class="mb-5 mt-5 text-center" width="300" src="/logo.png" alt="Lodo do MapIF">
-        </div>
+        <v-row class="justify-center">
+          <img
+            class="mb-5 mt-5 text-center"
+            width="300"
+            src="/logo.png"
+            alt="Lodo do MapIF"
+        /></v-row>
         <h2 class="text-primary-custom mb-5 text-center">Cadastre-se</h2>
         <v-form>
           <label for="email" class="text-label">Nome</label>
