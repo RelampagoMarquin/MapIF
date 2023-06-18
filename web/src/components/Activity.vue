@@ -7,7 +7,7 @@ import { useEventStore } from "../stores/eventStore";
 
 const router = useRouter();
 
-export interface Props {
+interface Props {
   title: string;
   description: string;
   dateInicio: string | Date;

@@ -6,7 +6,7 @@ import router from "../router/index";
 export const useUserStore = defineStore("users", {
   state: () => {
     return {
-      users: [] as UserGroup[],
+      users: [] as User[],
       token: localStorage.getItem("token"),
     };
   },
