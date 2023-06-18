@@ -6,7 +6,7 @@ import moment from "moment";
 
 /* Current router */
 const router = useRouter();
-const idatividade = parseInt(router.currentRoute.value.params.idatividade);
+const idatividade = router.currentRoute.value.params.idatividade;
 
 const activityStore = useActivityStore();
 

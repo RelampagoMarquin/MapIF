@@ -2,14 +2,10 @@
 import { defineProps } from "vue";
 
 const props = defineProps<{
-  id: {
-    type: string;
-    required: false;
-  };
+  id?: string | number;
   name: string;
-  verGrupos: boolean
+  verGrupos: boolean;
 }>();
-
 </script>
 
 <template>
@@ -32,6 +28,4 @@ const props = defineProps<{
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

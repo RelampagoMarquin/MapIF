@@ -4,7 +4,7 @@ import { useUserStore } from "../stores/userStore";
 import { ref } from "vue";
 const authStore = useAuthStore();
 const userStore = useUserStore();
-const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem("user")!);
 
 const nome = ref(user.nome);
 const email = ref(user.email);

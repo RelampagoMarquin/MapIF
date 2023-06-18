@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 
 /* Current router */
 const router = useRouter();
-const idPoligono = parseInt(router.currentRoute.value.params.idpoligono);
+const idPoligono = router.currentRoute.value.params.idpoligono;
 
 const activityStore = useActivityStore();
 

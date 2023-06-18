@@ -8,7 +8,7 @@ import { ActivityType } from "../utils/types";
 
 /* Current router */
 const router = useRouter();
-const idEvento = parseInt(router.currentRoute.value.params.idevento);
+const idEvento = router.currentRoute.value.params.idevento;
 
 /* getActivitys */
 const activityStore = useActivityStore();
