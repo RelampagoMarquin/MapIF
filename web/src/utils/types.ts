@@ -27,7 +27,6 @@ export interface Local {
   id: number;
   nome: string;
 }
-
 export interface Event {
   id: number;
   nome: string;
@@ -35,14 +34,16 @@ export interface Event {
   fim: Date;
   grupoId: number;
   descricao: string;
+  isPublic: boolean;
 }
 
 export interface EventCreate {
   nome: string;
   comeca: Date;
   fim: Date;
-  grupoId: number;
+  grupoId: number | string;
   descricao: string;
+  isPublic: boolean;
 }
 
 export interface Polygon {
@@ -70,20 +71,28 @@ export interface ActivityCreate {
   horarioInicial: Date;
   horarioFinal: Date;
   descricao: string;
-  poligonoId: number;
+  poligonoId: string | string[] | number;
+  isPublic: boolean;
 }
 
 export interface Group {
   id: number;
-  name: string;
+  nome: string;
+  usuarioGrupo: UserGroup[];
 }
 
 export interface GroupCreate {
-  name: string;
+  nome: string;
+}
+export interface UserGroup {
+  usuarioId: number;
+  grupoId: number;
+  isAdmin: boolean;
+  usuario: User;
 }
 
 export interface UsuarioGrupo {
-  usuarioId: number;
+  usuarioId: number | string;
   grupoId: number;
   isAdmin: boolean;
 }

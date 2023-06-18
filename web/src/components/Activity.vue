@@ -6,29 +6,23 @@ import { useActivityStore } from "../stores/atividadeStore";
 import { useEventStore } from "../stores/eventStore";
 
 const router = useRouter();
-const props = defineProps<{
+
+interface Props {
   title: string;
   description: string;
   dateInicio: string | Date;
   dateFim: string | Date;
-  location: string;
-  id: {
-    type: string | number;
-    required: false;
-  };
-  verAtividades: {
-    type: boolean;
-    default: false;
-  };
-  poligonoId: {
-    type: number;
-    required: false;
-  };
-  editar: {
-    type: boolean;
-    default: false;
-  };
-}>();
+  location?: string;
+  id?: string | number;
+  verAtividades: boolean;
+  poligonoId?: number;
+  editar: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  verAtividades: false,
+  editar: false,
+});
 
 function redirectToLocal() {
   const id = props.id;
@@ -65,7 +59,7 @@ function deleteFunction(id: any) {
 /* edit */
 
 function editItem() {
-  const id = props.id;
+  const id = props.id?.toString() || 1;
   id.toString();
   console.log(typeof id);
   if (!props.poligonoId) {

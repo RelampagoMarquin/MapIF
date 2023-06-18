@@ -6,7 +6,7 @@ import routes from "../router/index";
 export const useEventStore = defineStore("event", {
   state: () => {
     return {
-      events: [],
+      events: [] as Event[],
       loading: 0,
       token: localStorage.getItem("token"),
     };
@@ -48,7 +48,7 @@ export const useEventStore = defineStore("event", {
       this.events = response.data;
       this.removeLoader();
     },
-    async getOneEvent(id: string) {
+    async getOneEvent(id: string | number | string[]) {
       console.log("id", id);
       this.addLoader();
       const response = await axios

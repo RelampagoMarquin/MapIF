@@ -7,7 +7,7 @@ import { storeToRefs } from "pinia";
 import moment from "moment";
 
 const router = useRouter();
-const eventId = parseInt(router.currentRoute.value.params.idevento);
+const eventId = router.currentRoute.value.params.idevento;
 
 /*event store*/
 const eventStore = useEventStore();

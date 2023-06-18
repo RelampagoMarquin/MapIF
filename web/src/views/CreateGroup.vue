@@ -3,10 +3,12 @@ import { useGroupStore } from "../stores/groupStore";
 import { useUsuarioGroupStore } from "../stores/usuarioGruposStore";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { User } from "../utils/types";
 const router = useRouter();
 const groupStore = useGroupStore();
 const usuarioGroupStore = useUsuarioGroupStore();
-const user = JSON.parse(localStorage.getItem("user"));
+
+const user: User = JSON.parse(localStorage.getItem("user")!);
 
 const nome = ref("");
 let snackbarSucess = ref(false);
